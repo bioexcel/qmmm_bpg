@@ -16,6 +16,15 @@ Outline key steps, which are covered in sections below
 Preparing your system
 ---------------------
 
+Preparing PDB
+-------------
+Solvating, setting charges
+
+
+
+Forcefield preparation
+----------------------
+Anything needed to be done before you can simply specify it in CP2K input file
 
 
 
@@ -26,11 +35,20 @@ Choosing QM/MM simulation parameters
 
 CP2K supports variety of QM treatment approaches/ theory levels (list)
 
+MM forcefield
+-------------
+
+
+QM-MM region setup
+------------------
+
 
 Basis set
 ---------
 
 
+QM treatment
+------------
 
 
 QM theory level 1
@@ -65,6 +83,13 @@ MPI vs OpenMP, GPU
 Example execution commands (job scripts?)
 
 Example compute times / scaling (QM/MM benchmark results) to guide HPC resource usage ("cookbook")
+
+
+Restart
+-------
+
+Understanding outputs
+----------------------
 
 
 Common errors
