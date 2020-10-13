@@ -84,6 +84,7 @@ Example execution commands (job scripts?)
 
 Example compute times / scaling (QM/MM benchmark results) to guide HPC resource usage ("cookbook")
 
+Outline CP2K performance regimes (SCF vs LS-SCF), GPU offloading, sparse vs dense linear algebra
 
 Restart
 -------
