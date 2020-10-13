@@ -98,6 +98,12 @@ Common errors
 
 
 
+----------
+References
+----------
+https://www.tandfonline.com/doi/full/10.1080/00268976.2017.1333644
+
+
 
 
 
