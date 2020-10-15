@@ -12,12 +12,15 @@ cp2k but not how to make them
 Mechanics of a DFT calculation
 ------------------------------
 
-Quickstep - method
+Quickstep is the electronic stucture model within CP2K. It can handle SE, TDFT, and GPW methods amony others.
+This QS method is used to calcaulte the energies and forces
 
-SCF - self consistent functional
+SCF - self consistent field algorithm
 calculated until the change in energy is less than a threshold
 inner and outer scf - tolarences and max steps
+
 basis sets + potentials
+
 xc functional
 
 ---------------------------
