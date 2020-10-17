@@ -2,33 +2,75 @@
  QM treatment
 ==============================
 
-QM treatment of the QM region with QM/MM simualtion.
+The section of the guide will focus on setting up the QM parameters in a QM/MM simualtion.
 
-3 key considerations in running a QM simulation in CP2K, your choice of basis set
-Puesdopotential and XC functional.  will guide on how to use various choices within 
-cp2k but not how to make them
 
-------------------------------
-Mechanics of a DFT calculation
-------------------------------
+It will guide on how to use various options within CP2K, and give some general advice but
+it will not give any information about what choices are best for your system.
 
-Quickstep is the electronic stucture model within CP2K. It can handle SE, TDFT, and GPW methods amony others.
-This QS method is used to calcaulte the energies and forces
+--------------------------------------
+Mechanics of a DFT calculation in CP2K
+--------------------------------------
 
-SCF - self consistent field algorithm
-calculated until the change in energy is less than a threshold
-inner and outer scf - tolarences and max steps
+CP2K uses the Quickstep (QS) method when performing a QM calculation.
+Quickstep is the particular electronic stucture method within CP2K which handles
+the calculation of forces and energies on the QM atoms. This is done using 
+self-consistent Kohn-Sham Density Functional Theory (DFT). Within Quickstep
+there is the option to use Semi-empirical (SE), Tight-Binding DFT (DFTB),
+and Gaussian Planewaves (GPW) methods, among many others. The GPW method is a 
+key part of CP2K, this involves using a mixed basis of atom centred Gaussian
+orbitals and plane waves (regular grids) to improve on the performance compared
+to other QM methods. You can find information about GPW here:
 
-basis sets + potentials
+Basis functions descibted in the Gaussian type orbitals for each element are supplied
+through the basis set file. There are multiple choices for the Basis Set, Section x 
+will give an overview of these choices. Likewise the pseudopotentials for using with
+plane waves must also be supplied.
 
-xc functional
+The exchange-correlation (XC) functional within DFT contains approximations which make 
+it a source of inaccuracy in a DFT calculation. There are many choices of XC functional,
+with different levels of accuracy (see Jacobs ladder). However greater accuracy 
+usually comes with more computational cost.  Section x will outline the available options
+for XC functionals in CP2K and how to use them.
+
+In Quickstep, a self-consistant (SCF) calculation is performed in order to find the ground 
+state energy of the system (with the atom positions fixed).
+This involves performing a number of SCF steps
+where in each step the potential is calculated from the electronic density and 
+then this is used to construct a new electron density by solving the KS equations 
+(this density is then used in the next SCF step). The SCF converges when the
+required tolarence for self-consistency is met. This will correspond to ground
+state energy minimum. As this calculation is self-consistent it will depend
+highly on the starting electronic density, a good starting density will allow
+the calculation to converge faster. If the SCF has not converged after it has
+exceeded the maximum number of steps (set by MAX_SCF) the SCF calculation will 
+terminate and print the warning message: "SCF has not converged".
+
+The SCF calculation involves inner and outer loops. If the inner SCF loop does not
+converge in the desired number of steps (set in MAX_SCF) then the inner loop will exit in order to
+prevent wasting time heading in the wrong direction. The preconditioner is
+recalculated and then a new inner loop SCF begins, with the number of outer 
+steps incremented by one. This will hopefully stand a better chance of converging
+than the previous inner cycle. This process will be repeated for a number of outer
+steps (set in the &OUTER_SCF section). After this the SCF calculation is
+terminated. Hence, the maximum number of SCF steps attempted is given as the product
+of the inner SCF steps and the outer SCF steps.
+
+
+
+
 
 ---------------------------
-Setting up basic QM input
+A basic QM input
 ---------------------------
 
-A basic DFT input block for a calcualtion using the Gaussian Plane Wave (GPW) method. 
-Examples for using a Semi-emperical method (SE) and the Tight Binding method (TDFT) are provided here:
+A basic DFT input section for a calculation using the Gaussian Plane Wave (GPW) method is shown below.
+This is designed to act as a rough guide for how to build your DFT section, and contains some example
+parameter settings with descriptions in the comments. However it should not be taken as an example set
+up for your system, and should certainly not be used without first considering the choices for the
+important paramters outlined below.
+
+.. Examples for using a Semi-emperical method (SE) and the Tight Binding method (TDFT) are provided here:
 
 .. code-block::
 
@@ -52,7 +94,7 @@ Examples for using a Semi-emperical method (SE) and the Tight Binding method (TD
       SCF_GUESS RESTART                    ! starting point for scf - restart reads restart wfn.
       EPS_SCF 1.0E-6                       ! tolarance for SCF convergence
       MAX_SCF 50                           ! number of inner SCF steps to attempt
-      &OT  T
+      &OT  T                           ! Use the orbital transform method (T: true)
         MINIMIZER  DIIS                    ! DIIS minimisation (less reliable but faster than CG)
         PRECONDITIONER  FULL_ALL           ! good choice for preconditioner
       &END OT
@@ -93,7 +135,8 @@ to one of the basis sets for the given element within the basis set file. Basis 
 files are provided within the /data directory in CP2K (link).
 If your install of CP2K  has been built correctly then
 the files within this directory should be automatically included, so there is no
-need to provide these in you working directory.
+need to provide these in you working directory. Some common options for basis
+sets and their location within the basis set files are shown in the table below.
 
 
 GTH - Geodecker tuetter hutter recommended.
@@ -114,13 +157,25 @@ Puesdopotentials
 Important QM parameters
 ------------------------
 
-Cutoff
-Rel_cutoff
-NGRID
-EPS_SCF
-Commensurate
+CUTOFF
+------
+The CUTOFF parameter sets 
 
-Converging cutoff/rel cutoff
+REL_CUTOFF
+----------
+
+NGRID
+-----
+
+EPS_SCF
+-------
+
+COMMENSURATE
+------------
+
+----------------------------
+Converging the CUTOFF/REL_CUTOFF
+----------------------------
 
 -----------------
 Troubleshooting
