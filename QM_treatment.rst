@@ -28,7 +28,9 @@ will give an overview of these choices. Likewise the pseudopotentials for using 
 plane waves must also be supplied.
 
 The exchange-correlation (XC) functional within DFT contains approximations which make 
-it a source of inaccuracy in a DFT calculation. There are many choices of XC functional,
+it a source of inaccuracy in a DFT calculation. This stems from the fact that 
+the exact functionals for exchange and correlation are not known.
+There are many choices of XC functional,
 with different levels of accuracy (see Jacobs ladder). However greater accuracy 
 usually comes with more computational cost.  Section x will outline the available options
 for XC functionals in CP2K and how to use them.
@@ -140,9 +142,10 @@ If your install of CP2K  has been built correctly then
 the files within this directory should be automatically included, so there is no
 need to provide these in you working directory. 
 
-The GTH basis sets are usually recommended in CP2K.
+The GTH basis sets are usually recommended in CP2K, there also exist the molecular optimisted (MOLOPT) GTH
+basis set. 
 Some common options for basis
-sets and their location within the basis set files are shown in the table below.
+sets and their location within the basis set files are shown in the table below. 
 
 +--------------------------------------------------+--------------------------------+--------------------------------------+-------------------------------------------------+
 | Description                                      | GTH (cp2k_root/data/BASIS_SET) | MOLOPT (cp2k_root/data/BASIS_MOLOPT) | Comments                                        |
@@ -165,8 +168,8 @@ More accurate basis sets will increase the runtime, and may not be available for
 The error in due to the basis set is  smaller than the XC functional so chosing a large basis may not be sensible 
 unless using a very accurate XC functional.
 
-
-
+Using the DZVP basis set is usually a good choice. If you would like to explore more accurate options
+then you may consider checking the convergence of your basis set by plotting the number of independent orbital functions vs. the energy.
 
 
 ---------------------
@@ -176,23 +179,166 @@ XC functionals
 Overview
 --------
 
-LDA/GGA
--------
+The exchange-correlation (XC) functional within DFT contains approximations which make 
+it a source of inaccuracy in a DFT calculation. Choosing an XC functional is therefore
+an important consideration, it has the potential to be the largest source of error in
+a DFT calculation. 
+
+There are many choices of XC functional,
+with different levels of accuracy, however increased accuracy usually requires longer run time to solve 
+so this is a trade-off that you will have to consider when picking your functional. 
+
+The XC functional is set up is described in the XC section of the CP2K input. You will
+also want to consider your choice of pseudopotential in combination with your XC functional,
+some pseudopotentials have been optimised for given XC functionals.
+
+The table below lists the XC functional options available in CP2K from least to
+most accurate, and gives a overview of each option.
+
++----------------+-------------------------------------+-----------------+---------------------------------------------------------------------------------------------------+
+| Type           | Description                         | CP2K examples   | Comments                                                                                          |
++================+=====================================+=================+===================================================================================================+
+| LDA            | local density approximation	       | PADE, PW92      | fast but not accurate                                                                             |
++----------------+-------------------------------------+-----------------+---------------------------------------------------------------------------------------------------+
+| GGA            | generalised gradient approximation  | BLYP, PBE, PW91 | usually a good choice if you are not worried about being very accurate or have a large QM region  |
++----------------+-------------------------------------+-----------------+---------------------------------------------------------------------------------------------------+
+| metaGGA        | metaGGA (higher order terms)        | TPSS            | Available through Libxc library                                                                   |
++----------------+-------------------------------------+-----------------+---------------------------------------------------------------------------------------------------+
+| Hybrid         | Hartree Fock exchange + GGA method  | B3LYP, PBE0     | More accurate,                                                                                    |
++----------------+-------------------------------------+-----------------+---------------------------------------------------------------------------------------------------+
+| Double hybrid	 | HFX + PT2 correlation + GGA methods | B2PYLP          | Most accurate, can requires many times more time than GGA etc.                                    |
++----------------+-------------------------------------+-----------------+---------------------------------------------------------------------------------------------------+
+
+Empirical vs. non expirical
+---------------------------
+
+
+
+
+LDA
+---
+
+The local density approximation is one the simplist approximations for the XC functional.
+It assumes that the functional depends only on the density at one point, i.e the density
+is assumed to be smooth in space.
+
+An example for using the PADE LDA method is shown below. The functional needs to be specified
+in the XC_FUNCTIONAL section, and the complementary GTH-PADE pseudopotentials should be used.
+
+.. code-block::
+
+    &XC
+      &XC_FUNCTIONAL PADE
+      &END XC_FUNCTIONAL
+    &END XC
+
+
+GGA
+---
+
+The generalised gradient approximation is an improvement on the LDA which takes into account the 
+gradient of the density, as well as the density at one point.
+
+Using the GGA in CP2K is simular to using the LDA. It requires specifying the functional 
+and using the complementary  pseudopotentials (in this case GTH_PBE).
+
+.. code-block::
+
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+    &END XC
 
 metaGGA
 -------
 
+
+
 Hybrid methods
 --------------
 
-PBE0
+Hybrid methods cacultate a portoion fo the the exchange functional using the exact Hartree Fock theory.
+The rest of the exchange and correlation functions is calcaulated with other methods, typically GGA or LDA.
+The XC section of the CP2K input has a HF section is used for the hartree fock set up.
 
-B3LYP
+Two commonly used hybrid methods dicussed here are B3LYP and PBE0.
 
+**PBE0**
+
+In the PBE0 functional the exchange is comprised of 75% of the PBE exchange and 25% of the HF exchange.
+The correlation energy is full PBE.
+
+.. math::
+
+    E^{PBE0}_{XC} = \frac{1}{4} E_X^{HF} + \frac{3}{4} E_X^{PBE} + E_C^{PBE}
+
+In CP2K to use the PBE0 functional the XC section of the input file should be
+configured as follows:
+
+.. code-block::
+
+    &XC
+       &XC_FUNCTIONAL
+       &PBE
+         SCALE_X 0.75         ! 75% GGA exchange
+         SCALE_C 1.0          ! 100% GGA correlation
+       &END PBE
+      &END XC_FUNCTIONAL
+      &HF
+        FRACTION 0.25         ! 25 % HF exchange
+        &SCREENING        
+          EPS_SCHWARZ 1.0E-6  ! Important to improve scaling
+        &END
+        &MEMORY
+          MAX_MEMORY 1500     ! In MB per MPI rank
+        &END
+    &END
+
+
+**B3LYP**
+
+The B3BLYP functional which stands for (Becke, 3-parameter, Lee–Yang–Parr
+It makes use of the HF exchange and GGA functionals for the exchange and correlation
+(in particular the Becke 88 exchange functional and the LYP correlation functional).
+
+.. math::
+
+    E^{B3LYP}_{XC} = E_X^{LDA} + a_0(E_X^{HF} - E_X^{LDA}) + a_x(E_X^{GGA} - E_X^{LDA}) + E_C^{LDA} + a_c(E_C^{GGA} - E_C^{LDA})
+    
+.. code-block::
+
+   &XC
+      &XC_FUNCTIONAL
+         &LYP
+            SCALE_C 0.81          ! 81% LYP correlation
+         &END 
+         &BECKE88
+            SCALE_X 0.72          ! 72% Becke88 exchange
+         &END
+         &VWN
+            FUNCTIONAL_TYPE VWN3
+            SCALE_C 0.19          ! 19% LDA correlation
+         &END 
+         &XALPHA
+            SCALE_X 0.08          ! 8%  LDA exchange
+         &END 
+      &END XC_FUNCTIONAL
+      &HF
+         FRACTION 0.20            ! 20% HF exchange
+         &SCREENING
+            EPS_SCHWARZ 1.0E-10   ! Improves scaling
+         &END 
+         &MEMORY
+            MAX_MEMORY  1500     ! In MB per MPI rank
+         &END
+      &END
+   &END XC
+ 
 
 Double-hybrid methods
 ---------------------
 
+B2PLYP
 
 Dispersion corrections
 ----------------------
