@@ -259,6 +259,7 @@ are PBE is non empirical i.e. the parameters based only of QM rules, and BLYP is
 with some parameters chosen based on fittings. As a result PBE gives rather accurate results 
 for a wide range of systems, whereas BLYP can be more accurate than PBE for some particular systems.
 This also follows for the hybrid methods PBE0 and B3LYP which use functionals from their GGA counterparts.
+If BLYP/B3LYP are not widely used in your research area then it may be prudent to use PBE or PBE0 instead.
 
 
 
