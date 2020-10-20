@@ -78,13 +78,14 @@ important paramters outlined below.
 
   &DFT                                 ! CP2K input block for DFT
     CHARGE 0                               ! charge of the QM region
-    MULTIPLICITY 1                         ! multiplicityi of the QM region
+    MULTIPLICITY 1                         ! multiplicity of the QM region
     BASIS_SET_FILE_NAME  bs_filename       ! name of the basis set filename
     POTENTIAL_FILE_NAME  pot_filename      ! name of the potential filename
 
     &MGRID
-      CUTOFF 300                           ! energy cutoff
-      COMMENSURATE                         ! commensurate (always true for QMMM)
+      CUTOFF 300                           ! planewave cutoff
+      REL_CUTOFF 50                        ! relative cutoff for gaussian grid
+      COMMENSURATE                         ! If grids are commensurate (always true for QMMM)
     &END MGRID
     
     &QS
@@ -142,7 +143,7 @@ If your install of CP2K  has been built correctly then
 the files within this directory should be automatically included, so there is no
 need to provide these in you working directory. 
 
-The GTH basis sets are usually recommended in CP2K, there also exist the molecular optimisted (MOLOPT) GTH
+The GTH basis sets are usually recommended in CP2K, there also exists a molecular optimisted (MOLOPT) GTH
 basis set. 
 Some common options for basis
 sets and their location within the basis set files are shown in the table below. 
@@ -163,10 +164,10 @@ sets and their location within the basis set files are shown in the table below.
 
 
 The choice of basis will depend on the accuracy required, and whether it is available for the elements in your system. 
-More accurate basis sets will increase the runtime, and may not be available for some elements e.g. metal ions.
+More accurate basis sets will increase the run time of the simulation, and may not be available for some elements e.g. metal ions.
 
-The error in due to the basis set is  smaller than the XC functional so chosing a large basis may not be sensible 
-unless using a very accurate XC functional.
+The error in due to the basis set is smaller than the error due to the XC functional so chosing a large basis may not be sensible 
+unless you require a very accurate calcaultion and are using an accurate XC functional.
 
 Using the DZVP basis set is usually a good choice. If you would like to explore more accurate options
 then you may consider checking the convergence of your basis set by plotting the number of independent orbital functions vs. the energy.
@@ -185,12 +186,13 @@ an important consideration, it has the potential to be the largest source of err
 a DFT calculation. 
 
 There are many choices of XC functional,
-with different levels of accuracy, however increased accuracy usually requires longer run time to solve 
+with different levels of accuracy, however increased accuracy usually requires longer run time,
 so this is a trade-off that you will have to consider when picking your functional. 
 
 The XC functional is set up is described in the XC section of the CP2K input. You will
 also want to consider your choice of pseudopotential in combination with your XC functional,
-some pseudopotentials have been optimised for given XC functionals.
+some pseudopotentials have been optimised for given XC functionals, these include the functional type
+in their name e.g. GTH_PBE.
 
 The table below lists the XC functional options available in CP2K from least to
 most accurate, and gives a overview of each option.
@@ -209,9 +211,6 @@ most accurate, and gives a overview of each option.
 | Double hybrid	 | HFX + PT2 correlation + GGA methods | B2PYLP          | Most accurate, can requires many times more time than GGA etc.                                    |
 +----------------+-------------------------------------+-----------------+---------------------------------------------------------------------------------------------------+
 
-Empirical vs. non expirical
----------------------------
-
 
 
 
@@ -220,7 +219,7 @@ LDA
 
 The local density approximation is one the simplist approximations for the XC functional.
 It assumes that the functional depends only on the density at one point, i.e the density
-is assumed to be smooth in space.
+is assumed to be smooth in space. This means they are not accurate for some properties.
 
 An example for using the PADE LDA method is shown below. The functional needs to be specified
 in the XC_FUNCTIONAL section, and the complementary GTH-PADE pseudopotentials should be used.
@@ -233,14 +232,15 @@ in the XC_FUNCTIONAL section, and the complementary GTH-PADE pseudopotentials sh
     &END XC
 
 
+
 GGA
 ---
 
 The generalised gradient approximation is an improvement on the LDA which takes into account the 
 gradient of the density, as well as the density at one point.
 
-Using the GGA in CP2K is simular to using the LDA. It requires specifying the functional 
-and using the complementary  pseudopotentials (in this case GTH_PBE).
+Using the GGA in CP2K is similar to using the LDA. It requires specifying the functional 
+and using the complementary pseudopotentials (which in this case would be GTH_PBE).
 
 .. code-block::
 
@@ -248,6 +248,19 @@ and using the complementary  pseudopotentials (in this case GTH_PBE).
       &XC_FUNCTIONAL PBE
       &END XC_FUNCTIONAL
     &END XC
+
+Using a GGA functional is usually a good starting point for a running a QM calculation. It is not
+computationally expensive and it is simple to set up in CP2K. 
+
+**BLYP or PBE?**
+
+BLYP and PBE are the most commonly used GGA functionals. The main difference between them is
+are PBE is non empirical i.e. the parameters based only of QM rules, and BLYP is part-empirical 
+with some parameters chosen based on fittings. As a result PBE gives rather accurate results 
+for a wide range of systems, whereas BLYP can be more accurate than PBE for some particular systems.
+This also follows for the hybrid methods PBE0 and B3LYP which use functionals from their GGA counterparts.
+
+
 
 metaGGA
 -------
@@ -257,16 +270,15 @@ metaGGA
 Hybrid methods
 --------------
 
-Hybrid methods cacultate a portoion fo the the exchange functional using the exact Hartree Fock theory.
+Hybrid methods calculate a portion fo the the exchange functional using exact Hartree Fock theory.
 The rest of the exchange and correlation functions is calcaulated with other methods, typically GGA or LDA.
-The XC section of the CP2K input has a HF section is used for the hartree fock set up.
-
+Within the XC section of the CP2K input the HF section is used for the Hartree Fock exchange set up.
 Two commonly used hybrid methods dicussed here are B3LYP and PBE0.
 
 **PBE0**
 
 In the PBE0 functional the exchange is comprised of 75% of the PBE exchange and 25% of the HF exchange.
-The correlation energy is full PBE.
+The correlation energy is entirely PBE.
 
 .. math::
 
@@ -297,14 +309,19 @@ configured as follows:
 
 **B3LYP**
 
-The B3BLYP functional which stands for (Becke, 3-parameter, Lee–Yang–Parr
+The B3LYP functional stands for - Becke, 3-parameter, Lee–Yang–Parr.
 It makes use of the HF exchange and GGA functionals for the exchange and correlation
 (in particular the Becke 88 exchange functional and the LYP correlation functional).
+Three parameters are used in its description:
 
 .. math::
 
     E^{B3LYP}_{XC} = E_X^{LDA} + a_0(E_X^{HF} - E_X^{LDA}) + a_x(E_X^{GGA} - E_X^{LDA}) + E_C^{LDA} + a_c(E_C^{GGA} - E_C^{LDA})
     
+where a_0 = 0.2, a_x = 0.72 and a_c = 0.81.
+To use B3LYP in CP2K the XC section of the input file should be
+configured as follows:
+
 .. code-block::
 
    &XC
@@ -355,26 +372,51 @@ Puesdopotentials
 Important QM parameters
 ------------------------
 
+CHARGE
+------
+
+MULTIPLICITY
+------------
+
 CUTOFF
 ------
 
-The CUTOFF parameter sets 
+The CUTOFF parameter sets the planewave cutoff (given in units of Ry). It is an important
+parameter in a QM calculation, and choosing the wrong cutoff can result in large inaccuracies 
+in the energy. A larger cutoff is usually more accurate as the planewave grid becomes finer,
+however there becomes a point at which going to a larger and larger 
+cutoff no longer makes any difference to the energy, and becomes a waste computational effort.
+
+Before doing a production run it is important to converge the cutoff. This process is
+described in detail here: https://www.cp2k.org/howto:converging_cutoff .
+It essentially involves tracking the energy as the cutoff is varied
+and then selecting a large enough cutoff such that the energy has converged. The correct choice
+of cutoff is dependent on the basis set, pseudopotentals, XC functional and the system itself
+so this convergence check must be done whenever these options are changed.
 
 REL_CUTOFF
 ----------
 
-NGRID
------
-
-EPS_SCF
--------
+The REL_CUTOFF is similar to the CUTOFF and sets the cutoff for the gaussian grid. 
+Converging this parameter is also covered in this guide: https://www.cp2k.org/howto:converging_cutoff.
 
 COMMENSURATE
 ------------
 
-----------------------------
-Converging the CUTOFF/REL_CUTOFF
-----------------------------
+COMMENSURATE is a logical option which specifies if the grids should be commensurate or not. In a QM/MM
+calculation this must be set to true.
+
+EPS_DEFAULT
+-----------
+
+
+EPS_SCF
+-------
+
+MAX_SCF
+-------
+
+
 
 -----------------
 Troubleshooting
