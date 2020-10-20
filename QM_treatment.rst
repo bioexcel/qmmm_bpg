@@ -131,15 +131,41 @@ Basis sets
 
 The basis set can be changed by editing the bs_filename, and the bs_identifier 
 under each element within the SUBSYS&KIND section. The bs_identifier should correspond
-to one of the basis sets for the given element within the basis set file. Basis set
-files are provided within the /data directory in CP2K (link).
+to one of the basis sets for the given element within the basis set file.
+The q number proceeding the basis set in the identifer gives the number of 
+valence electrons. It depends on the element, for example H:1, C:4, O:6, N:5.
+
+Basis set files are provided within the /data directory in CP2K (link).
 If your install of CP2K  has been built correctly then
 the files within this directory should be automatically included, so there is no
-need to provide these in you working directory. Some common options for basis
+need to provide these in you working directory. 
+
+The GTH basis sets are usually recommended in CP2K.
+Some common options for basis
 sets and their location within the basis set files are shown in the table below.
 
++--------------------------------------------------+--------------------------------+--------------------------------------+-------------------------------------------------+
+| Description                                      | GTH (cp2k_root/data/BASIS_SET) | MOLOPT (cp2k_root/data/BASIS_MOLOPT) | Comments                                        |
++==================================================+================================+======================================+=================================================+
+| Single-zeta valence                              | SZV-GTH                        | SZV-MOLOPT-GTH                       | Use only for testing                            |
++--------------------------------------------------+--------------------------------+--------------------------------------+-------------------------------------------------+
+| Double-zeta valence polarised                    | DZVP-GTH                       | DZVP-MOLOPT-GTH                      | A good choice, available for most elements      |
++--------------------------------------------------+--------------------------------+--------------------------------------+-------------------------------------------------+
+| Triple-zeta valence polarised                    | TZVP-GTH                       | TZVP-MOLOPT-GTH                      | More accurate than DZVP                         |
++--------------------------------------------------+--------------------------------+--------------------------------------+-------------------------------------------------+
+| Triple-zeta valence 2x polarisation functions    | TZV2P-GTH                      | TZV2P-MOLOPT-GTH	                   | More accurate still, may not have some elements |
++--------------------------------------------------+--------------------------------+--------------------------------------+-------------------------------------------------+
+| Quadrupal-zeta valence 2x polarisation functions | QZV2P-GTH                      | QZV2P-MOLOPT-GTH	                   | Most accurate but least availablity             |
++--------------------------------------------------+--------------------------------+--------------------------------------+-------------------------------------------------+
 
-GTH - Geodecker tuetter hutter recommended.
+
+The choice of basis will depend on the accuracy required, and whether it is available for the elements in your system. 
+More accurate basis sets will increase the runtime, and may not be available for some elements e.g. metal ions.
+
+The error in due to the basis set is  smaller than the XC functional so chosing a large basis may not be sensible 
+unless using a very accurate XC functional.
+
+
 
 
 
@@ -147,6 +173,32 @@ GTH - Geodecker tuetter hutter recommended.
 XC functionals
 ---------------------
 
+Overview
+--------
+
+LDA/GGA
+-------
+
+metaGGA
+-------
+
+Hybrid methods
+--------------
+
+PBE0
+
+B3LYP
+
+
+Double-hybrid methods
+---------------------
+
+
+Dispersion corrections
+----------------------
+
+Higher order methods
+--------------------
 
 ---------------------
 Puesdopotentials
@@ -159,6 +211,7 @@ Important QM parameters
 
 CUTOFF
 ------
+
 The CUTOFF parameter sets 
 
 REL_CUTOFF
