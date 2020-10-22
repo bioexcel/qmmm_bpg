@@ -410,24 +410,61 @@ calculation this must be set to true.
 EPS_DEFAULT
 -----------
 
+This is an easy way to set all EPS_xxx to values, which will lead to an energy correct to within this value. 
+The default value for this is 1.0E-10. Decreasing this increases the accuracy slightly, but will increase the run time.
 
 EPS_SCF
 -------
 
+This sets the target accuracy for the SCF convergence. The SCF will be converged when the energy change between two SCF
+steps is less than this value. The default for this value is 1.0E-5. It is possible to set different values for the inner
+and outer SCF loops, however the EPS_SCF of the outer SCF must be smaller than or equal to EPS_SCF of the inner loop. As
+the EPS_SCF of the inner loop determines the value at can be reached in the outer loop.
+
 MAX_SCF
 -------
 
-
+In the main SCF section of the input this sets the maximum number of SCF iterations to be performed in the inner SCF loop.
+In the OUTER_SCF section this sets the maximum number of outer loops. The total number of SCF steps will be  the product
+of the inner SCF MAX_SCF and the outer SCF MAX_SCF.
 
 -----------------
 Troubleshooting
 -----------------
 
-My energy is positive
----------------------
+Simulation fails or gives strange results
+-----------------------------------------
+
+Providing you have used a sensible QM set up with a large enough cutoff then the error is usually to do with the set up of your 
+system. If running a periodic calculation check that the CELL boundaries are large enough to separate the periodic images.
+Also check the initial atomic coordinates are sensible by visualising your system. 
+
+If this looks correct then consider simpifying 
+you input, starting with the most simple settings, and choices for basis sets and functionals. If the QM/MM simulation fails then
+may want to try running a simple MM calcaultion first (RUN_TYPE FIST) to check the geometries, and then slowly increase the complexity
+adding in QM and QMMM sections.
 
 SCF does not converge
 ---------------------
+
+If the energies are rapidly varying then it is likely that the SCF is failing to converge. This will be reported in the cp2k output
+with the message "WARNING SCF has not converged. You can quickly double whether the SCF has failed top converge by using grep to 
+search your output for this message:
+
+grep 'WARNING
+
+If this occurs then the easiest variables to change to try and fix this are the MAX_SCF and EPS_SCF.
+
+Some things to try are listed below:
+
+* Check OUTER_SCF&EPS_SCF <= EPS_SCF. If not decrease the outer EPS_SCF.
+* Increase the number of SCF loops with OUTER_SCF&MAX_SCF.
+* Increase the number of inner SCF steps with MAX_SCF.
+* Change the OT minimizer to CG.
+* Check again your geometry.
+* If running MD consider decreasing your timestep.
+
+
 
 Some other CP2K error messages
 ------------------------------
