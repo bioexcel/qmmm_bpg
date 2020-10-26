@@ -131,23 +131,25 @@ Run a simple QMMM calculation in CP2K
 
 Once an MM calcualtion has been run successfully the input can be used as a basis for a QMMM calculation.
 
-The METHOD should be switched to QMMM.
-You will need to add the QMMM section for the parammeterisation of the QM region and the DFT section
-which will define all the necessary settings for the QM part of the calculation. Additionally, information
+The METHOD should be set to QMMM.
+You will need to add the QMMM section for the parameterisation of the QM region and the DFT section
+which will define all the necessary settings for the QM treatment. Additionally, information
 about the atomic kind parameterisation will needed to be added for each kind in the SUBSYS section.
 
-Information on setting the QM stuff can be found here:
+Information on setting up the parameters for the QMMM section can be found here:
+Settings for this will depend highly on your choice of QM region.
+
+Information on setting the QM treatment can be found here:
 It is good practice to start with simple method for the XC functional and then check that the QM set up 
 has been done correctly before increasing the complexity and deciding on most accurate or appropirate
 method for your system.
 
-Information on setting the QMMM stuff can be found here:
+You should first calculate just the ENERGY of the system and check that this is sensible and that the SCF
+converges.
 
-Add in sections DFT and QMMM - see instructions
+Before running a production QMMM calculation the value of the CUTOFF should be converged
+for the final choice of BASIS_SET, XC_FUNCTIONAL and any other parameters.
 
-Energy only calculation
-
-Check this works - converges, energy is negative
 
 
 --------------
