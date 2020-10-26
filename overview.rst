@@ -27,7 +27,7 @@ Overview of CP2K input
        .... contents of QMMM section
      &END QMMM
   
-     &MM                                    ! MM section - MM forcefields, connectivity etc.
+     &MM                                    ! MM section - MM forcefields,  etc.
        .... contents of MM section
      &END MM
      
@@ -64,7 +64,7 @@ Select QM atoms
 
 
 ----------------------------------
-Test run of MM only in CP2K
+Run MM only in CP2K
 ----------------------------------
 
 .. code-block ::
@@ -75,10 +75,10 @@ Test run of MM only in CP2K
      PRINT_LEVEL LOW
   &END GLOBAL
   &FORCE_EVAL
-     METHOD FIST                       ! MM method
+     METHOD FIST                       ! Do MM
      &MM
        &FORCEFIELD
-       PARMTYPE AMBER                  ! use the amber forcefield 
+       PARMTYPE AMBER                  ! use the Amber forcefield type
        DO_NONBONDED .TRUE.             ! short range non bonded interactions
        PARM_FILE_NAME ff_name          ! forcefield filename
        &SPLINE
@@ -88,16 +88,16 @@ Test run of MM only in CP2K
        &END FORCEFIELD
        &POISSON
           &EWALD
-             EWALD_TYPE SPME           ! recommended in cp2k manual
+             EWALD_TYPE SPME           ! recommended ewald type
              GMAX 70                   ! number of grid points 1 per angstrom in each direction
           &END EWALD
        &END POISSON
      &END MM
      &SUBSYS
         &CELL
-          ABC x y z                    ! size in x,y,z
+          ABC x y z                    ! size in x,y,z in Angstrom
           PERIODIC XYZ
-          ALPHA_BETA_GAMMA 90 90 90    ! cubic cell
+          ALPHA_BETA_GAMMA 90 90 90    ! cubic cell (90 degrees between alpha, beta, gamma
         &END CELL
         &TOPOLOGY                      
            CONN_FILE_FORMAT AMBER
@@ -108,11 +108,18 @@ Test run of MM only in CP2K
      &SUBSYS
   &END FORCE_EVAL
 
-FIST
+Before running a QMMM simulation in CP2K it is recommended to try and run a simple single energy
+MM calculation in CP2K. This will verify that the input forcefield and coordinates
+are set up correctly and compatible with CP2K before attempting to add more complicated
+QMMM parameters. The MM calculation should be fast to run and if the calculation finishes without
+error and the energy is sensible then it is a good indicator that the system has been
+prepared correctly for CP2K.
 
-input pdb and topology
-cell size
-
+The FIST (Frontiers in Simulation Technology) method is used in CP2K MM calculations.
+The MM and SUBSYS sections of FORCE_EVAL are required for this calculation. The MM section will contain 
+all the parameters for the MM such as the forcefield, and the poisson and spline information.
+The subsys section contains the systems topology information
+such as the atomic coordinates, the cell size and the connectivity.
 
 
 
@@ -122,8 +129,21 @@ cell size
 Run a simple QMMM calculation in CP2K
 ------------------------------------------
 
+Once an MM calcualtion has been run successfully the input can be used as a basis for a QMMM calculation.
 
-Add in sections QM and QMMM - see instructions
+The METHOD should be switched to QMMM.
+You will need to add the QMMM section for the parammeterisation of the QM region and the DFT section
+which will define all the necessary settings for the QM part of the calculation. Additionally, information
+about the atomic kind parameterisation will needed to be added for each kind in the SUBSYS section.
+
+Information on setting the QM stuff can be found here:
+It is good practice to start with simple method for the XC functional and then check that the QM set up 
+has been done correctly before increasing the complexity and deciding on most accurate or appropirate
+method for your system.
+
+Information on setting the QMMM stuff can be found here:
+
+Add in sections DFT and QMMM - see instructions
 
 Energy only calculation
 
