@@ -10,9 +10,9 @@ CP2K QMMM input format
 
 .. code-block ::
 
-  &QMMM  			                     ! This defines the QS cell in the QMMM calc
+  &QMMM 
     &CELL
-      ABC qm_x qm_y qm_z                 ! size of QM box in x,y,z
+      ABC qm_x qm_y qm_z                 ! size of QM cell in x,y,z
       PERIODIC XYZ
     &END CELL
     ECOUPL GAUSS                         ! type of QM/MM elect. coupling
@@ -51,34 +51,54 @@ QMMM Cell
 Selecting the size of the cell
 ------------------------------
 
-QMMM&CELL
 
-much too small SCF will not converge
-usually add 1.5-2A around QM atoms
-slighty too small energy different
-converge energy with cell size, increase cell see energy change
-much too big no real large effect on the energy but the run time is increased - wasteful
+The CELL section within the QMMM section contains setting for the QMMM cell which should contain the QM
+atoms. This represents a boundary region where the MM atoms within it
+
+QM atoms are by default centered within the cell so you do not have to worry about
+its position within the cell for the whole system.
+However the dimensions of the CELL should be large enough to contain all the QM atoms.
+A size roughly where the cell extends roughly 1.5-2A around the outermost QM atoms.
+
+If the CELL is much too small the QM energy will not be calculated properly and as a
+consquence the SCF will not converge and/or the energies will be incorrect. 
+
+To check the size of your CELL may want to consider running a series of energy calculations
+and check the convergence of the energy with the CELL size. Up to a certain size a larger cell
+may be more accurate, however after this increasing the size further makes very little difference
+to the energy, and will increase the run time.
+
 
 
 
 Dealing with QM atoms moving outside of the cell
 ------------------------------------------------
 
-usually waters move readily around the box - having QM waters usually causes these kinds of errors
+The QM atoms should stay within the QM box during a simulation. If they move outside
+of the QM box the following warning message will be printed - "WARNING One or few QM atoms are within the SKIN 
+of the quantum box". The calculation will usually continue in this case but the energies
+and forces could be wrong.  This message will usually occur in the first few MD steps
+of a simulation, and if you see this message it is a good idea to terminate the
+calculation to check what might be wrong.
 
-error message - WARNING in qmmm_util.F:: One or few QM atoms are within the SKIN 
-of the quantum box. Check your run and you may possibly consider: the 
- activation of the QMMM WALLS around the QM box, switching ON the      
-centering of the QM box or increase the size of the QM cell. CP2K    
- CONTINUE but results could be meaningless.                            
+Some simple fixes for this might be to increase the size of the QM box and double 
+check that the QM atoms are properly centered in the box using &QMMM&CELL&CENTERING.
+However these options may not solve the issue if atoms are moving rapidly from within the box.
+Fast movement of atoms in an MD simulation may be due to incorrect geometry. It can also happen if you 
+have QM water atoms as these move around more readily
+than protein atoms. In this case you have a few choices about how to prevent the
+waters leaving the QM box.
+
+**Constrain waters**
+
+The water atoms in CP2K can be constrained in a similar way to those in classical
+MD simulation software. The 
+
+**Add walls around QM box**
+
+Walls can be added
 
 
-options
--------
-
-constrain all waters
-
-add walls around QM box - how to do this
 
 
 
@@ -90,10 +110,10 @@ Dealing with the QM-MM boundary
 Finding which bonds to cut
 ---------------------------
 
-usually c-c
+
 look at pdb file
 identify QM residue at end
-find C-C bond
+find  bond
 indexes
 
 
