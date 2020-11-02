@@ -156,4 +156,7 @@ for the final choice of BASIS_SET, XC_FUNCTIONAL and any other parameters.
 Run MD in CP2K
 --------------
 
+Once you  have setup a simple single energy QMMM calculation CP2K it fairly 
+straightfoward to adjust the input file to run a molecular dynaimcs simulation.
+
 
