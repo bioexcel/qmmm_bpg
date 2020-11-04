@@ -2,7 +2,10 @@
 QMMM parameterisation
 =====================
 
-Choosing how to set up your QMMM region once you have selected your QM atoms
+The chapter describes how set the QMMM settings in CP2K once you have decided on your QM atoms.
+This includes how to get the QM atoms into the right format for CP2K, and how to parameterise
+the QMMM cell. It will also deal with how to properly handle atomic bonds that cross the QMMM
+boundary.
 
 -----------------------
 CP2K QMMM input format
@@ -51,6 +54,37 @@ slightly different parameters. These are explained under the ECOUPL option.
  &END QMMM
     
 
+-------------------
+Setting up QM atoms
+-------------------
+
+The QM atoms need to be listed in terms of their MM index in the .pdb file 
+(or coordinate file format of your choice). They should be grouped into their QM atomic
+kinds (i.e. their element type) and given as a list of indexes, as shown below for N atoms.
+
+.. code-block ::
+
+    &QM_KIND N                           
+      MM_INDEX list_of_atom_indexes      ! list of N QM atoms
+    &END QM_KIND
+
+The QM kind should match a KIND specified in the SUBSYS section, which supplies the element
+tpye and corresponding basis set and pseudopotential. To get the correct input format
+for CP2K the get_qm_kinds.sh script is supplied which converts a pdb file containing the
+QM atoms to this format. This pdb can be created by selecting the QM atoms from the whole system
+
+
+Odd atomic kinds
+----------------
+
+Occasionally you may get an error message from CP2K saying "". This is becasue CP2K only expects
+proper element symbols in the coordinate and force field files. The work around for this is 
+to let CP2K know what element the symbol should correspond to. This is done by adding it as a KIND
+in the SUBSYS section.
+
+
+
+
 ------------------
 QMMM Input options
 ------------------
@@ -60,11 +94,11 @@ ECOUPL
 
 Specifies the type of the QM-MM electrostatic coupling. The following options are available:
 
-* **COULOMB** -
-* **GAUSS** - 
-* **NONE** -
-* **POINT_CHARGE** -
-* **S-WAVE** -
+* **COULOMB** - use a coulomb potential (not for GPW, GAPW).
+* **GAUSS** - use a Gaussian expansion of the electrostatic potential (not for DFTB)
+* **NONE** - use a classical point charge based coupling
+* **POINT_CHARGE** - use a QM derived point charges
+* **S-WAVE** - use a Gaussian expansion of the s-wave electrostatic potential
 
 USE_GEEP_LIB
 ------------
@@ -92,9 +126,9 @@ memory.
 CENTER
 ------
 
-This sets when the QM system is automatically centered within the QM box. This can
-prevent QM atoms from leaving the box. The options for this setting are EVERY_STEP, SETUP_ONLY
-and NEVER.
+This sets when the QM system is automatically centered within the QM box. 
+The options for this setting are EVERY_STEP, SETUP_ONLY
+and NEVER. The default is EVERY_STEP, which is suggested to prevent QM atoms from leaving the box.
 
 --------------
 QMMM Cell 
@@ -110,8 +144,7 @@ atoms. This represents a boundary region where the MM atoms within it
 QM atoms are by default centered within the cell so you do not have to worry about
 its position within the cell for the whole system (this is controlled by the CENTER option).
 However the dimensions of the CELL should be large enough to contain all the QM atoms.
-A size roughly where the cell extends roughly 1.5-2A around the outermost QM atoms.
-
+A size roughly where the cell extends roughly 1.5-2A around the outermost QM atoms. 
 If the CELL is much too small the QM energy will not be calculated properly and as a
 consquence the SCF will not converge and/or the energies will be incorrect. 
 
@@ -148,7 +181,9 @@ waters leaving the QM box.
 
 **Add walls around QM box**
 
-Walls can be added
+Walls can be added around the QM box to reflect any QM atoms which may try to leave the box.
+This is of course, slightly unphysical so care should be taken to set this up in a way that preserves
+the dynamics of the system. 
 
 
 
@@ -158,10 +193,6 @@ Walls can be added
 -------------------------------
 Dealing with the QM-MM boundary
 -------------------------------
-
-
-
-A localized orbital is introduced at the boundary between the regions
 
 Once you have chosen the QM atoms you must deal with any bonds at the boundaries of the QM region,
 between MM and QM atoms. This is to ensure that there are no dangling QM bonds.
@@ -173,25 +204,35 @@ It is important that the bonds across the boundary are not expected to have larg
 as there is no treatment for charge transfer through the QMMM bounadary. Cutting a C-C bond for example
 is usually a safe choice.
 
-The bonds can be identied through visualisation, e.g. vmd or pdb viewer, or by observation
+The bonds can be identied through visualisation, e.g. vmd or other pdb viewer, or by observation
 of the pdb file. To correctly treat a QM-MM bond in CP2K you need to know the atomic indexes
-of the QM and MM atoms.
-
-In CP2K there are x methods treat the QM boundary
+of the QM and MM atoms. The LINK section is then used to pass this information.
 
 
-Link atoms setup
-----------------
+QMMM Link parameterisation
+--------------------------
 
+The CP2K link treatment involves adding a atom (usually a hydrogen) to cap the QM bond in place of the MM atom.
+This must be done for all dangling QM bonds or you will get the following error "
 
-Link atoms involve adding a atom (usually a hydrogen) to cap the QM bond in place of the MM atom.
+There are three different link treatments in CP2K which can be set using the LINK_TYPE option. These are as follows:
+
+* GHO - Integrated Molecular Orbital Molecular Mechanics method
+* IMOMM -  Generalized Hybrid Orbital method
+* PSEUDO - Use a monovalent pseudo-potential
+
+The element used to cap the bond can be changed by setting QM_KIND; the default option is hydrogen H.
+
+An example LINK section is shown below:
 
 .. code-block ::
 
     &LINK
-       QM_KIND H 
+       QM_KIND H                         ! element capping
+       QMMM_SCALE_FACTOR 1.0             ! scale factor of the MM charge
        MM_INDEX  mm_atom_index           ! index of MM atom in broken bond
        QM_INDEX  qm_atom_index           ! index of QM atom in broken bond
        LINK_TYPE IMOMM                   ! IMOMM method
     &END LINK
+
 
