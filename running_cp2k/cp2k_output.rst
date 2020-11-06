@@ -76,7 +76,7 @@ recalcailting the preconditioner. If then the outer scf MAX_SCF steps are exceed
 and the SCF calculation has not converged a warning will be printed and the SCF will be abandoned.
 Information on how to handle this is given in the troubleshooting chapter.
 
-Upon successful convergence energy (and force specified) information is printed.
+Upon successful convergence energy (and force if specified) information is printed.
 
 
 .. code-block ::
@@ -105,7 +105,12 @@ Upon successful convergence energy (and force specified) information is printed.
 It is a good idea to check that the electronic density corresponds to the number of 
 electrons, and that the charge is as expected.
 
-The Total energy given is the energy from the QM only part -  the SCF calculation.
+The Total energy given is the energy from only the QM part i.e from the SCF calculation.
+A breakdown of its components is printed above it. The total number of outer SCF loops
+and inner SCF steps that were done is also shown.
+
+The ENERGY (QMMM) is the QMMM energy including all its components; the QM energy, MM energy
+and QMMM interation energy. This is the energy you are usually interested in.
 
 
 Wavefuntions - NAME-RESTART.wfn
