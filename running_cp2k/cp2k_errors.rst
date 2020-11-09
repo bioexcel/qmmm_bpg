@@ -64,9 +64,9 @@ QM atoms missing from list in QMMM&QM_KIND
 
 QM-MM link missing
 
----------------
-CPASSERT failed
----------------
+------------------------
+CPASSERT failed messages
+------------------------
 
 This error is produced when a check within the CP2K code fails. It can be difficult to diagnose
 as the error is not always very specific and ways to solve it are not given.
