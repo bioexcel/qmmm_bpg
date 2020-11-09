@@ -6,19 +6,19 @@ CP2K Troubleshooting
 Warning messages
 -----------------------
 
-Warning about EMAX_SPLINE
--------------------------
+GEOMETRY wrong or EMAX_SPLINE too small!
+----------------------------------------
 
-geometry wrong or EMAX_SPLINE too large
+may be a problem with the MM forcefield, geometry
 
 
 KIND not found
 ---------------
 
-You may get an error message from CP2K saying "". This is becasue CP2K only expects
+You may get an error message from CP2K saying "Unknown element for KIND". This is becasue CP2K only expects
 proper element symbols in the coordinate and force field files. The work around for this is
-to let CP2K know what element the symbol should correspond to. This is done by adding it as a KIND
-in the SUBSYS section.
+to let CP2K know what element the symbol should correspond to. This is done by adding it as its own KIND section
+in the SUBSYS section, or by specifying elements in the PDB coordinates file.
 
 Use the LSD option for an odd number of electrons
 -------------------------------------------------
