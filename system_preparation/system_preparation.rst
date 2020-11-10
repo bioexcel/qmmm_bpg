@@ -19,7 +19,35 @@ In particular, QM/MM methods are often used to study chemical reactions catalyse
 
 
 ------------
-Preparing your PDB file for CP2K
+Preparing your PDB file
+------------
+
+The most common way to obtain the structure of a biomolecule (proteins, nucleic acids, protein complexes...) is  via a structural biologist collaborator or via downloading an entry of the Protein Data Bank (PDB). Usually these structures are not ready to use as they will likely have crystallisation products and will require fixing to obtain the desired protonation state of the protein. 
+
+Cleaning the structural coordinates of the biomolecule of interest
+------------
+
+The structures should be cleaned of all those molecules that are not relevant to your study. Usually there are crystallisation products and ions. 
+
+Asessing the protonation states of your biomolecule
+------------
+
+As mentioned before, the protonation state of your system should be considered carefully. If you know the pH you want to simulate, you can get a suggestive protonation state for your protein using the pKa predictor. The results of these pKa predictors always have to be visually checked, as the protonation patterns are very important in enzymatic reactivity. 
+
+Here it is a short list of pKa predictors:
+
+- `PROPKA 3 <https://github.com/jensengroup/propka>`_: It predicts the pKa values of ionizable groups in proteins and protein-ligand complexes based on the 3D structure.
+- `H++ server <http://biophysics.cs.vt.edu>`_: It computes pK values of ionizable groups in macromolecules and adds missing hydrogen atoms according to the specified pH of the environment.
+- `DelphiPKa Web server <http://compbio.clemson.edu/pka_webserver/>`_: It allows to predict pKa's for ionizable groups in proteins, RNA and DNA.
+
+
+Checking for disulphide bonds and other covalent bonds 
+------------
+Disulphide bonds keep proteins folded, therefore 
+
+
+------------
+Preparing topology and coordinate files for CP2K
 ------------
 
 CP2K allows several formats for topology files (you can find the complete list here: `&TOPOLOGY 
