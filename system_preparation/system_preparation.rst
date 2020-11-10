@@ -35,6 +35,7 @@ Since both AMBER and CHARMM software packages have excellent training material, 
 System preparation using AMBERTools software package
 -------------
 
+AMBERTools <https://ambermd.org/AmberTools.php>`_ is a free suite provided by the AMBER software package developers that provides all the tools needed to prepare a biological system. It includes AMBER forcefields for proteins, lipids, sugars, nucleic acids and drug-like molecules. Also provides all the tools needed to derive ad-hoc parameters for special residues such as chromophores and organic products. AMBER also provides a lot of useful `tutorials <https://ambermd.org/tutorials/>`_. 
 
 
 
