@@ -23,19 +23,19 @@ Preparing your PDB file for CP2K
 ------------
 
 CP2K allows several formats for topology files (you can find the complete list here: `&TOPOLOGY 
-<https://manual.cp2k.org/trunk/CP2K_INPUT/FORCE_EVAL/SUBSYS/TOPOLOGY.html>`_ under the &CONN_FILE_FORMAT and the &COORD_FILE_FORMAT subsections). For biomolecular modelling purposes, the most convenient formats are AMBER formats (AMBER7 topology files, AMBER7 CRD files) and CHARMM formats (PSF, PDB). 
+<https://manual.cp2k.org/trunk/CP2K_INPUT/FORCE_EVAL/SUBSYS/TOPOLOGY.html>`_ under the **&CONN_FILE_FORMAT** and the **&COORD_FILE_FORMAT** subsections). For biomolecular modelling purposes, the most convenient formats are AMBER formats (AMBER7 topology files, AMBER7 CRD files) and CHARMM formats (PSF, PDB). 
 
 Since both AMBER and CHARMM software packages have excellent training material, here we are going to give a quick overview of the system preparation process and provide a list of useful tutorials for each software packages. We will highlight how to adapt those protocols to the specific requirements of CP2K:
 
-- Use a cubic or triclinic box. Simulation of octahedral boxes is not enabled in the parallel version of CP2K.psmp . 
-- Neutralise the system. 
-- Add missing forcefield parameters. 
+- To use a cubic or triclinic box. 
+- To neutralise the system. 
+- To add missing forcefield parameters. 
 
 
 System preparation using AMBERTools software package
 -------------
 
-AMBERTools <https://ambermd.org/AmberTools.php>`_ is a free suite provided by the AMBER software package developers that provides all the tools needed to prepare a biological system. It includes AMBER forcefields for proteins, lipids, sugars, nucleic acids and drug-like molecules. Also provides all the tools needed to derive ad-hoc parameters for special residues such as chromophores and organic products. AMBER also provides a lot of useful `tutorials <https://ambermd.org/tutorials/>`_. 
+`AMBERTools <https://ambermd.org/AmberTools.php>`_ is a free suite provided by the AMBER software package developers that provides all the tools needed to prepare a biological system. It includes AMBER forcefields for proteins, lipids, sugars, nucleic acids and drug-like molecules. Also provides all the tools needed to derive ad-hoc parameters for special residues such as chromophores and organic products. AMBER also provides a lot of useful `tutorials <https://ambermd.org/tutorials/>`_. 
 
 
 
