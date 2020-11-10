@@ -24,10 +24,12 @@ Preparing your PDB file
 
 The most common way to obtain the structure of a biomolecule (proteins, nucleic acids, protein complexes...) is  via a structural biologist collaborator or via downloading an entry of the Protein Data Bank (PDB). Usually these structures are not ready to use as they will likely have crystallisation products and will require fixing to obtain the desired protonation state of the protein. 
 
+
 Cleaning the structural coordinates of the biomolecule of interest
 ------------
 
 The structures should be cleaned of all those molecules that are not relevant to your study.  
+
 
 Asessing the protonation states of your biomolecule
 ------------
@@ -47,6 +49,13 @@ Checking for disulphide bonds and other posttranslational modifications
 Disulphide bonds keep some proteins properly folded, therefore it is very important to look for them in your protein structures. The cysteine residues involved in a disulphide bond should be rename to the aminoacid code CYX. 
 
 It is also important to check for other posttranslational modifications such as phosporilation or glicosilation of protein residues. You might need to include them in your setup if they are relevant to your hypothesis. 
+
+
+Presence of chromophores, cofactors, substrates, inhibitors and other organic molecules
+------------
+
+WIP. 
+
 
 
 ------------
