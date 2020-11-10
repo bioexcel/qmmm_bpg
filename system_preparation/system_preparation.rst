@@ -27,7 +27,7 @@ The most common way to obtain the structure of a biomolecule (proteins, nucleic 
 Cleaning the structural coordinates of the biomolecule of interest
 ------------
 
-The structures should be cleaned of all those molecules that are not relevant to your study. Usually there are crystallisation products and ions. 
+The structures should be cleaned of all those molecules that are not relevant to your study.  
 
 Asessing the protonation states of your biomolecule
 ------------
@@ -41,9 +41,12 @@ Here it is a short list of pKa predictors:
 - `DelphiPKa Web server <http://compbio.clemson.edu/pka_webserver/>`_: It allows to predict pKa's for ionizable groups in proteins, RNA and DNA.
 
 
-Checking for disulphide bonds and other covalent bonds 
+Checking for disulphide bonds and other posttranslational modifications 
 ------------
-Disulphide bonds keep proteins folded, therefore 
+
+Disulphide bonds keep some proteins properly folded, therefore it is very important to look for them in your protein structures. The cysteine residues involved in a disulphide bond should be rename to the aminoacid code CYX. 
+
+It is also important to check for other posttranslational modifications such as phosporilation or glicosilation of protein residues. You might need to include them in your setup if they are relevant to your hypothesis. 
 
 
 ------------
