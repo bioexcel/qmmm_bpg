@@ -51,7 +51,7 @@ Check the basis set file name is correct for the basis sets named in the SUBSYS 
 Error in QMMM Connectivity
 ---------------------------
 
-.. code-block ::
+.. code-block:: none
 
  ERROR in the QM/MM connectivity. A QM/MM LINK was detected but
  no LINK section was provided in the Input file!
