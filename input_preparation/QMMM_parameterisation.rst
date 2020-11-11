@@ -62,7 +62,7 @@ The QM atoms need to be listed in terms of their MM index in the .pdb file
 (or coordinate file format of your choice). They should be grouped into their QM atomic
 kinds (i.e. their element type) and given as a list of indexes, as shown below for N atoms.
 
-.. code-block ::
+.. code-block:: none
 
     &QM_KIND N                           
       MM_INDEX list_of_atom_indexes      ! list of N QM atoms
@@ -225,7 +225,7 @@ The element used to cap the bond can be changed by setting QM_KIND; the default 
 
 An example LINK section is shown below:
 
-.. code-block ::
+.. code-block:: none
 
     &LINK
        QM_KIND H                         ! element capping
