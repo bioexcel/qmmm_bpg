@@ -7,7 +7,7 @@ Note that the RUN_TYPE is set to ENERGY and the METHOD in the FORCE_EVAL section
 is set to FIST for an MM run. This stands for Frontiers in Simulation Technology which is the 
 method used in CP2K MM calculations.
 
-.. code-block ::
+.. code-block:: none
 
   &GLOBAL
      PROJECT project_name
