@@ -62,9 +62,9 @@ Forcefield types
 
 
 
------------------------
-Important MM parameters
------------------------
+-----------------------------
+Important MM input parameters
+-----------------------------
 
 
 EMAX_SPLINE
