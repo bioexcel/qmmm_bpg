@@ -74,7 +74,7 @@ important paramters outlined below.
 
 .. Examples for using a Semi-emperical method (SE) and the Tight Binding method (TDFT) are provided here:
 
-.. code-block::
+.. code-block:: none
 
   &DFT                                 ! CP2K input block for DFT
     CHARGE 0                               ! charge of the QM region
@@ -224,7 +224,7 @@ is assumed to be smooth in space. This means they are not accurate for some prop
 An example for using the PADE LDA method is shown below. The functional needs to be specified
 in the XC_FUNCTIONAL section, and the complementary GTH-PADE pseudopotentials should be used.
 
-.. code-block::
+.. code-block:: none
 
     &XC
       &XC_FUNCTIONAL PADE
@@ -242,7 +242,7 @@ gradient of the density, as well as the density at one point.
 Using the GGA in CP2K is similar to using the LDA. It requires specifying the functional 
 and using the complementary pseudopotentials (which in this case would be GTH_PBE).
 
-.. code-block::
+.. code-block:: none
 
     &XC
       &XC_FUNCTIONAL PBE
@@ -288,7 +288,7 @@ The correlation energy is entirely PBE.
 In CP2K to use the PBE0 functional the XC section of the input file should be
 configured as follows:
 
-.. code-block::
+.. code-block:: none
 
     &XC
        &XC_FUNCTIONAL
@@ -323,7 +323,7 @@ where a_0 = 0.2, a_x = 0.72 and a_c = 0.81.
 To use B3LYP in CP2K the XC section of the input file should be
 configured as follows:
 
-.. code-block::
+.. code-block:: none
 
    &XC
       &XC_FUNCTIONAL
@@ -369,9 +369,9 @@ Puesdopotentials
 ---------------------
 
 
-------------------------
-Important QM parameters
-------------------------
+------------------------------
+Important QM input parameters
+------------------------------
 
 CHARGE
 ------
@@ -465,7 +465,4 @@ Some things to try are listed below:
 * If running MD consider decreasing your timestep.
 
 
-
-Some other CP2K error messages
-------------------------------
 
