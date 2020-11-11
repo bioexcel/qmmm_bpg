@@ -116,7 +116,7 @@ important paramters outlined below.
 Additionally for each element identifier in your topology you need to tell CP2K which basis 
 sets and potentials to use. This is done in the SUBSYS section, under KIND. 
 
-.. code-block::
+.. code-block:: none
 
   &SUBSYS
     &KIND H
