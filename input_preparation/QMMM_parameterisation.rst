@@ -19,7 +19,7 @@ a QMMM calculation using the GEEP method. However other methods exist and these 
 slightly different parameters. These are explained under the ECOUPL option.
 
 
-.. code-block ::
+.. code-block::
 
   &QMMM 
     &CELL
