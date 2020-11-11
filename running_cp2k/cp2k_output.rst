@@ -24,7 +24,7 @@ output from the self-consistent Kohn-Sham ground state calculation (SCF optimisa
 This will look similar to the below.
 
 
-.. code-block ::
+.. code-block:: none
 
  SCF WAVEFUNCTION OPTIMIZATION
 
@@ -66,7 +66,7 @@ The Convergence gives an idea of the accuracy of the SCF energy. When this value
 becomes less than the EPS_SCF value specified in the input the SCF calculation will
 exit and a message stating that convergence has been acheived is printed.
 
-.. code-block ::
+.. code-block:: none
 
  *** SCF run converged in     3 steps ***
 
@@ -79,7 +79,7 @@ Information on how to handle this is given in the troubleshooting chapter.
 Upon successful convergence energy (and force if specified) information is printed.
 
 
-.. code-block ::
+.. code-block:: none
 
   Electronic density on regular grids:       -213.9999999972        0.0000000028
   Core density on regular grids:              213.9999999999       -0.0000000001
@@ -123,7 +123,7 @@ already exists the older version is moved to NAME-RESTART.wfn.bak-1, rather than
 This is done for up to three files and so you may see the following files, where
 the third backup (bak-3) is the oldest.
 
-.. code-block ::
+.. code-block:: none
 
  NAME-RESTART.wfn
  NAME-RESTART.wfn.bak-1
@@ -133,9 +133,9 @@ the third backup (bak-3) is the oldest.
 Wavefunction restarts are  used when restarting a calculation in order to act
 as a guide for the first SCF step to speed up the calculation.
 In this case the project name should be consistent
-and the SCF_GUESS should be set to 'restart'. In this case care should be taken that
+and the SCF_GUESS should be set to 'restart'. Care should be taken that
 the wavefunction is a suitable guess for the SCF calculation otherwise it may not
-converge.
+converge. 
 
 -----------------------------------
 Output from a Geometry optimatision
