@@ -74,20 +74,12 @@ for CP2K the get_qm_kinds.sh script is supplied which converts a pdb file contai
 QM atoms to this format. This pdb can be created by selecting the QM atoms from the whole system
 
 
-Odd atomic kinds
-----------------
-
-Occasionally you may get an error message from CP2K saying "". This is becasue CP2K only expects
-proper element symbols in the coordinate and force field files. The work around for this is 
-to let CP2K know what element the symbol should correspond to. This is done by adding it as a KIND
-in the SUBSYS section.
 
 
 
-
-------------------
-QMMM Input options
-------------------
+--------------------------------
+Important QMMM input parameters
+--------------------------------
 
 ECOUPL
 ------
@@ -156,7 +148,7 @@ to the energy, and will increase the run time.
 
 
 
-Dealing with QM atoms moving outside of the cell
+Preventing QM atoms moving outside of the cell
 ------------------------------------------------
 
 The QM atoms should stay within the QM box during a simulation. If they move outside
