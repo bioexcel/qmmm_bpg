@@ -54,8 +54,31 @@ It is also important to check for other posttranslational modifications such as 
 Presence of chromophores, cofactors, substrates, inhibitors and other organic molecules
 ---------------------------------------------------------------------------------------
 
-WIP. 
+Classical forcefields contain parameters for the most common residues in biomolecular simulations such as aminoacids, nucleic acids, lipids, sugars, ions and water molecules. Unfortunately, drug-like molecules, most chromophores and other organic molecules of interest of your biological system are not included in those forcefields and must be parameterised adhoc. 
 
+There are several protocols to parameterise organic molecules for each forcefield as well as several web servers that provide parameters for organic molecules. We are going to list here a set of tutorials for ligand parameterisation and a list of web servers created for that same purpose. Additionally, we also include some databases of parameterised molecules. 
+
+**Ligand parameterisation protocols:**
+
+- `AMBER tutorials for developing non standard parameters <https://ambermd.org/tutorials/ForceField.php>`_: The AMBER project provides you with 6 tutorials on how to parameterise different non standard residues such as organic molecules, covalent ligands and metal ions. 
+- CHARMM tutorials:
+	- `All CHARMM tutorials <https://www.charmm.org/charmm/documentation/tutorials/>`_
+	- `CHARMM tutorial on Parameterising novel residues <https://www.ks.uiuc.edu/Training/Tutorials/science/forcefield-tutorial/forcefield.pdf>`_
+	- `Paratool VMD Plugin <http://www.ks.uiuc.edu/Research/vmd/plugins/paratool/>`_
+
+**Web Servers:**
+
+- `SwissParam <www.swissparam.ch>`_: a web server that provides topology and parameters for small organic molecules compatible with the CHARMM all atoms force field, for use with CHARMM and GROMACS.
+- `CHARMM GUI Ligand Reader and Modeller <http://www.charmm-gui.org/?doc=input/ligandrm>`_: a web server that provides parameters compatible for CHARMM forcefields. 
+- `ACPYPE Server <https://alanwilter.github.io/acpype/>`_ : a web server that generates topology parameters files for unusual organic chemical compounds for AMBER forcefields. 
+- `LigParGen web Server <http://zarbi.chem.yale.edu/ligpargen/>`_ : is a web-based service that provides force field (FF) parameters for organic molecules or ligands with the OPLS-AA forcefield. 
+
+**Published parameters of organic molecules:**
+
+- `AMBER parameter database <http://research.bmh.manchester.ac.uk/bryce/amber/>`_ : Parameters for use  with the AMBER forcefield for an extensive list of cofactors and other organic molecules. 
+- `AMBER DYES forcefield <https://github.com/t-/amber-dyes>`_ : Parameters for use with the AMBER forcefield for the most common dyes. 
+
+Additionally, it is worth mentioning the `Open Force Field Initiative <https://openforcefield.org>`_ to escape from typical forcefield atomtypes and use chemical perception to parameterise organic molecules. 
 
 
 ------------------------------------------------
