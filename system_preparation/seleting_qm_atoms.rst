@@ -98,9 +98,9 @@ the C-C bond to break, and record the atomic indexes of the QM and MM C atoms.
 These will be needed to correctly treat a QM-MM bond in CP2K (see section).
 
 
-----------------------------------
+-------------------------------------
 Expanding or shrinking the QM region
-----------------------------------
+-------------------------------------
 
 You may want to examine the effect of growing or shrinking the QM region on your
 property of interest in order to decide on a suitable region size. If the calculation
