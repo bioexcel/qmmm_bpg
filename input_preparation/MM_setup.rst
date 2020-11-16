@@ -11,7 +11,7 @@ method used in CP2K MM calculations.
 
 
 
-.. code-block:: none
+.. parsed-literal:: 
 
   &GLOBAL
      PROJECT project_name
