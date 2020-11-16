@@ -33,7 +33,7 @@ method used in CP2K MM calculations.
        &POISSON
           &EWALD
              :ref:`ref_ewald_type` SPME           ! recommended ewald type
-             :ref:`gmax' 70                   ! number of grid points 1 per angstrom in each direction
+             :ref:`ref_gmax` 70                   ! number of grid points 1 per angstrom in each direction
           &END EWALD
        &END POISSON
      &END MM
