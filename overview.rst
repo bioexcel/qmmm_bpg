@@ -2,32 +2,50 @@
 QMMM overview
 ==============
 
+The following overview will outline the main steps in setting up and running a QMMM 
+simulation in CP2K, starting from preparing your system from a raw pdb file, and leading 
+towards running a production QMMM run, for example a molecular dynamics simulation. Each
+section will contain relavent links to the specfic parts of the guide.
+
+This overview is designed to be read from the point of view of a beginner, a more experianced
+user may benefit from using the contents page to directly navigate to areas of interest.
 
   
 ---------------
 Prepare system
 ---------------
 
+The first step is to prepare your system - i.e. to generate the desired starting 
+system and forcefield files. The starting point for this is usually a pdb file 
+which may have been downloaded from the PDB data bank. Usually these structures are not
+ready to use and will require fixing to obtain the desired protonation state of the protein.
+Details of how to this are described in the system prepartion guide here:
 
 
+You will also have to generate a forcefield for you system. There are different tools
+available to do this depending on the type of forcefield. For CP2K the Amber, Charmm and Gromos
+forcefields can be used. The relevant tools and the tutorials can be found below:
 
-----------------------------------------------
-Minimisation, Equilibration and Thermalisation
-----------------------------------------------
-
+- Ambertools
+- Charmm
 
 ---------------
 Select QM atoms
 ---------------
 
+After the system has been prepared you can consider which atoms will be included 
+in the QM region. This will usually be the atoms in your ligand, however it is 
+important to consider whether enough atoms are included to accurately represent
+the chemistry of the system, while at the same time not having too many QM atoms 
+(which will require more compute resources).
 
-Indentify ligend, region of interest
+Details on how to select QM atoms from a pdb file and get them in the correct format
+for using in a CP2K input are given here:
 
-Residue numbers
 
-growing/ shrinking
-
-find broken bonds
+----------------------------------------------
+Minimisation, Equilibration and Thermalisation
+----------------------------------------------
 
 
 
@@ -42,7 +60,13 @@ MM calculation in CP2K. This will verify that the input forcefield and coordinat
 are set up correctly and compatible with CP2K before attempting to add more complicated
 QMMM parameters. The MM calculation should be fast to run and if the calculation finishes without
 error and the energy is sensible then it is a good indicator that the system has been
-prepared correctly for CP2K.
+prepared correctly for CP2K. 
+
+Details of how to this are given here:
+
+If this is your first time using CP2K then it is recommended to read the Running CP2K section of guide (LINK),
+as well as the CP2K Output Guide (LINK). If you encouter any errors while runnning
+you can debug these in the Troubleshooting guide (LINK).
 
 
 
@@ -117,7 +141,8 @@ is documented here: https://www.cp2k.org/howto:converging_cutoff
 Run MD with CP2K
 -----------------
 
-Once you  have setup a simple single energy QMMM calculation CP2K it fairly 
+Once you  have setup a simple single energy QMMM calculation CP2K it is fairly 
 straightfoward to adjust the input file to run a production molecular dynamics simulation.
 
 
+Run 
