@@ -22,7 +22,7 @@ method used in CP2K MM calculations.
        DO_NONBONDED .TRUE.             ! short range non bonded interactions
        PARM_FILE_NAME ff_name          ! forcefield filename
        &SPLINE
-          EMAX_SPLINE 1.0E14           ! max spline
+          EMAX_SPLINE 1.0E14           ! max spline :ref:`ref_emax_spline`
           RCUT_NB [angstrom] 12        ! Cutoff radius for nonbonded interactions
        &END SPLINE
        &END FORCEFIELD
@@ -55,11 +55,6 @@ all the parameters for MM such as the forcefield, and the poisson and spline inf
 The subsys section contains the systems topology information
 such as the atomic coordinates, the cell size and the connectivity.
 
---------------------
-Forcefield types
---------------------
-
-
 
 
 -----------------------------
@@ -67,8 +62,11 @@ Important MM input parameters
 -----------------------------
 
 
+.. _ref_emax_spline:
 EMAX_SPLINE
 -----------
+
+
 
 RCUT_NB
 -------
