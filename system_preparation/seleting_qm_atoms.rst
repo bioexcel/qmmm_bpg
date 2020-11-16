@@ -60,12 +60,12 @@ from the pdb file using the residue ID.
     awk '$5~/$res/{print}' system.pdb >> QMatoms.pdb
  done
 
-6) Use the qmtocp2k script (path/to/script) to convert the pdb containing the QM 
+6) Use the get_qm_kind.py script (path/to/script) to convert the pdb containing the QM 
 atoms to the format required in the CP2K input (requires python).
 
 .. code-block:: none
 
- python getQMatoms.py QMatoms.pdb
+ python get_qm_kind.py QMatoms.pdb
 
 Including waters
 ----------------
@@ -84,6 +84,18 @@ In this case negihbouring water molecules can be included in the selection using
 Dealing with breaking bonds
 ---------------------------
 
+Across the boundary between QM and MM atoms the broken bonds have to be deal with 
+correctly. In CP2K this involves adding link atoms where the dangling QM bond is capped. 
+More about this can be found in the QMMM input part of the guide.
+The boundary between the QM and MM part should not be arbitrarily chosen, as to avoid 
+charge transfer between the QM and MM parts. Based on this breaking a C-C bond 
+is usually a good choice.
+ 
+The bonds can be identied through visualisation, e.g. with vmd or other pdb viewer, or by observation
+of the pdb file. You should first find the residues within the QM region which are bonded
+to residues which are treated without QM. Within these residues you can then find 
+the C-C bond to break, and record the atomic indexes of the QM and MM C atoms.
+These will be needed to correctly treat a QM-MM bond in CP2K (see section).
 
 
 ----------------------------------
@@ -95,7 +107,11 @@ property of interest in order to decide on a suitable region size. If the calcul
 is taking too long you could consider reducing the number of QM atoms in the region (i.e.
 shrinking the region), or if the chemistry is not sufficiently included the region can be expanded.
 This can be done by increasing or decreasing the  distance around the ligand (or region
-of interest) using the above approach. The property of
+of interest) using the above approach. The property of interest can be measured for different
+QM region sizes and used to determine the optimum size. This approach has been 
+documented in:
+
+.. references
 
 
 
