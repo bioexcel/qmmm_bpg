@@ -26,15 +26,14 @@ method used in CP2K MM calculations.
        DO_NONBONDED .TRUE.             ! short range non bonded interactions
        PARM_FILE_NAME ff_name          ! forcefield filename
        &SPLINE
-          EMAX_SPLINE 1.0E14           ! max spline
-          :ref:`ref_emax_spline`
-          RCUT_NB [angstrom] 12        ! Cutoff radius for nonbonded interactions
+          :ref:`ref_emax_spline` 1.0E14           ! max spline
+          :ref:`ref_rcut_nb` [angstrom] 12        ! Cutoff radius for nonbonded interactions
        &END SPLINE
        &END FORCEFIELD
        &POISSON
           &EWALD
-             EWALD_TYPE SPME           ! recommended ewald type
-             GMAX 70                   ! number of grid points 1 per angstrom in each direction
+             :ref:`ref_ewald_type` SPME           ! recommended ewald type
+             :ref:`gmax' 70                   ! number of grid points 1 per angstrom in each direction
           &END EWALD
        &END POISSON
      &END MM
@@ -72,13 +71,17 @@ Important MM input parameters
 EMAX_SPLINE
 -----------
 
-
+.. _ref_rcut_nb:
 
 RCUT_NB
 -------
 
+.. _ref_ewald_type:
+
 EWALD_TYPE
 ----------
+
+.. _ref_gmax:
 
 GMAX
 ----
