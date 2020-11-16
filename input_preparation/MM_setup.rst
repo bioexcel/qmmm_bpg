@@ -8,6 +8,9 @@ is set to FIST for an MM run. This stands for Frontiers in Simulation Technology
 method used in CP2K MM calculations.
 
 :ref:`ref_emax_spline`
+
+
+
 .. code-block:: none
 
   &GLOBAL
