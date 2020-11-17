@@ -19,19 +19,20 @@ a QMMM calculation using the GEEP method. However other methods exist and these 
 slightly different parameters. These are explained under the ECOUPL option.
 
 
-.. code-block:: none
+.. parsed-literal:: 
 
-  &QMMM 
-    &CELL
+  &QMMM                            
+    &CELL                                ! see :ref:`ref_qmmmcell`
       ABC qm_x qm_y qm_z                 ! size of QM cell in x,y,z
-      PERIODIC XYZ
+      :ref:`ref_periodic` XYZ
     &END CELL
-    ECOUPL GAUSS                         ! type of QM/MM elect. coupling
-    USE_GEEP_LIB 9                       ! number of Gaussians in Gaussian expansion
+    :ref:`ref_ecoupl` GAUSS                         ! type of QM/MM elect. coupling
+    :ref:`ref_geep_lib` 9                       ! number of Gaussians in Gaussian expansion
     &PERIODIC                            ! apply periodic potential
       &MULTIPOLE ON                      ! turn on coupling of the QM multipole
       &END
     &END PERIODIC
+    :ref:`ref_par_scheme` ATOM                  ! parallel scheme (atom is default)
     &QM_KIND N                           
       MM_INDEX list_of_atom_indexes      ! list of N QM atoms
     &END QM_KIND
@@ -45,7 +46,7 @@ slightly different parameters. These are explained under the ECOUPL option.
       MM_INDEX list_of_atom_indexes      ! list of O QM atoms
     &END QM_KIND
 
-    &LINK
+    &LINK                                ! see :ref:`ref_link`
        QM_KIND H 
        MM_INDEX  mm_atom_index           ! index of MM atom in broken bond
        QM_INDEX  qm_atom_index           ! index of QM atom in broken bond
@@ -53,6 +54,7 @@ slightly different parameters. These are explained under the ECOUPL option.
     &END LINK
  &END QMMM
     
+.. _ref_qmatoms:
 
 -------------------
 Setting up QM atoms
@@ -81,6 +83,8 @@ QM atoms to this format. This pdb can be created by selecting the QM atoms from 
 Important QMMM input parameters
 --------------------------------
 
+.. _ref_ecoupl:
+
 ECOUPL
 ------
 
@@ -92,16 +96,22 @@ Specifies the type of the QM-MM electrostatic coupling. The following options ar
 * **POINT_CHARGE** - use a QM derived point charges
 * **S-WAVE** - use a Gaussian expansion of the s-wave electrostatic potential
 
+.. _ref_geep_lib:
+
 USE_GEEP_LIB
 ------------
 
 This allows use of the internal GEEP library to generate the gaussian expansion of the MM potential.
 You can specify a number from 2 to 15, to set the number of gaussian funtions to be used in the expansion.
 
+.. _ref_periodic:
+
 PERIODIC
 ---------
 
 The periodic option can be  used to specify the periodicity of the QM cell.
+
+.. _ref_par_scheme:
 
 PARALLEL_SCHEME
 ---------------
@@ -114,6 +124,7 @@ many atoms the performance may suffer. Instead you want to consider sticking wit
 scheme, but using multiple threads per process or oversubscribing to increase the available 
 memory.
 
+.. _ref_center:
 
 CENTER
 ------
@@ -121,6 +132,8 @@ CENTER
 This sets when the QM system is automatically centered within the QM box. 
 The options for this setting are EVERY_STEP, SETUP_ONLY
 and NEVER. The default is EVERY_STEP, which is suggested to prevent QM atoms from leaving the box.
+
+.. _ref_qmmmcell:
 
 --------------
 QMMM Cell 
@@ -200,6 +213,8 @@ The bonds can be identied through visualisation, e.g. vmd or other pdb viewer, o
 of the pdb file. To correctly treat a QM-MM bond in CP2K you need to know the atomic indexes
 of the QM and MM atoms. The LINK section is then used to pass this information.
 
+
+.. _ref_link:
 
 QMMM Link parameterisation
 --------------------------
