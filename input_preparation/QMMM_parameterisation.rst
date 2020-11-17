@@ -32,7 +32,7 @@ slightly different parameters. These are explained under the ECOUPL option.
       &MULTIPOLE ON                      ! turn on coupling of the QM multipole
       &END
     &END PERIODIC
-    :ref:`ref_par_scheme` ATOM                  ! parallel scheme (atom is default)
+    :ref:`ref_par_scheme` ATOM                ! parallel scheme (atom is default)
     &QM_KIND N                           
       MM_INDEX list_of_atom_indexes      ! list of N QM atoms
     &END QM_KIND
