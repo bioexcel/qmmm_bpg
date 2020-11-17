@@ -24,7 +24,7 @@ method used in CP2K MM calculations.
        DO_NONBONDED .TRUE.             ! short range non bonded interactions
        PARM_FILE_NAME ff_name          ! forcefield filename
        &SPLINE
-          :ref:`ref_emax_spline` 1.0E14           ! max spline
+          :ref:`ref_emax_spline` 1.0E04           ! max spline
           :ref:`ref_rcut_nb` [angstrom] 12        ! Cutoff radius for nonbonded interactions
        &END SPLINE
        &END FORCEFIELD
