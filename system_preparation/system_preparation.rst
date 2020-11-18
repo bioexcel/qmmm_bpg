@@ -104,7 +104,8 @@ To showcase the process, we are going to provide an overview of the AMBERTools s
 AMBERtools provides a tool named **LEap**, which is able to read coordinate files (such as PDB, MOL2, ...) and build AMBER topology and coordinate files (PARM7, RST7, ...). LEap comes in two flavours: **xleap** with a rudimentary GUI and **tleap** with only a terminal command line. You can provide commands either directly into the command line or as a list in a input file. A usual LEap input file will contain the following structure:
 
 .. code-block:: none
-  # Loading forcefield parameters for
+
+  # Loading forcefield parameters 
   #==================================
   # FF for Water and Counterions
   source leaprc.water.tip3p
@@ -114,11 +115,13 @@ AMBERtools provides a tool named **LEap**, which is able to read coordinate file
   source leaprc.lipid17
   # FF for organic molecules
   source leaprc.gaff 
+  
   # Loading parameters for other ligands
   #==================================
   loadamberprep ligand.prepc
   ligand = loadMOL2 ligand.mol2 
   # Loading PDB coordinates
+  
   #==================================
   # Load aligned coordinates of each part of the system
   prot = loadPDB protein.pdb
@@ -129,6 +132,7 @@ AMBERtools provides a tool named **LEap**, which is able to read coordinate file
   bond NEW.231.SG  NEW.235.SG
   # Combine all the coordinates
   system = combine { prot lig waters }
+  
   # Solvate and add counterions
   #==================================
   # Add a periodic box boundary and fill it with waters
@@ -136,10 +140,12 @@ AMBERtools provides a tool named **LEap**, which is able to read coordinate file
   # Neutralise
   addions2 system Cl- 0
   addions2 system Na+ 0 
+  
   # Save AMBER input files
   #==================================
   savePDB system system.pdb
   saveAmberParm system system.parm7 system.rst7
+  
   quit
 
 
