@@ -97,9 +97,11 @@ Since both AMBER and CHARMM software packages have excellent training material, 
 System preparation using AMBERTools software package
 ----------------------------------------------------
 
-`AMBERTools <https://ambermd.org/AmberTools.php>`_ is a free suite provided by the AMBER software package developers that provides all the tools needed to prepare a biological system. It includes AMBER forcefields for proteins, lipids, sugars, nucleic acids and drug-like molecules. Also provides all the tools needed to derive ad-hoc parameters for special residues such as chromophores and organic products. AMBER also provides a lot of useful `tutorials <https://ambermd.org/tutorials/>`_. 
+`AMBERTools <https://ambermd.org/AmberTools.php>`_ is a free suite provided by the AMBER software package developers that provides all the tools needed to prepare a biological system. It includes AMBER forcefields for proteins, lipids, sugars, nucleic acids and drug-like molecules. Also provides all the tools needed to derive ad-hoc parameters for special residues such as chromophores and other organic molecules. AMBER also provides a lot of useful `tutorials <https://ambermd.org/tutorials/>`_. 
 
+To showcase the process, we are going to provide an overview of the AMBERTools system preparation process as well as we encourage you to have a look to the `AMBER tutorials <https://ambermd.org/tutorials/>`_.
 
+AMBERtools provides a tool named LEap, which is able to read coordinate files (such as PDB, MOL2, ...) and build AMBER topology and coordinate files (PARM7, RST7, ...). LEap comes in two flavours: `xleap` with a rudimentary GUI and `tleap` with only a terminal input line. 
 
 
 
