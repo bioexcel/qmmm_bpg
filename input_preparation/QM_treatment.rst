@@ -360,12 +360,41 @@ configured as follows:
 Dispersion corrections
 ----------------------
 
+Dispersion corrections can be used in combination with XC functionals to
+
+In CP2K there are three dispersion options available, DFT-D2, DFT-D3 and DFT-D3(BJ)
+(listed in order of least to most complex). To use a dispersion correction the 
+vdW_POTENTIAL section is added inside the XC_FUNCTIONAL section. The example usage of
+the vdW_POTENTIAL section is shown below:
+
+.. code-block:: none
+
+  &vdW_POTENTIAL
+     DISPERSION_FUNCTIONAL PAIR_POTENTIAL     ! usually set to pair_potential
+     &PAIR_POTENTIAL
+        TYPE vdw-type                         ! VDW type (DFT-D2, DFT-D3 or DFT-D3(BJ)
+        PARAMETER_FILE_NAME dftd3.dat         ! required for DFT-D3 and DFT-D3(BJ)
+        REFERENCE_FUNCTIONAL xc_type          ! the reference xc functional e.g. PBE, B3LYP    
+      &END PAIR_POTENTIAL
+  &END vdW_POTENTIAL
+
+
+DFT-D2
+------
+
+DFT-D3
+-------
+
+DFT-D3(BJ)
+----------
 
 ---------------------
 Puesdopotentials
 ---------------------
 
-
+The choice of Potential should be matched to the choice of XC functional so that
+it is optimised for the exchange correlation functional. For example the GTH-PBE
+potential should be used with the PBE XC functional.
 
 ------------------------------
 Important QM input parameters
@@ -374,8 +403,14 @@ Important QM input parameters
 CHARGE
 ------
 
+This is used to set the charge of the QM part of the system.
+
 MULTIPLICITY
 ------------
+
+The multiplicity should be set to two times the total spin plus one. 
+If set to 0 (the default) this will be 1 for an even number of electrons and 2 for an odd 
+number of electrons. 
 
 CUTOFF
 ------
