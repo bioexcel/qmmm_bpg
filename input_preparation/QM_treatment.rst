@@ -6,7 +6,8 @@ The section of the guide will focus on setting up the QM parameters in a QM/MM s
 
 
 It will guide on how to use various options within CP2K, and give some general advice but
-it will not give any information about what choices are best for your system.
+it will not give any information about what specific choices (e.g. basis sets and XC functionals)
+are best for your system.
 
 --------------------------------------
 Mechanics of a DFT calculation in CP2K
@@ -46,7 +47,8 @@ state energy minimum. As this calculation is self-consistent it will depend
 highly on the starting electronic density, a good starting density will allow
 the calculation to converge faster. If the SCF has not converged after it has
 exceeded the maximum number of steps (set by MAX_SCF) the SCF calculation will 
-terminate and print the warning message: "SCF has not converged".
+terminate and print the warning message: "SCF has not converged". Information on 
+how to overcome the SCF not converging can be found in section x.
 
 The SCF calculation involves inner and outer loops. If the inner SCF loop does not
 converge in the desired number of steps (set in MAX_SCF) then the inner loop will exit in order to
@@ -353,20 +355,16 @@ configured as follows:
    &END XC
  
 
-Double-hybrid methods
----------------------
 
-B2PLYP
 
 Dispersion corrections
 ----------------------
 
-Higher order methods
---------------------
 
 ---------------------
 Puesdopotentials
 ---------------------
+
 
 
 ------------------------------
