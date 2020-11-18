@@ -101,11 +101,13 @@ System preparation using AMBERTools software package
 
 To showcase the process, we are going to provide an overview of the AMBERTools system preparation process as well as we encourage you to have a look to the `AMBER tutorials <https://ambermd.org/tutorials/>`_.
 
-AMBERtools provides a tool named **LEap**, which is able to read coordinate files (such as PDB, MOL2, ...) and build AMBER topology and coordinate files (PARM7, RST7, ...). LEap comes in two flavours: **xleap** with a rudimentary GUI and **tleap** with only a terminal command line. You can provide commands either directly into the command line or as a list in a input file. A usual LEap input file will contain the following structure:
+AMBERtools provides a tool named **LEap**, which is able to read coordinate files (such as PDB, MOL2, ...) and build AMBER topology and coordinate files (PARM7, RST7, ...). LEap comes in two flavours: **xleap** with a rudimentary GUI and **tleap** with only a terminal command line. You can provide commands either directly into the command line or as a list in a input file. 
+
+A usual LEap input file will contain the following structure:
 
 .. code-block:: none
 
-  # Loading forcefield parameters 
+  # Loading forcefield parameters
   #==================================
   # FF for Water and Counterions
   source leaprc.water.tip3p
@@ -120,17 +122,17 @@ AMBERtools provides a tool named **LEap**, which is able to read coordinate file
   #==================================
   loadamberprep ligand.prepc
   ligand = loadMOL2 ligand.mol2 
-  # Loading PDB coordinates
   
+  # Loading PDB coordinates
   #==================================
   # Load aligned coordinates of each part of the system
-  prot = loadPDB protein.pdb
-  lig  = loadPDB ligand.pdb
-  waters = loadPDB ray_waters.pdb
+  prot = loadPDB protein.pdb 
+  lig = loadPDB ligand.pdb
+  waters = loadPDB xray_waters.pdb
   # Creating disulphide bonds
   bond NEW.80.SG   NEW.159.SG
   bond NEW.231.SG  NEW.235.SG
-  # Combine all the coordinates
+  # Combine all the coordin ates
   system = combine { prot lig waters }
   
   # Solvate and add counterions
@@ -147,6 +149,14 @@ AMBERtools provides a tool named **LEap**, which is able to read coordinate file
   saveAmberParm system system.parm7 system.rst7
   
   quit
+
+You can execute the commands by using the following commands:
+
+.. code-block:: bash
+
+  tleap -f input.leap
+
+For a complete list of LEap commands, please check the `AMBER documentation <https://ambermd.org/doc12/Amber20.pdf>`_ or the `LEap tutorial <http://ambermd.org/tutorials/pengfei/index.htm>`_ .
 
 
 System preparation using CHARMM software package
