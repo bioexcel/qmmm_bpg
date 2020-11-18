@@ -94,12 +94,15 @@ Since both AMBER and CHARMM software packages have excellent training material, 
 - To add missing forcefield parameters. 
 
 
-System preparation using AMBERTools software package
+Using AMBERTools software package
 ----------------------------------------------------
 
 `AMBERTools <https://ambermd.org/AmberTools.php>`_ is a free suite provided by the AMBER software package developers that provides all the tools needed to prepare a biological system. It includes AMBER forcefields for proteins, lipids, sugars, nucleic acids and drug-like molecules. Also provides all the tools needed to derive ad-hoc parameters for special residues such as chromophores and other organic molecules. AMBER also provides a lot of useful `tutorials <https://ambermd.org/tutorials/>`_. 
 
 To showcase the process, we are going to provide an overview of the AMBERTools system preparation process as well as we encourage you to have a look to the `AMBER tutorials <https://ambermd.org/tutorials/>`_.
+
+1) System building
+''''''''''''
 
 AMBERtools provides a tool named **LEap**, which is able to read coordinate files (such as PDB, MOL2, ...) and build AMBER topology and coordinate files (PARM7, RST7, ...). LEap comes in two flavours: **xleap** with a rudimentary GUI and **tleap** with only a terminal command line. You can provide commands either directly into the command line or as a list in a input file. 
 
@@ -113,8 +116,6 @@ A usual LEap input file will contain the following structure:
   source leaprc.water.tip3p
   # FF for Proteins
   source leaprc.ff19SB
-  # FF for Lipids (optional)
-  source leaprc.lipid17
   # FF for organic molecules
   source leaprc.gaff 
   
@@ -129,9 +130,10 @@ A usual LEap input file will contain the following structure:
   prot = loadPDB protein.pdb 
   lig = loadPDB ligand.pdb
   waters = loadPDB xray_waters.pdb
+  
   # Creating disulphide bonds
-  bond NEW.80.SG   NEW.159.SG
-  bond NEW.231.SG  NEW.235.SG
+  bond prot.80.SG   prot.159.SG
+
   # Combine all the coordin ates
   system = combine { prot lig waters }
   
@@ -139,6 +141,7 @@ A usual LEap input file will contain the following structure:
   #==================================
   # Add a periodic box boundary and fill it with waters
   solvateBox system TIP3PBOX 12 iso
+  
   # Neutralise
   addions2 system Cl- 0
   addions2 system Na+ 0 
@@ -146,7 +149,7 @@ A usual LEap input file will contain the following structure:
   # Save AMBER input files
   #==================================
   savePDB system system.pdb
-  saveAmberParm system system.parm7 system.rst7
+  saveAmberParm system system.parm7 system.crd
   
   quit
 
@@ -158,6 +161,27 @@ You can execute the commands by using the following commands:
 
 For a complete list of LEap commands, please check the `AMBER documentation <https://ambermd.org/doc12/Amber20.pdf>`_ or the `LEap tutorial <http://ambermd.org/tutorials/pengfei/index.htm>`_ .
 
+2) Minimisation, heating and equilibration using classical mechanics
+''''''''''''
+
+LEap outputs two files a PARM7 file conatining the topology and the CRD or RST7 files containing the coordinates of the system. These coordinates must be minimised to fix any possible bad contacts in the structure and subsequently slowly heated up to target temperature and carefully equilibrated so the the pressure and the density of the system are correct. 
+
+Each biological system will demand a specific minimisation and equilibration recipe, therefore we suggest you to check these tutorials to write up your minimisation and equilibration input files:
+
+- Globular proteins. 
+- Membrane proteins.
+
+3) Amending the forcefield 
+''''''''''''
+
+
+4) Monitorisation using QM/MM methods
+''''''''''''
 
 System preparation using CHARMM software package
 ------------------------------------------------
+
+`CHARMM <https://www.charmm.org/charmm/>`_ (Chemistry at HARvard Molecular Mechanics) is a molecular simulation program developed with a primary focus on molecules of biological interest. 
+
+The first step is to obtain a PDB containing all the relevant parts of your system compatible with the CHARMM forcefield. 
+
