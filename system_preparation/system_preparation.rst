@@ -29,7 +29,7 @@ Cleaning the structural coordinates of the biomolecule of interest
 ------------------------------------------------------------------
 
 The structures should be cleaned of all those molecules that are not relevant to your study.  
-
+It is worth mentioning here that crystallographic waters are very important for protein stability and enzymatic reactivity and therefore, they should not be discarded without a proper visual assessment. 
 
 Asessing the protonation states of your biomolecule
 ---------------------------------------------------
