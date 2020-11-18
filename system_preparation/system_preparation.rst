@@ -78,8 +78,7 @@ There are several protocols to parameterise organic molecules for each forcefiel
 - `AMBER parameter database <http://research.bmh.manchester.ac.uk/bryce/amber/>`_ : Parameters for use  with the AMBER forcefield for an extensive list of cofactors and other organic molecules. 
 - `AMBER DYES forcefield <https://github.com/t-/amber-dyes>`_ : Parameters for use with the AMBER forcefield for the most common dyes. 
 
-Additionally, it is worth mentioning the `Open Force Field Initiative <https://openforcefield.org>`_ to escape from typical forcefield atomtypes and use chemical perception to parameterise organic molecules. 
-
+Additionally, it is worth mentioning the `Open Force Field Initiative <https://openforcefield.org>`_ which is actively working to develop new forcefileds that escape from typical forcefield atomtypes and use chemical perception to parameterise organic molecules. 
 
 ------------------------------------------------
 Preparing topology and coordinate files for CP2K
