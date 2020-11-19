@@ -238,7 +238,7 @@ in the XC_FUNCTIONAL section, and the complementary GTH-PADE pseudopotentials sh
 GGA
 ---
 
-The generalised gradient approximation is an improvement on the LDA which takes into account the 
+The generalised gradient approximation (GGA) is an improvement on the LDA which takes into account the 
 gradient of the density, as well as the density at one point.
 
 Using the GGA in CP2K is similar to using the LDA. It requires specifying the functional 
@@ -268,7 +268,25 @@ If BLYP/B3LYP are not widely used in your research area then it may be prudent t
 metaGGA
 -------
 
+The metaGGA builds upon the GGA methods by assuming the functional also depends on
+then non-interacting kinetic energy density, in addition to the electron density and it 
+gradient. To use metaGGA methods in CP2K the libxc library is used, and therefore your
+version of CP2K needs to be built with this library enabled. An example of the XC
+section for using the metaGGA is shown below (here the oTPSS-D functional has
+been used (http://doi.org/10.1021/ct900489g) ).
 
+   &XC 
+      &XC_FUNCTIONAL
+         &LIBXC T                        ! use libxc library
+          FUNCTIONAL MGGA_XC_OTPSS_D     ! oTPSS-D functional
+         &END LIBXC
+      &END XC_FUNCTIONAL
+   &END XC
+
+
+There are a variety of metaGGA method available through libxc, details of these 
+can be found here: https://www.tddft.org/programs/libxc/functionals/ (note that 
+functional availablity is dependent on the version of libxc used).
 
 Hybrid methods
 --------------
@@ -360,10 +378,22 @@ configured as follows:
 Dispersion corrections
 ----------------------
 
-Dispersion corrections can be used in combination with XC functionals to
+Dispersion corrections can be used in combination with XC functionals to incorporate
+Van der Waals forces, which can play an important role in interactions in protein
+systems.
 
-In CP2K there are three dispersion options available, DFT-D2, DFT-D3 and DFT-D3(BJ)
-(listed in order of least to most complex). To use a dispersion correction the 
+In CP2K there are three dispersion options available, DFT-D2, DFT-D3 and DFT-D3(BJ).
+All three of these methods involve adding
+an extra dispersion term to the energy density functional, e.g.
+
+E_tot = E_DFT + E_disp
+
+These methods are based on the same formalism for the dispersion energy which is
+written as a sum of the long range interaction between pairs of atoms, that decays as -1/r^6 with
+separation distance r. The DFT-D3 method offers improvements on the DFT-D2 method,
+and the DFT-D3(BJ) method adds Becke-Jonson damping to the dispersion energy.
+
+To use a dispersion correction the 
 vdW_POTENTIAL section is added inside the XC_FUNCTIONAL section. The example usage of
 the vdW_POTENTIAL section is shown below:
 
@@ -379,14 +409,6 @@ the vdW_POTENTIAL section is shown below:
   &END vdW_POTENTIAL
 
 
-DFT-D2
-------
-
-DFT-D3
--------
-
-DFT-D3(BJ)
-----------
 
 ---------------------
 Puesdopotentials
