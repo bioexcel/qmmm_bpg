@@ -6,10 +6,19 @@ CP2K Troubleshooting
 Abort messages
 -----------------------
 
+Abort messages appear when something has occured that causes CP2K to exit. They 
+will look like this and contain a message about what has caused the abort, and 
+what can be done to fix it.
+
+
+
 GEOMETRY wrong or EMAX_SPLINE too small!
 ----------------------------------------
 
 This is usually means there is a problem with the MM forcefield or the geometry of your system.
+You may want to try and increase EMAX_SPLINE first off as to rule this possibility out.
+If this does not fix the error then you should then double check you MM forcefield and
+geomertries are correct.
 
 
 KIND not found
@@ -58,11 +67,9 @@ Error in QMMM Connectivity
  This very probably can be identified as an error in the specified QM
  indexes or in a missing LINK section. Check your structure!
 
-Fairly self explanitory
-
-QM atoms missing from list in QMMM&QM_KIND
-
-QM-MM link missing
+This error is fairly self explanitory. It means that the QM region has not been 
+properly defined based on the connectivity between atoms. You are either missing QM
+atoms from the QM region in QMMM&QM_KIND or a QM to MM LINK section is missing.
 
 ------------------------
 CPASSERT failed messages
@@ -87,6 +94,11 @@ pw/pw_spline_utils.F:1086
 ---------------------
 Runtime issues
 ---------------------
+
+Runtime issue are those that do not produce an error or cause the calculation to 
+crash. Sometimes a warning message may be printed in the output to signify
+something is not behaving as expected, or the calculation might produce 
+unexpected results. 
 
 Simulation fails or gives strange results
 -----------------------------------------
