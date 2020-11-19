@@ -119,9 +119,28 @@ The current AMBER and CHARMM forcefields are developed to reproduce the behaviou
 
 However, these approximations can not be done in quantum mechanics. In particular, in QM/MM simulations they lead to unnatural interactions between the point charges ot the MM subsystem with the electronic densities of the QM subsystem, which eventually cause the simulation to crash. Therefore, you have to add the missing parameters for hydrogens at least in the QM/MM interface. 
 
-There is not a unique way to add these parameters:
-- to add those parameters in the CP2K input file:
-- to modify directly the topology file. AMBERtools provides a tool to modify PARM7 topology files named **parmed**. More details on how to do this can be found in the `parmed documentation <https://parmed.github.io/ParmEd/html/index.html>`_ .
+There are two ways to add the Lennard-Jones parameters to the forcefield:
+
+- to add the Lennard-Jones parameters in the CP2K input file within the &QMMM subsection of the &FORCE_EVAL section. You must specify the Lennard-Jones parameters for each interaction each kind of hydrogen atom using the following format:
+
+.. code-block:: none
+
+  &QMMM
+  ...
+    &FORCEFIELD
+      &NONBONDED
+        &LENNARD-JONES
+            ATOMS HW O
+            EPSILON [kcalmol] 0.058
+            SIGMA [angstrom]  2.2612
+            RCUT [angstrom] 9.0
+        &END
+      &END
+    &END
+
+- to modify the Lennard-Jones parameters directly in the topology file. AMBERtools provides a tool to modify PARM7 topology files named **parmed**. More details on how to do this can be found in the `parmed documentation <https://parmed.github.io/ParmEd/html/index.html>`_ .
+
+Also, if you are using a QM region that shares a covalent bond with the MM region, you must make sure that the MM subsystem remains neutral as a charge imbalance in the MM subsystem can lead to important simulation artefacts. Therefore you must modify the charges of the MM region, usually those of molecule that is split between the two regions. If you are using an AMBER topology, you can easily modify the topology using **parmed**.  
 
 
 
