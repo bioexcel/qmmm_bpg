@@ -6,6 +6,7 @@ This guide provides practical advice on how to use CP2K to perform QM/MM simulat
 
 .. toctree::
    :maxdepth: 2
+   :caption: Overview:
 
    overview/overview
 	      
