@@ -511,7 +511,7 @@ If the energies are rapidly varying then it is likely that the SCF is failing to
 with the message "WARNING SCF has not converged. You can quickly double whether the SCF has failed top converge by using grep to 
 search your output for this message:
 
-grep 'WARNING
+``grep 'WARNING SCF' output-file.log``
 
 If this occurs then the easiest variables to change to try and fix this are the MAX_SCF and EPS_SCF.
 
