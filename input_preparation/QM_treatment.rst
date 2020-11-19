@@ -275,6 +275,9 @@ version of CP2K needs to be built with this library enabled. An example of the X
 section for using the metaGGA is shown below (here the oTPSS-D functional has
 been used (http://doi.org/10.1021/ct900489g) ).
 
+
+.. code-block:: none
+
    &XC 
       &XC_FUNCTIONAL
          &LIBXC T                        ! use libxc library
