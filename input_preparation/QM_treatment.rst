@@ -383,7 +383,7 @@ The choice of Potential should be matched to the choice of XC functional so that
 it is optimised for the exchange correlation functional. For example the GTH-PBE
 potential should be used with the PBE XC functional.
 
-
+----------------------
 Dispersion corrections
 ----------------------
 
