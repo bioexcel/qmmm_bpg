@@ -375,7 +375,13 @@ configured as follows:
       &END
    &END XC
  
+---------------------
+Puesdopotentials
+---------------------
 
+The choice of Potential should be matched to the choice of XC functional so that
+it is optimised for the exchange correlation functional. For example the GTH-PBE
+potential should be used with the PBE XC functional.
 
 
 Dispersion corrections
@@ -389,7 +395,9 @@ In CP2K there are three dispersion options available, DFT-D2, DFT-D3 and DFT-D3(
 All three of these methods involve adding
 an extra dispersion term to the energy density functional, e.g.
 
-E_tot = E_DFT + E_disp
+.. math::
+
+ E_tot = E_DFT + E_disp
 
 These methods are based on the same formalism for the dispersion energy which is
 written as a sum of the long range interaction between pairs of atoms, that decays as -1/r^6 with
@@ -413,13 +421,7 @@ the vdW_POTENTIAL section is shown below:
 
 
 
----------------------
-Puesdopotentials
----------------------
 
-The choice of Potential should be matched to the choice of XC functional so that
-it is optimised for the exchange correlation functional. For example the GTH-PBE
-potential should be used with the PBE XC functional.
 
 ------------------------------
 Important QM input parameters
