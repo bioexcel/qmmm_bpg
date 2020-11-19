@@ -80,6 +80,12 @@ There are several protocols to parameterise organic molecules for each forcefiel
 
 Additionally, it is worth mentioning the `Open Force Field Initiative <https://openforcefield.org>`_ which is actively working to develop new forcefileds that escape from typical forcefield atomtypes and use chemical perception to parameterise organic molecules. 
 
+
+
+------------------------------------------------
+Preparing topology and coordinate files for CP2K
+------------------------------------------------
+
 CP2K allows several formats for topology files (you can find the complete list here: `&TOPOLOGY 
 <https://manual.cp2k.org/trunk/CP2K_INPUT/FORCE_EVAL/SUBSYS/TOPOLOGY.html>`_ under the **&CONN_FILE_FORMAT** and the **&COORD_FILE_FORMAT** subsections). For biomolecular modelling purposes, the most convenient formats are AMBER formats (AMBER7 topology files, AMBER7 CRD files) and CHARMM formats (PSF, PDB). 
 
@@ -109,8 +115,16 @@ Afterwards the pressure and volume of the system must be equilibrated. However, 
 As a general rule, you should check that all the fixed quantities of the ensemble that you use (NVT, NPT, NVE ...) are stable before you start your production runs. It is also wise to assess the stability of your biomolecule during all the themalisation and equilibration process.  
 
 
-3) Amending the forcefield 
+ 3) Adding missing parameters to the MM forcefield 
 ''''''''''''
+
+The current AMBER and CHARMM forcefields are developed to reproduce the behaviour of biomolecules using classical mechanics. In this context, hydrogen atoms of starndard residues and water molecules are parameterised without Lennard-Jones parameters. MM forcefields account for these missing parameters and simulations are usually performed with hydrogen restraining algorithms such as SHAKE, SETTLE or LINKS that freeze the X-H bond vibration frequency in order to increase the simulation timestep. 
+
+However, these approximations can not be done in quantum mechanics. In particular, in QM/MM simulations they lead to unnatural interactions between the point charges ot the MM subsystem with the electronic densities of the QM subsystem, which eventually cause the simulation to crash. Therefore, you have to add the missing parameters for hydrogens at least in the QM/MM interface. 
+
+There is not a unique way to add these parameters:
+- to add those parameters in the CP2K input file:
+- to modify directly the topology file. AMBERtools provides a tool to modify PARM7 topology files named **parmed**. More details on how to do this can be found in the `parmed documentation <https://parmed.github.io/ParmEd/html/index.html>`_ .
 
 
 
