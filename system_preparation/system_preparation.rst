@@ -146,7 +146,7 @@ Also, if you are using a QM region that shares a covalent bond with the MM regio
 
 **4) Monitorisation using QM/MM methods**
 
-
+Once the topology is amended and coordinates of the system are properly equilibrated, we are ready to start the QM/MM simulations. It is recommended to perform a short monitorisation simulation using the QM/MM of choice before starting the production runs in order to assess the stability of the QM/MM interface. 
 
 
 
@@ -155,19 +155,19 @@ Using AMBERTools software package
 
 `AMBERTools <https://ambermd.org/AmberTools.php>`_ is a free suite provided by the AMBER software package developers that provides all the tools needed to prepare a biological system. It includes AMBER forcefields for proteins, lipids, sugars, nucleic acids and drug-like molecules. Also provides all the tools needed to derive ad-hoc parameters for special residues such as chromophores and other organic molecules. AMBER also provides a lot of useful `tutorials <https://ambermd.org/tutorials/>`_. 
 
-To showcase the process, we are going to provide an overview of the AMBERTools system preparation process as well as we encourage you to have a look to the `AMBER tutorials <https://ambermd.org/tutorials/>`_.
-
 AMBER also provide detailed tutorials for different kinds of biomolecules:
 
-- `Nucleic acids <>`_
-- `Globular proteins <https://ambermd.org/tutorials/basic/tutorial7/index.php>`_ . 
+- `Nucleic acids <https://amberhub.chpc.utah.edu/analisis-of-nucleic-acid-simulation/>`_
+- `Globular proteins <http://ambermd.org/tutorials/basic/tutorial0/index.php>`_ . 
 - `Membrane proteins <https://ambermd.org/tutorials/advanced/tutorial16/index.php>`_ .
-
 
 System preparation using CHARMM software package
 ------------------------------------------------
 
-`CHARMM <https://www.charmm.org/charmm/>`_ (Chemistry at HARvard Molecular Mechanics) is a molecular simulation program developed with a primary focus on molecules of biological interest. 
+`CHARMM <https://www.charmm.org/charmm/>`_ (Chemistry at HARvard Molecular Mechanics) is a molecular simulation program developed with a primary focus on molecules of biological interest. CHARMM contains a comprehensive set of analysis and model builiding tools. CHARMM also has a lot of useful `tutorials <https://www.charmm.org/charmm/documentation/tutorials/>`_ .
 
+CHARMM has several tutorials to perform MD simulations of biomolecules:
 
-
+- `CHARMM GUI web server <http://www.charmm-gui.org/>`_
+- `Globular proteins <https://www.charmmtutorial.org/index.php/Full_example>`_
+- `Membrane proteins <http://www.charmm-gui.org/?doc=tutorial&project=membrane>`_
