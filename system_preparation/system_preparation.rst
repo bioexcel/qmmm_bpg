@@ -80,18 +80,45 @@ There are several protocols to parameterise organic molecules for each forcefiel
 
 Additionally, it is worth mentioning the `Open Force Field Initiative <https://openforcefield.org>`_ which is actively working to develop new forcefileds that escape from typical forcefield atomtypes and use chemical perception to parameterise organic molecules. 
 
-------------------------------------------------
-Preparing topology and coordinate files for CP2K
-------------------------------------------------
-
 CP2K allows several formats for topology files (you can find the complete list here: `&TOPOLOGY 
 <https://manual.cp2k.org/trunk/CP2K_INPUT/FORCE_EVAL/SUBSYS/TOPOLOGY.html>`_ under the **&CONN_FILE_FORMAT** and the **&COORD_FILE_FORMAT** subsections). For biomolecular modelling purposes, the most convenient formats are AMBER formats (AMBER7 topology files, AMBER7 CRD files) and CHARMM formats (PSF, PDB). 
 
-Since both AMBER and CHARMM software packages have excellent training material, here we are going to give a quick overview of the system preparation process and provide a list of useful tutorials for each software packages. We will highlight how to adapt those protocols to the specific requirements of CP2K:
+Since both AMBER and CHARMM software packages have excellent training material, here we are going to give a quick overview of the system preparation process and provide a list of useful tutorials for each software packages. We will highlight how to adapt those protocols to the specific requirements of CP2K.
 
-- To use a cubic or triclinic box. 
-- To neutralise the system. 
-- To add missing forcefield parameters. 
+1) System building
+''''''''''''
+
+It is crucial to build your model system in a way that represents the biological process you want to study in the most accurate way possible. You should include all of the key elements of your system you have investigated beforehand. 
+
+In order to prepare a suitable model system, you should include:
+- Water molecules when possible
+- Create bonds for special features as disulphide bonds, covalent molecules 
+- Use a cubic or triclinic periodic box (This is a requirement to run QM/MM simulations in paralle in CP2K.)
+- Neutralise the system in order to avoid simulation artefacts. 
+
+
+2) Minimisation, thermalisation and equilibration using classical mechanics
+''''''''''''
+
+After you have built your topology and coordinate files, you must minimise these coordinates using the forcefield parameters in your topology file. Energy minimisation will find an energy minima in the potential energy surface of your system and fix any possible bad contacts in your initial structure. If possible, it is important that you use more that one minimisation algorithm ( steepest descent and conjugate gradient ) in order to avoid getting stuck in a local minima. 
+
+Once the system is minimised, it has to be subsequently heated (from 0K to your target conditions i.e. 300K ) and equilibrated. Since a sudden increase in the kinetic energy of your system may lead to system inestabilities, a gradual and slow heating process is recommended were possible. 
+
+Afterwards the pressure and volume of the system must be equilibrated. However, the nature of your simulation (for instance globular and membrane proteins), might require a specific equilibration recipe. Therefore, we will point out to several tutorials that cover the specifics of each kind of simulation. 
+
+As a general rule, you should check that all the fixed quantities of the ensemble that you use (NVT, NPT, NVE ...) are stable before you start your production runs. It is also wise to assess the stability of your biomolecule during all the themalisation and equilibration process.  
+
+
+3) Amending the forcefield 
+''''''''''''
+
+
+
+4) Monitorisation using QM/MM methods
+''''''''''''
+
+
+
 
 
 Using AMBERTools software package
@@ -101,59 +128,17 @@ Using AMBERTools software package
 
 To showcase the process, we are going to provide an overview of the AMBERTools system preparation process as well as we encourage you to have a look to the `AMBER tutorials <https://ambermd.org/tutorials/>`_.
 
-1) System building
-''''''''''''
+AMBER also provide detailed tutorials for different kinds of biomolecules:
 
-AMBERtools provides a tool named **LEap**, which is able to read coordinate files (such as PDB, MOL2, ...) and build AMBER topology and coordinate files (PARM7, RST7, ...). LEap comes in two flavours: **xleap** with a rudimentary GUI and **tleap** with only a terminal command line. You can provide commands either directly into the command line or as a list in a input file. 
-
-A usual LEap input file will contain the following structure:
-
-.. code-block:: none
-
-  # Loading FF:
-  source leaprc.water.tip3p
-  source leaprc.ff19SB
-  # Loading PDB coordinates
-  system = loadPDB protein.pdb 
-  # Solvate and add counterions
-  solvateBox system TIP3PBOX 12 iso
-  # Neutralise system
-  addions system Cl- 5
-  # Save AMBER input files
-  saveAmberParm system system.parm7 system.crd,
-  
-  quit
-
-You can execute the commands by using the following commands:
-
-.. code-block:: bash
-
-  tleap -f input.leap
-
-For more information on LEap commands, please check the  `LEap tutorial <https://ambermd.org/tutorials/pengfei/index.php>`_  or the `AMBER documentation <https://ambermd.org/doc12/Amber20.pdf>`_ .
-
-
-2) Minimisation, heating and equilibration using classical mechanics
-''''''''''''
-
-LEap outputs two files a PARM7 file conatining the topology and the CRD or RST7 files containing the coordinates of the system. These coordinates must be minimised to fix any possible bad contacts in the structure and subsequently slowly heated up to target temperature and carefully equilibrated so the the pressure and the density of the system are correct. 
-
-Each biological system will demand a specific minimisation and equilibration recipe, therefore we suggest you to check these tutorials to write up your minimisation and equilibration input files:
-
+- `Nucleic acids <>`_
 - `Globular proteins <https://ambermd.org/tutorials/basic/tutorial7/index.php>`_ . 
-- `Membrane proteins <https://ambermd.org/tutorials/advanced/tutorial16/index.php>` .
+- `Membrane proteins <https://ambermd.org/tutorials/advanced/tutorial16/index.php>`_ .
 
-3) Amending the forcefield 
-''''''''''''
-
-
-4) Monitorisation using QM/MM methods
-''''''''''''
 
 System preparation using CHARMM software package
 ------------------------------------------------
 
 `CHARMM <https://www.charmm.org/charmm/>`_ (Chemistry at HARvard Molecular Mechanics) is a molecular simulation program developed with a primary focus on molecules of biological interest. 
 
-The first step is to obtain a PDB containing all the relevant parts of your system compatible with the CHARMM forcefield. 
+
 
