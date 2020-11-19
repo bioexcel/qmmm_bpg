@@ -74,7 +74,8 @@ CHARMM
 -------
 
 The CHARMM force field  (i.e. a .prm file) can be used by setting ``PARMTYPE`` to CHM. The 
-psf CHARMM connectivity file is used with ``CONN_FILE_FORMAT`` set to PSF.
+psf CHARMM connectivity file is used with ``CONN_FILE_FORMAT`` set to PSF. 
+Example usage can be found here: https://www.cp2k.org/exercises:2015_cecam_tutorial:forcefields
 
 GROMOS
 ------
