@@ -110,46 +110,17 @@ A usual LEap input file will contain the following structure:
 
 .. code-block:: none
 
-  # Loading forcefield parameters
-  #==================================
-  # FF for Water and Counterions
+  # Loading FF:
   source leaprc.water.tip3p
-  # FF for Proteins
   source leaprc.ff19SB
-  # FF for organic molecules
-  source leaprc.gaff 
-  
-  # Loading parameters for other ligands
-  #==================================
-  loadamberprep ligand.prepc
-  ligand = loadMOL2 ligand.mol2 
-  
   # Loading PDB coordinates
-  #==================================
-  # Load aligned coordinates of each part of the system
-  prot = loadPDB protein.pdb 
-  lig = loadPDB ligand.pdb
-  waters = loadPDB xray_waters.pdb
-  
-  # Creating disulphide bonds
-  bond prot.80.SG   prot.159.SG
-
-  # Combine all the coordin ates
-  system = combine { prot lig waters }
-  
+  system = loadPDB protein.pdb 
   # Solvate and add counterions
-  #==================================
-  # Add a periodic box boundary and fill it with waters
   solvateBox system TIP3PBOX 12 iso
-  
-  # Neutralise
-  addions2 system Cl- 0
-  addions2 system Na+ 0 
-  
+  # Neutralise system
+  addions system Cl- 5
   # Save AMBER input files
-  #==================================
-  savePDB system system.pdb
-  saveAmberParm system system.parm7 system.crd
+  saveAmberParm system system.parm7 system.crd,
   
   quit
 
@@ -159,7 +130,8 @@ You can execute the commands by using the following commands:
 
   tleap -f input.leap
 
-For a complete list of LEap commands, please check the `AMBER documentation <https://ambermd.org/doc12/Amber20.pdf>`_ or the `LEap tutorial <http://ambermd.org/tutorials/pengfei/index.htm>`_ .
+For more information on LEap commands, please check the  `LEap tutorial <https://ambermd.org/tutorials/pengfei/index.php>`_  or the `AMBER documentation <https://ambermd.org/doc12/Amber20.pdf>`_ .
+
 
 2) Minimisation, heating and equilibration using classical mechanics
 ''''''''''''
@@ -168,8 +140,8 @@ LEap outputs two files a PARM7 file conatining the topology and the CRD or RST7 
 
 Each biological system will demand a specific minimisation and equilibration recipe, therefore we suggest you to check these tutorials to write up your minimisation and equilibration input files:
 
-- Globular proteins. 
-- Membrane proteins.
+- `Globular proteins <https://ambermd.org/tutorials/basic/tutorial7/index.php>`_ . 
+- `Membrane proteins <https://ambermd.org/tutorials/advanced/tutorial16/index.php>` .
 
 3) Amending the forcefield 
 ''''''''''''
