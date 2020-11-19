@@ -91,8 +91,7 @@ CP2K allows several formats for topology files (you can find the complete list h
 
 Since both AMBER and CHARMM software packages have excellent training material, here we are going to give a quick overview of the system preparation process and provide a list of useful tutorials for each software packages. We will highlight how to adapt those protocols to the specific requirements of CP2K.
 
-1) System building
-''''''''''''
+**1) System building**
 
 It is crucial to build your model system in a way that represents the biological process you want to study in the most accurate way possible. You should include all of the key elements of your system you have investigated beforehand. 
 
@@ -103,8 +102,7 @@ In order to prepare a suitable model system, you should include:
 - Neutralise the system in order to avoid simulation artefacts. 
 
 
-2) Minimisation, thermalisation and equilibration using classical mechanics
-''''''''''''
+**2) Minimisation, thermalisation and equilibration using MM forcefields**
 
 After you have built your topology and coordinate files, you must minimise these coordinates using the forcefield parameters in your topology file. Energy minimisation will find an energy minima in the potential energy surface of your system and fix any possible bad contacts in your initial structure. If possible, it is important that you use more that one minimisation algorithm ( steepest descent and conjugate gradient ) in order to avoid getting stuck in a local minima. 
 
@@ -115,8 +113,7 @@ Afterwards the pressure and volume of the system must be equilibrated. However, 
 As a general rule, you should check that all the fixed quantities of the ensemble that you use (NVT, NPT, NVE ...) are stable before you start your production runs. It is also wise to assess the stability of your biomolecule during all the themalisation and equilibration process.  
 
 
- 3) Adding missing parameters to the MM forcefield 
-''''''''''''
+**3) Adding missing parameters to the MM forcefield**
 
 The current AMBER and CHARMM forcefields are developed to reproduce the behaviour of biomolecules using classical mechanics. In this context, hydrogen atoms of starndard residues and water molecules are parameterised without Lennard-Jones parameters. MM forcefields account for these missing parameters and simulations are usually performed with hydrogen restraining algorithms such as SHAKE, SETTLE or LINKS that freeze the X-H bond vibration frequency in order to increase the simulation timestep. 
 
@@ -128,8 +125,7 @@ There is not a unique way to add these parameters:
 
 
 
-4) Monitorisation using QM/MM methods
-''''''''''''
+**4) Monitorisation using QM/MM methods**
 
 
 
