@@ -141,11 +141,36 @@ converge.
 Output from a Geometry optimatision
 -----------------------------------
 
+Standard output
+---------------
+
+When running a geometry optimisation extra information is printed in the standard output
+about the progress of the optimisation.
+
+
+Geometry trajectory 
+--------------------
+
+This is usually printed in and xyz file or similiar. It will show how the atomic coordinates
+are changing throughout the optimisation. The coordinates of subsequent steps are printed
+one after the other in the file. This can be viewed as a .xyz movie in order to view the progression.
+Once the optimation has completed the final image in the file represents the optimised
+configuration.
+
+Restart files
+-------------
+
+
+
 ---------------------
 Output from an MD run
 ---------------------
 
+In
 
-.ener
+ener file
+---------
 
-.restart
+The .ener file 
+
+
