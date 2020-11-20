@@ -29,6 +29,13 @@ forcefields can be used. The relevant tools and the tutorials can be found below
 - Ambertools
 - Charmm
 
+
+----------------------------------------------
+Minimisation, Equilibration and Thermalisation
+----------------------------------------------
+
+
+
 ---------------
 Select QM atoms
 ---------------
@@ -41,11 +48,6 @@ the chemistry of the system, while at the same time not having too many QM atoms
 
 Details on how to select QM atoms from a pdb file and get them in the correct format
 for using in a CP2K input are given here:
-
-
-----------------------------------------------
-Minimisation, Equilibration and Thermalisation
-----------------------------------------------
 
 
 
@@ -121,9 +123,11 @@ The structure of your input will look something like this:
   &END MOTION
 
 Information on setting up the parameters for the QMMM section can be found here:
+
 Settings for this will depend highly on your choice of QM region.
 
 Information on setting the QM treatment can be found here:
+
 It is good practice to start with simple method for the XC functional and then check that the QM set up 
 has been done correctly before increasing the complexity and deciding on most accurate or appropirate
 method for your system.
