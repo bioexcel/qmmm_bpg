@@ -38,7 +38,9 @@ Performance considerations
 
 A selection of CP2K QMMM benchmarks are available at: https://github.com/bioexcel/qmmm_benchmark_suite
 
-Additionally the performance results for these can be found at:
+Performance results for these are shown below
+
+
 
 
 
