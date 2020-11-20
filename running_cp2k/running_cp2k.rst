@@ -38,7 +38,26 @@ Performance considerations
 
 A selection of CP2K QMMM benchmarks are available at: https://github.com/bioexcel/qmmm_benchmark_suite
 
-Performance results for these are shown below
+The table below gives an overview of them.
+
+Speed up plots for these on ARCHER are shown below in order to give an idea of a suitable number of cores
+to use.
+
++-----------+---------------------+----------------+-------------+----------------+-----------------+
+| Name      | Type                | QM atoms       | Total atoms | XC Functional  | Basis set       | 
++===========+=====================+================+=============+================+=================+
+| MQAE      | solute-solvent      | 34             | 16,396      | BLYP	          | DZVP-MOLOPT-GTH | 
++-----------+---------------------+----------------+-------------+----------------+-----------------+
+| ClC       | ion channel         | 19, 253        | 150,925     | BLYP	          | DZVP-MOLOPT-GTH |
++-----------+---------------------+----------------+-------------+----------------+-----------------+
+| CBD_PHY   | phytochrome         | 68             | 167,922     | PBE            | DZVP-MOLOPT-GTH |
++-----------+---------------------+----------------+-------------+----------------+-----------------+
+| GFP_QM-77 | fluorescent protein | 20, 32, 53, 77 | 28,264      | BLYP           | DZVP-GTH-BLYP   | 
++-----------+---------------------+----------------+-------------+----------------+-----------------+
+
+
+ClC-19
+------
 
 
 .. image:: ../images/CIC-19-thread-improvements-su.png
