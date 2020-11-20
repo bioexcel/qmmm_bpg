@@ -42,9 +42,9 @@ Performance results for these are shown below
 
 
 .. image:: ../images/CIC-19-thread-improvements-su.png
-    :width: 100px
+    :width: 600px
     :align: center
-    :height: 50px
+    :height: 300px
     :alt: alternate text
 
 
