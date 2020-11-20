@@ -36,7 +36,7 @@ The number of processes will need to be set so that the threads
 Performance considerations
 --------------------------
 
-A selection of CP2K QMMM benchmarks are available at: 
+A selection of CP2K QMMM benchmarks are available at: https://github.com/bioexcel/qmmm_benchmark_suite
 
 Additionally the performance results for these can be found at:
 
