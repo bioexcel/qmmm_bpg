@@ -25,16 +25,22 @@ Details of how to this are described in the system prepartion guide here:
 
 You will also have to generate a forcefield for you system. There are different tools
 available to do this depending on the type of forcefield. For CP2K the Amber, Charmm and Gromos
-forcefields can be used. The relevant tools and the tutorials can be found below:
+forcefields can be used. The relevant tools and their tutorials can be found below:
 
-- Ambertools
-- Charmm
+- Ambertools - https://ambermd.org/tutorials/ForceField.php
+- Charmm - https://www.charmm.org/charmm/documentation/tutorials/
+- Gromos -
 
 
 ----------------------------------------------
 Minimisation, Equilibration and Thermalisation
 ----------------------------------------------
 
+After you have built your topology and coordinate files you must minimise your system. 
+This will find the energy minima for your system and fix any possible bad contacts in your initial structure.
+Once the system is minimised, it has to be subsequently heated (from 0K to your target conditions i.e. 300K ) and equilibrated. 
+This gradual and slow heating process prevents instabilities arising due to the
+sudden increase in the kinetic energy.
 
 
 ---------------
@@ -176,13 +182,40 @@ More information about MD simulations in CP2K is
 given here: https://www.cp2k.org/howto:md
 
 
-NVT Ensemble
+Ensembles
 ------------
 
 
+CP2K offers a range of MD ensembles which are listed here: https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/MD.html#ENSEMBLE
 
-NPT Ensemble
-------------
+Common ones are the NVT and NPT_I (iosbaric) ensemble. For an NVT ensemble 
+you will need to add information about the thermostat in the &THERMOSTAT section
+within the MD section, and the NPT_I ensemble will need both and THERMOSTAT and 
+BARASTAT section as shown below.
+
+.. code-block:: none
+
+ &MOTION
+ ..
+  &MD
+     ENSEMBLE NPT_I
+     TIMESTEP  0.5
+     STEPS  1000 
+     TEMPERATURE 298
+     &BAROSTAT
+       TIMECON [fs] 100        ! timeconstant for barostat
+       PRESSURE [bar] 1.0      ! target pressure
+     &END BAROSTAT
+     &THERMOSTAT
+       TYPE CSVR               ! type of thermostat -  options include NOSE, CSVR (rescaling), GLE, AD_LANGEVIN
+       &CSVR
+         TIMECON [fs] 10.      ! time constant for thermostat
+       &END CSVR
+     &END THERMOSTAT
+  &END MD
+  ..
+ &END MOTION
+
 
 .. -----------------------------------
 .. Running a NEB calculation with CP2K
