@@ -41,7 +41,11 @@ A selection of CP2K QMMM benchmarks are available at: https://github.com/bioexce
 Performance results for these are shown below
 
 
-
+.. image:: ../images/clc-19.png
+    :width: 200px
+    :align: center
+    :height: 100px
+    :alt: alternate text
 
 
 
