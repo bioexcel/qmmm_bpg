@@ -11,6 +11,19 @@ will look like this and contain a message about what has caused the abort, and
 what can be done to fix it.
 
 
+.. code-block :: none
+
+ *******************************************************************************
+ *   ___                                                                       *
+ *  /   \                                                                      *
+ * [ABORT]                                                                     *
+ *  \___/                         Error messsge here                           *
+ *    |                                                                        *
+ *  O/|                                                                        *
+ * /| |                                                                        *
+ * / \                                                                         *
+ *******************************************************************************
+
 
 GEOMETRY wrong or EMAX_SPLINE too small!
 ----------------------------------------
