@@ -15,7 +15,7 @@ This guide provides practical advice on how to use CP2K to perform QM/MM simulat
    :caption: System preparation:
 
    system_preparation/system_preparation
-   system_preparation/seleting_qm_atoms
+   system_preparation/selecting_qm_atoms
 
 .. toctree::
    :maxdepth: 2
