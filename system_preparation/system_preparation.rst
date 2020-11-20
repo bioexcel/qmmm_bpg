@@ -32,7 +32,7 @@ The structures should be cleaned of all those molecules that are not relevant to
 It is worth mentioning here that crystallographic waters are very important for protein stability and enzymatic reactivity and therefore, they should not be discarded without a proper visual assessment. 
 
 Assessing the protonation states of your biomolecule
----------------------------------------------------
+----------------------------------------------------
 
 As mentioned before, the protonation state of your system should be considered carefully. If you know the pH you want to simulate, you can get a suggestive protonation state for your protein using the pKa predictor. The results of these pKa predictors always have to be visually checked, as the protonation patterns are very important in enzymatic reactivity. 
 
