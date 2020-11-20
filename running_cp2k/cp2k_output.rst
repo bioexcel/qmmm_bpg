@@ -137,25 +137,25 @@ and the SCF_GUESS should be set to 'restart'. Care should be taken that
 the wavefunction is a suitable guess for the SCF calculation otherwise it may not
 converge. 
 
------------------------------------
-Output from a Geometry optimatision
------------------------------------
+.. -----------------------------------
+.. Output from a Geometry optimatision
+.. -----------------------------------
 
-Standard output
----------------
+.. Standard output
+.. ---------------
 
 
-Geometry trajectory 
---------------------
+.. Geometry trajectory 
+.. --------------------
 
-This is usually printed in an xyz file or similiar. It will show how the atomic coordinates
-are changing throughout the optimisation. The coordinates of subsequent steps are printed
-one after the other in the file. This can be viewed as a .xyz movie in order to view the progression.
-Once the optimation has completed the final image in the file represents the optimised
-configuration.
+.. This is usually printed in an xyz file or similiar. It will show how the atomic coordinates
+.. are changing throughout the optimisation. The coordinates of subsequent steps are printed
+.. one after the other in the file. This can be viewed as a .xyz movie in order to view the progression.
+.. Once the optimation has completed the final image in the file represents the optimised
+.. configuration.
 
-.restart file
---------------
+.. .restart file
+.. --------------
 
 
 
