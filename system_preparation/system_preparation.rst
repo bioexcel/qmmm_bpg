@@ -8,7 +8,7 @@ In this guide, we are going to briefly explain how to prepare your biological sy
 Getting to know your biological system
 --------------------------------------
 
-Biological molecules are complex systems as they have evolved to react to changes in their chemical envinronment such as pH, concentration of substrates or voltage across biological membranes. All the factors that can tune the biological activity of interest must be taken into account for molecular modelling purposes. Therefore, a thourough literature search before starting your simulation will help you figure out which is the chemical environment of your biological system. 
+Biological molecules are complex systems as they have evolved to react to changes in their chemical environment such as pH, concentration of substrates or voltage across biological membranes. All the factors that can tune the biological activity of interest must be taken into account for molecular modelling purposes. Therefore, a thorough literature search before starting your simulation will help you figure out which is the chemical environment of your biological system. 
 
 In particular, QM/MM methods are often used to study chemical reactions catalysed by enzymes, light absorption through chromophores within proteins, reduction and/or oxidation of cofactors and much more. To study the aforementioned biological processes, it is crucial to known the fine details involved such as the protonation states and the geometry of the residues involved in the reaction, the presence of water molecules, the oxidation state of the chromophore or cofactor, coordination geometry of the metal ions involved... This structural information will also help to determine:
 
@@ -31,7 +31,7 @@ Cleaning the structural coordinates of the biomolecule of interest
 The structures should be cleaned of all those molecules that are not relevant to your study.  
 It is worth mentioning here that crystallographic waters are very important for protein stability and enzymatic reactivity and therefore, they should not be discarded without a proper visual assessment. 
 
-Asessing the protonation states of your biomolecule
+Assessing the protonation states of your biomolecule
 ---------------------------------------------------
 
 As mentioned before, the protonation state of your system should be considered carefully. If you know the pH you want to simulate, you can get a suggestive protonation state for your protein using the pKa predictor. The results of these pKa predictors always have to be visually checked, as the protonation patterns are very important in enzymatic reactivity. 
@@ -78,7 +78,7 @@ There are several protocols to parameterise organic molecules for each forcefiel
 - `AMBER parameter database <http://research.bmh.manchester.ac.uk/bryce/amber/>`_ : Parameters for use  with the AMBER forcefield for an extensive list of cofactors and other organic molecules. 
 - `AMBER DYES forcefield <https://github.com/t-/amber-dyes>`_ : Parameters for use with the AMBER forcefield for the most common dyes. 
 
-Additionally, it is worth mentioning the `Open Force Field Initiative <https://openforcefield.org>`_ which is actively working to develop new forcefileds that escape from typical forcefield atomtypes and use chemical perception to parameterise organic molecules. 
+Additionally, it is worth mentioning the `Open Force Field Initiative <https://openforcefield.org>`_ which is actively working to develop new forcefields that escape from typical forcefield atomtypes and use chemical perception to parameterise organic molecules. 
 
 
 
@@ -98,7 +98,7 @@ It is crucial to build your model system in a way that represents the biological
 In order to prepare a suitable model system, you should include:
 - Water molecules when possible
 - Create bonds for special features as disulphide bonds, covalent molecules 
-- Use a cubic or triclinic periodic box (This is a requirement to run QM/MM simulations in paralle in CP2K.)
+- Use a cubic or triclinic periodic box (This is a requirement to run QM/MM simulations in parallel in CP2K.)
 - Neutralise the system in order to avoid simulation artefacts. 
 
 
@@ -106,7 +106,7 @@ In order to prepare a suitable model system, you should include:
 
 After you have built your topology and coordinate files, you must minimise these coordinates using the forcefield parameters in your topology file. Energy minimisation will find an energy minima in the potential energy surface of your system and fix any possible bad contacts in your initial structure. If possible, it is important that you use more that one minimisation algorithm ( steepest descent and conjugate gradient ) in order to avoid getting stuck in a local minima. 
 
-Once the system is minimised, it has to be subsequently heated (from 0K to your target conditions i.e. 300K ) and equilibrated. Since a sudden increase in the kinetic energy of your system may lead to system inestabilities, a gradual and slow heating process is recommended were possible. 
+Once the system is minimised, it has to be subsequently heated (from 0K to your target conditions i.e. 300K ) and equilibrated. Since a sudden increase in the kinetic energy of your system may lead to system instabilities, a gradual and slow heating process is recommended were possible. 
 
 Afterwards the pressure and volume of the system must be equilibrated. However, the nature of your simulation (for instance globular and membrane proteins), might require a specific equilibration recipe. Therefore, we will point out to several tutorials that cover the specifics of each kind of simulation. 
 
@@ -115,9 +115,9 @@ As a general rule, you should check that all the fixed quantities of the ensembl
 
 **3) Adding missing parameters to the MM forcefield**
 
-The current AMBER and CHARMM forcefields are developed to reproduce the behaviour of biomolecules using classical mechanics. In this context, hydrogen atoms of starndard residues and water molecules are parameterised without Lennard-Jones parameters. MM forcefields account for these missing parameters and simulations are usually performed with hydrogen restraining algorithms such as SHAKE, SETTLE or LINKS that freeze the X-H bond vibration frequency in order to increase the simulation timestep. 
+The current AMBER and CHARMM forcefields are developed to reproduce the behaviour of biomolecules using classical mechanics. In this context, hydrogen atoms of standard residues and water molecules are parameterised without Lennard-Jones parameters. MM forcefields account for these missing parameters and simulations are usually performed with hydrogen restraining algorithms such as SHAKE, SETTLE or LINKS that freeze the X-H bond vibration frequency in order to increase the simulation timestep. 
 
-However, these approximations can not be done in quantum mechanics. In particular, in QM/MM simulations they lead to unnatural interactions between the point charges ot the MM subsystem with the electronic densities of the QM subsystem, which eventually cause the simulation to crash. Therefore, you have to add the missing parameters for hydrogens at least in the QM/MM interface. 
+However, these approximations cannot be done in quantum mechanics. In particular, in QM/MM simulations they lead to unnatural interactions between the point charges of the MM subsystem with the electronic densities of the QM subsystem, which eventually cause the simulation to crash. Therefore, you have to add the missing parameters for hydrogens at least in the QM/MM interface. 
 
 There are two ways to add the Lennard-Jones parameters to the forcefield:
 
@@ -164,7 +164,7 @@ AMBER also provide detailed tutorials for different kinds of biomolecules:
 System preparation using CHARMM software package
 ------------------------------------------------
 
-`CHARMM <https://www.charmm.org/charmm/>`_ (Chemistry at HARvard Molecular Mechanics) is a molecular simulation program developed with a primary focus on molecules of biological interest. CHARMM contains a comprehensive set of analysis and model builiding tools. CHARMM also has a lot of useful `tutorials <https://www.charmm.org/charmm/documentation/tutorials/>`_ .
+`CHARMM <https://www.charmm.org/charmm/>`_ (Chemistry at HARvard Molecular Mechanics) is a molecular simulation program developed with a primary focus on molecules of biological interest. CHARMM contains a comprehensive set of analysis and model building tools. CHARMM also has a lot of useful `tutorials <https://www.charmm.org/charmm/documentation/tutorials/>`_ .
 
 CHARMM has several tutorials to perform MD simulations of biomolecules:
 
