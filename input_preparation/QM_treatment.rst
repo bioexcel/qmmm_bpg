@@ -397,7 +397,7 @@ an extra dispersion term to the energy density functional, e.g.
 
 .. math::
 
- E_tot = E_DFT + E_disp
+ E_{tot} = E_{DFT} + E_{disp}
 
 These methods are based on the same formalism for the dispersion energy which is
 written as a sum of the long range interaction between pairs of atoms, that decays as -1/r^6 with
