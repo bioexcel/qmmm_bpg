@@ -19,7 +19,8 @@ The first step is to prepare your system - i.e. to generate the desired starting
 system and forcefield files. The starting point for this is usually a pdb file 
 which may have been downloaded from the PDB data bank. Usually these structures are not
 ready to use and will require fixing to obtain the desired protonation state of the protein.
-Details of how to this are described in the system prepartion guide here:
+Details of how to this are described in the system prepartion guide here: 
+:doc:`../system_preparation/system_preparation`
 
 
 You will also have to generate a forcefield for you system. There are different tools
@@ -47,7 +48,7 @@ the chemistry of the system, while at the same time not having too many QM atoms
 (which will require more compute resources).
 
 Details on how to select QM atoms from a pdb file and get them in the correct format
-for using in a CP2K input are given here:
+for using in a CP2K input are given here: :doc:`../system_preparation/selecting_qm_atoms`
 
 
 
@@ -64,11 +65,11 @@ QMMM parameters. The MM calculation should be fast to run and if the calculation
 error and the energy is sensible then it is a good indicator that the system has been
 prepared correctly for CP2K. 
 
-Details of how to this are given here:
+Details of how to this are given here: :doc:`../input_preparation/MM_setup`
 
-If this is your first time using CP2K then it is recommended to read the Running CP2K section of guide (LINK),
-as well as the CP2K Output Guide (LINK). If you encouter any errors while runnning
-you can debug these in the Troubleshooting guide (LINK).
+If this is your first time using CP2K then it is recommended to read the Running CP2K section of guide (:doc:`../running_cp2k/running_cp2k`),
+as well as the CP2K Output Guide (:doc:`../running_cp2k/cp2k_output`). If you encouter any errors while runnning
+you can debug these in the Troubleshooting guide (:doc:`../running_cp2k/cp2k_errors`).
 
 
 
@@ -122,11 +123,11 @@ The structure of your input will look something like this:
     .... contents of MOTION section
   &END MOTION
 
-Information on setting up the parameters for the QMMM section can be found here:
+Information on setting up the parameters for the QMMM section can be found here: :doc:`../input_preparation/QMMM_parameterisation`
 
 Settings for this will depend highly on your choice of QM region.
 
-Information on setting the QM treatment can be found here:
+Information on setting the QM treatment can be found here: :doc:`../input_preparation/QM_treatment`
 
 It is good practice to start with simple method for the XC functional and then check that the QM set up 
 has been done correctly before increasing the complexity and deciding on most accurate or appropirate
