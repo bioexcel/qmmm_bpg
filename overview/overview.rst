@@ -135,7 +135,12 @@ Before running a production QMMM calculation the value of the CUTOFF should be c
 for the final choice of BASIS_SET, XC_FUNCTIONAL and any other parameters. How to do this
 is documented here: https://www.cp2k.org/howto:converging_cutoff
 
+.. -----------------------------------------
+.. Running a Geometry Optimisation with CP2K
+.. -----------------------------------------
 
+
+.. https://www.cp2k.org/howto:geometry_optimisation
 
 -----------------
 Run MD with CP2K
@@ -144,5 +149,36 @@ Run MD with CP2K
 Once you  have setup a simple single energy QMMM calculation CP2K it is fairly 
 straightfoward to adjust the input file to run a production molecular dynamics simulation.
 
+The first change is to set the ``RUN_TYPE`` to MD. You will also need to add an MD section 
+in the MOTION section which will list the parameters to do with the dynamics of the 
+simulation. For a simple NVE MD ensemble this would look like this:
 
-Run 
+.. code-block:: none
+
+ &MOTION
+    &MD
+       ENSEMBLE NVE                            ! Ensemble type
+       STEPS 5                                 ! Number of MD steps
+       TEMPERATURE 300                         ! Target temperature in Kelvin
+       TIMESTEP 1                              ! Timestep in femtoseconds
+    &END MD
+ &END MOTION 
+ 
+Usually a timestep of 1 femtoseconds or less is recommended in order to ensure
+energy conservation in the system.
+
+More information about MD simulations in CP2K is 
+given here: https://www.cp2k.org/howto:md
+
+
+NVT Ensemble
+------------
+
+
+
+NPT Ensemble
+------------
+
+.. -----------------------------------
+.. Running a NEB calculation with CP2K
+.. -----------------------------------
