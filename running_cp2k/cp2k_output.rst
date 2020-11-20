@@ -144,21 +144,18 @@ Output from a Geometry optimatision
 Standard output
 ---------------
 
-When running a geometry optimisation extra information is printed in the standard output
-about the progress of the optimisation.
-
 
 Geometry trajectory 
 --------------------
 
-This is usually printed in and xyz file or similiar. It will show how the atomic coordinates
+This is usually printed in an xyz file or similiar. It will show how the atomic coordinates
 are changing throughout the optimisation. The coordinates of subsequent steps are printed
 one after the other in the file. This can be viewed as a .xyz movie in order to view the progression.
 Once the optimation has completed the final image in the file represents the optimised
 configuration.
 
-Restart files
--------------
+.restart file
+--------------
 
 
 
@@ -166,11 +163,52 @@ Restart files
 Output from an MD run
 ---------------------
 
-In
 
-ener file
----------
+.ener file
+----------
 
-The .ener file 
+The .ener file shows the important information about the system as the simulation 
+progresses. For each step the Temperature, Kinetic energy, Potential energy, CPU time
+and the Conserved Quantity are printed. The Conserved Quantity is the total energy of 
+the system and its constitutes will depend on the MD ensemble used.
 
+MD trajectory
+-------------
 
+This will look similar to the geometry trajectory from a geometry optimation and 
+will appear as a .xyz file as default. The coordinates at each MD step are printed in order
+in this file. You can control how often this file is printed using the following settings
+within the motion section:
+
+.. code-block:: none
+
+ &MOTION
+    &PRINT
+       &TRAJECTORY
+         &EACH
+            MD 10                       ! print every 10 steps
+         &END EACH
+       &END TRAJECTORY
+    &END PRINT
+ &END MOTION
+
+.restart file
+-------------
+
+This lists the information at the end of an MD step which can be used to restart the
+MD simulation. This file is human readable and lists information about the system 
+set up along with the current positions and velocities of the atoms in the system.
+
+To restart an MD the restart section can be added to the input file to instruct the code
+to use this file as the restart point:
+
+.. code-block:: none
+
+  &EXT_RESTART
+     EXTERNAL_FILE_NAME  project-1.restart
+  &END EXT_RESTART
+
+You can also use this file as if it were an input file, and supply it straight to 
+the executable in the job submission script:
+
+``cp2k.psmp –i project-1.restart``
