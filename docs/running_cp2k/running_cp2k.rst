@@ -1,6 +1,6 @@
-==================================
-Running QMMM simulations with CP2K
-==================================
+===================================
+Running QM/MM simulations with CP2K
+===================================
 
 
 ---------------------------------
@@ -36,7 +36,7 @@ The number of processes will need to be set so that the threads
 Performance considerations
 --------------------------
 
-A selection of CP2K QMMM benchmarks are available at: https://github.com/bioexcel/qmmm_benchmark_suite
+A selection of CP2K QM/MM benchmarks are available at: https://github.com/bioexcel/qmmm_benchmark_suite
 
 The table below gives an overview of them.
 

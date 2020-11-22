@@ -15,8 +15,8 @@ e.g. the number of processes and threads that were specifed when running. It can
 used for future reference.
 
 After this it will then print details of the individual set up for the important
-sections in the input file. These will appear under clear headings e.g. FIST for MM, 
-Quickstep for DFT, and QMMM. Input parameters are printed, along with some more information
+sections in the input file. These will appear under clear headings e.g. FIST for the MM section, 
+Quickstep for the DFT section, and QMMM. Input parameters are printed, along with some more information
 such as for example the number of basis functions.
 
 After this the output from the calculation is usually printed. This will start with the
@@ -109,8 +109,8 @@ The Total energy given is the energy from only the QM part i.e from the SCF calc
 A breakdown of its components is printed above it. The total number of outer SCF loops
 and inner SCF steps that were done is also shown.
 
-The ENERGY (QMMM) is the QMMM energy including all its components; the QM energy, MM energy
-and QMMM interation energy. This is the energy you are usually interested in.
+The ENERGY (QMMM) is the QM/MM energy including all its components; the QM energy, MM energy
+and QM-MM interation energy. This is the energy you are usually interested in.
 
 
 Wavefuntions - NAME-RESTART.wfn

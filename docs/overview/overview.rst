@@ -1,10 +1,10 @@
 ==============
-QMMM overview
+QM/MM overview
 ==============
 
-The following overview will outline the main steps in setting up and running a QMMM 
+The following overview will outline the main steps in setting up and running a QM/MM 
 simulation in CP2K, starting from preparing your system from a raw pdb file, and leading 
-towards running a production QMMM run, for example a molecular dynamics simulation. Each
+towards running a production QM/MM run, for example a molecular dynamics simulation. Each
 section will contain relavent links to the specfic parts of the guide.
 
 This overview is designed to be read from the point of view of a beginner, a more experianced
@@ -64,10 +64,10 @@ Run MM only in CP2K
 ----------------------------------
 
 
-Before running a QMMM simulation in CP2K it is recommended to try and run a simple single energy
+Before running a QM/MM simulation in CP2K it is recommended to try and run a simple single energy
 MM calculation in CP2K. This will verify that the input forcefield and coordinates
 are set up correctly and compatible with CP2K before attempting to add more complicated
-QMMM parameters. The MM calculation should be fast to run and if the calculation finishes without
+QM/MM parameters. The MM calculation should be fast to run and if the calculation finishes without
 error and the energy is sensible then it is a good indicator that the system has been
 prepared correctly for CP2K. 
 
@@ -83,10 +83,10 @@ you can debug these in the Troubleshooting guide (:doc:`../running_cp2k/cp2k_err
 
 
 ------------------------------------------
-Run a simple QMMM calculation in CP2K
+Run a simple QM/MM calculation in CP2K
 ------------------------------------------
 
-Once an MM calcualtion has been run successfully the input can be used as a basis for a QMMM calculation.
+Once an MM calculation has been run successfully the input can be used as a basis for a QM/MM calculation.
 
 The METHOD should be set to QMMM.
 You will need to add the QMMM section for the parameterisation of the QM region and the DFT section
@@ -142,7 +142,7 @@ method for your system.
 You should first calculate just the ENERGY of the system and check that this is sensible and that the SCF
 converges. This will ensure that there are not any errors in your DFT setup or QM atom selection.
 
-Before running a production QMMM calculation the value of the CUTOFF should be converged
+Before running a production QM/MM calculation the value of the CUTOFF should be converged
 for the final choice of BASIS_SET, XC_FUNCTIONAL and any other parameters. How to do this
 is documented here: https://www.cp2k.org/howto:converging_cutoff
 
@@ -157,7 +157,7 @@ is documented here: https://www.cp2k.org/howto:converging_cutoff
 Run MD with CP2K
 -----------------
 
-Once you  have setup a simple single energy QMMM calculation CP2K it is fairly 
+Once you  have setup a simple single energy QM/MM calculation CP2K it is fairly 
 straightfoward to adjust the input file to run a production molecular dynamics simulation.
 
 The first change is to set the ``RUN_TYPE`` to MD. You will also need to add an MD section 

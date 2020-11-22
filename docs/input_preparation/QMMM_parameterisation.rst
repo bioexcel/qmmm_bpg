@@ -1,10 +1,10 @@
-=====================
-QMMM parameterisation
-=====================
+======================
+QM/MM parameterisation
+======================
 
-The chapter describes how set the QMMM settings in CP2K once you have decided on your QM atoms.
+The chapter describes how set the QM/MM settings in CP2K once you have decided on your QM atoms.
 This includes how to get the QM atoms into the right format for CP2K, and how to parameterise
-the QMMM cell. It will also deal with how to properly handle atomic bonds that cross the QMMM
+the QM/MM cell. It will also deal with how to properly handle atomic bonds that cross the QM-MM
 boundary.
 
 -----------------------
@@ -15,7 +15,7 @@ The basic input for the QMMM section in CP2K is shown below. This contains all t
 describing the selection of QM atoms and how the QM region should be treated within the system.
 This is designed to act as a rough guide for how to build your QMMM section, and contains some example
 parameter settings with descriptions in the comments. It contains set up parameters as if to run
-a QMMM calculation using the GEEP method. However other methods exist and these will require
+a QM/MM calculation using the GEEP method. However other methods exist and these will require
 slightly different parameters. These are explained under the ECOUPL option.
 
 
@@ -206,7 +206,7 @@ Finding which bonds are cut
 ---------------------------
 
 It is important that the bonds across the boundary are not expected to have large charge transfers,
-as there is no treatment for charge transfer through the QMMM bounadary. Cutting a C-C bond for example
+as there is no treatment for charge transfer through the QM-MM boundary. Cutting a C-C bond for example
 is usually a safe choice.
 
 The bonds can be identied through visualisation, e.g. vmd or other pdb viewer, or by observation
@@ -216,8 +216,8 @@ of the QM and MM atoms. The LINK section is then used to pass this information.
 
 .. _ref_link:
 
-QMMM Link parameterisation
---------------------------
+QM-MM Link parameterisation
+---------------------------
 
 The CP2K link treatment involves adding a atom (usually a hydrogen) to cap the QM bond in place of the MM atom.
 This must be done for all dangling QM bonds or you will get the following error "

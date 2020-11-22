@@ -70,7 +70,7 @@ The requested basis set for element was not found in the basis set files
 This will also give you the name 
 Check the basis set file name is correct for the basis sets named in the SUBSYS section.
 
-Error in QMMM Connectivity
+Error in QM/MM Connectivity
 ---------------------------
 
 .. code-block:: none
@@ -80,7 +80,7 @@ Error in QMMM Connectivity
  This very probably can be identified as an error in the specified QM
  indexes or in a missing LINK section. Check your structure!
 
-This error is fairly self explanitory. It means that the QM region has not been 
+This error is fairly self explanatory. It means that the QM region has not been 
 properly defined based on the connectivity between atoms. You are either missing QM
 atoms from the QM region in QMMM&QM_KIND or a QM to MM LINK section is missing.
 

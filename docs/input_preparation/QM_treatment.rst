@@ -87,7 +87,7 @@ important paramters outlined below.
     &MGRID
       CUTOFF 300                           ! planewave cutoff
       REL_CUTOFF 50                        ! relative cutoff for gaussian grid
-      COMMENSURATE                         ! If grids are commensurate (always true for QMMM)
+      COMMENSURATE                         ! If grids are commensurate (always true for QM/MM)
     &END MGRID
     
     &QS

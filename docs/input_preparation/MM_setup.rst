@@ -154,7 +154,7 @@ GMAX
 
 Number of grid points (SPME and EWALD). Supply a single variable N for all three dimensions or Nx, Ny, Nz 
 for individiual dimensions. One point per Angstrom is common, however this may cause the calculation to be
-slow for larger QMMM cells.
+slow for larger cells.
 
 ---------------
 Troubleshooting
