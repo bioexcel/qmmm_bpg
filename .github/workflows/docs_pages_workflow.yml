@@ -1,0 +1,50 @@
+name: docs_pages_workflow
+ 
+# execute this workflow automatically when a we push to master
+on:
+  push:
+ 
+jobs:
+ 
+  build_docs_job:
+    runs-on: ubuntu-latest
+    #container: debian:buster-slim
+ 
+    steps:
+    - uses: "actions/checkout@v2"
+    - uses: "actions/setup-python@v1"
+      with:
+        python-version: '3.7'
+    #- name: Prereqs
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  run: |
+    #    apt-get update
+    #    apt-get install -y git
+    #    git clone "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .
+    #  shell: bash
+
+    - name: Install
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install git rsync
+        python -m pip install --upgrade pip setuptools wheel
+        python3 -m pip install --upgrade sphinx sphinx-rtd-theme gitpython virtualenv setuptools
+        python3 -m pip install --upgrade rinohtype pygments
+      
+    - name: Execute script to build our documentation and update pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: "docs/buildDocs.sh"
+      shell: bash
+
+    - name: Deploy
+      if: "contains(env.DEPLOY_DOCS, matrix.python-version)"
+      uses: crazy-max/ghaction-github-pages@v2
+      with:
+        keep_history: false
+        target_branch: gh-pages
+        build_dir: ../docs
+        jekyll: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
