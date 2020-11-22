@@ -116,9 +116,9 @@ git checkout main
 cat > "${docroot}/index.html" <<EOF
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>Redirecting to https://docs.bioexcel.eu/qmmm_bpg/rtd-github-pages/en/master/</title>
-<meta http-equiv="refresh" content="0; URL=https://docs.bioexcel.eu/qmmm_bpg/en/master/">
-<link rel="canonical" href="https://docs.bioexcel.eu/qmmm_bpg/en/master/">
+<title>Redirecting to https://docs.bioexcel.eu/qmmm_bpg/rtd-github-pages/en/main/</title>
+<meta http-equiv="refresh" content="0; URL=https://docs.bioexcel.eu/qmmm_bpg/en/main/">
+<link rel="canonical" href="https://docs.bioexcel.eu/qmmm_bpg/en/main/">
 EOF
  
 # Add README
