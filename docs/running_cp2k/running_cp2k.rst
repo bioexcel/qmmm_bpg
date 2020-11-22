@@ -92,7 +92,7 @@ ClC-19
 ------
 
 
-.. image:: /_static/CIC-19-thread-improvements-su.png
+.. image:: ../_static/CIC-19-thread-improvements-su.png
     :width: 500px
     :align: center
     :height: 366px
