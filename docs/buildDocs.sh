@@ -113,28 +113,28 @@ git checkout main
 #touch ${docroot}/.nojekyll
  
 # add redirect from the docroot to our default docs language/version
-#cat > "${docroot}/index.html" <<EOF
-#<!DOCTYPE html>
-#<meta charset="utf-8">
-#<title>Redirecting to https://longr.github.io/rtd-github-pages/en/master/</title>
-#<meta http-equiv="refresh" content="0; URL=https://longr.github.io/rtd-github-pages/en/master/">
-#<link rel="canonical" href="https://longr.github.io/rtd-github-pages/en/master/">
-#EOF
+cat > "${docroot}/index.html" <<EOF
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Redirecting to https://docs.bioexcel.eu/qmmm_bpg/rtd-github-pages/en/master/</title>
+<meta http-equiv="refresh" content="0; URL=https://docs.bioexcel.eu/qmmm_bpg/en/master/">
+<link rel="canonical" href="https://docs.bioexcel.eu/qmmm_bpg/en/master/">
+EOF
  
 # Add README
-#cat > README.md <<EOF
-## GitHub Pages Cache
-# 
-#Nothing to see here. The contents of this branch are essentially a cache that's not intended to be view#ed on github.com.
-# 
-# 
-#If you're looking to update our documentation, check the relevant development branch's 'docs/' dir.
-# 
-#For more information on how this documentation is built using Sphinx, Read the Docs, and GitHub Actions#/Pages, see:
-# 
-# * https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1
-#EOF
-# 
+cat > README.md <<EOF
+# GitHub Pages Cache
+ 
+Nothing to see here. The contents of this branch are essentially a cache that's not intended to be view#ed on github.com.
+ 
+ 
+If you're looking to update our documentation, check the relevant development branch's 'docs/' dir.
+ 
+For more information on how this documentation is built using Sphinx, Read the Docs, and GitHub Actions#/Pages, see:
+ 
+ * https://tech.michaelaltfield.net/2020/07/18/sphinx-rtd-github-pages-1
+EOF
+ 
 # copy the resulting html pages built from sphinx above to our new git repo
 #git add .
  
