@@ -46,9 +46,9 @@ Here it is a short list of pKa predictors:
 Checking for disulphide bonds and other posttranslational modifications 
 ------------------------------------------------------------------------
 
-Disulphide bonds keep some proteins properly folded, therefore it is very important to look for them in your protein structures. The cysteine residues involved in a disulphide bond should be rename to the aminoacid code CYX. 
+Disulphide bonds keep some proteins properly folded, therefore it is very important to look for them in your protein structures. The cysteine residues involved in a disulphide bond should be renamed to the aminoacid code **CYX**. It is worth mentioning that MM forcefields encode each chemical species of each aminoacid residue using a three-letter-code. Since cysteines involved in a disulphide bond lack the hydrogen atom attached to the S atom, they must be named differently (CYX) than the normal cysteine residues (CYS). 
 
-It is also important to check for other posttranslational modifications such as phosporilation or glicosilation of protein residues. You might need to include them in your setup if they are relevant to your hypothesis. 
+It is also important to check for other posttranslational modifications such as phosphorilation or glicosilation of protein residues. You might need to include them in your setup if they are relevant to your hypothesis. 
 
 
 Presence of chromophores, cofactors, substrates, inhibitors and other organic molecules
