@@ -163,8 +163,8 @@ System preparation using AMBERTools software package
 AMBER also provide detailed tutorials for different kinds of biomolecules:
 
 - `Nucleic acids <https://amberhub.chpc.utah.edu/analisis-of-nucleic-acid-simulation/>`_
-- `Globular proteins <http://ambermd.org/tutorials/basic/tutorial0/index.php>`_ . 
-- `Membrane proteins <https://ambermd.org/tutorials/advanced/tutorial16/index.php>`_ .
+- `Globular proteins <http://ambermd.org/tutorials/basic/tutorial0/index.php>`_ 
+- `Membrane proteins <https://ambermd.org/tutorials/advanced/tutorial16/index.php>`_ 
 
 System preparation using CHARMM software package
 ------------------------------------------------
