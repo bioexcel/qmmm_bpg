@@ -112,7 +112,7 @@ Afterwards the pressure and volume of the system must be equilibrated. However, 
 
 As a general rule, you should check that all the fixed quantities of the ensemble that you use (NVT, NPT, NVE ...) are stable before you start your production runs. It is also wise to assess the stability of your biomolecule during all the themalisation and equilibration process. 
 
-It is worth mentioning that the equilibrated system using MM forcefield would be equilibrated only at this level of theory, it will have to be equilibrated again at the QM/MM level of theory (see **4) Monitorisation using QM/MM methods** ) before starting our QM/MM production runs.
+It is worth mentioning that the equilibrated system using MM forcefield would be equilibrated only at this level of theory, it will have to be equilibrated again at the QM/MM level of theory (see **4) Monitorisation using QM/MM methods** ) before starting the QM/MM production runs.
 
 
 **3) Adding missing parameters to the MM forcefield**
