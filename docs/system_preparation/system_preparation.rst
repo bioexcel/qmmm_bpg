@@ -92,7 +92,7 @@ Preparing topology and coordinate files for CP2K
 CP2K allows several formats for topology files (you can find the complete list here: `&TOPOLOGY 
 <https://manual.cp2k.org/trunk/CP2K_INPUT/FORCE_EVAL/SUBSYS/TOPOLOGY.html>`_ under the **&CONN_FILE_FORMAT** and the **&COORD_FILE_FORMAT** subsections). For biomolecular modelling purposes, the most convenient formats are AMBER formats (AMBER7 topology files, AMBER7 CRD files) and CHARMM formats (PSF, PDB). 
 
-Since both AMBER and CHARMM software packages have excellent training material, here we are going to give a quick overview of the system preparation process and provide a list of useful tutorials for each software packages. We will highlight how to adapt those protocols to the specific requirements of CP2K.
+Since both AMBER and CHARMM software packages have excellent training material, here we are going to give a quick overview of the system preparation process and provide a list of useful tutorials for each software package. We will highlight how to adapt those protocols to the specific requirements of CP2K.
 
 **1) System building**
 
@@ -107,11 +107,11 @@ In order to prepare a suitable model system, you should include:
 
 **2) Minimisation, thermalisation and equilibration using MM forcefields**
 
-After you have built your topology and coordinate files, you must minimise these coordinates using the forcefield parameters in your topology file. Energy minimisation will find an energy minima in the potential energy surface of your system and fix any possible bad contacts in your initial structure. If possible, it is important that you use more that one minimisation algorithm ( steepest descent and conjugate gradient ) in order to avoid getting stuck in a local minima. 
+After you have built your topology and coordinate files, you must minimise these coordinates using the forcefield parameters in your topology file. Energy minimisation will find an energy minima in the potential energy surface of your system and fix any possible bad contacts in your initial structure. If possible, it is important that you use minimise using first a the steepest descent algorithm to avoid getting stuck in a local minima and subsequently refine the structure by minimising with the conjugate gradient algorithm.  
 
-Once the system is minimised, it has to be subsequently heated (from 0 K to your target conditions i.e. 300 K ) and equilibrated. Since a sudden increase in the kinetic energy of your system may lead to system instabilities, a gradual and slow heating process is recommended were possible. 
+Once the system is minimised, it has to be subsequently heated (from 0 K to your target conditions i.e. 300 K ) and equilibrated. Since a sudden increase in the kinetic energy of your system may lead to system instabilities, a gradual and slow heating process is recommended where possible. 
 
-Afterwards the pressure and volume of the system must be equilibrated. However, the nature of your simulation (for instance globular and membrane proteins) might require a specific equilibration recipe. Therefore, we will point out to several tutorials that cover the specifics of each kind of simulation. 
+Afterwards the pressure and volume of the system must be equilibrated. However, the nature of your simulation (for instance globular and membrane proteins) might require a specific equilibration recipe. Therefore, we will point out at the end of this page to several tutorials that cover the specifics of each kind of simulation. 
 
 As a general rule, you should check that all the fixed quantities of the ensemble that you use (NVT, NPT, NVE ...) are stable before you start your production runs. It is also wise to assess the stability of your biomolecule during all the themalisation and equilibration process. 
 
@@ -126,7 +126,7 @@ However, these approximations cannot be done in quantum mechanics. In particular
 
 There are two ways to add the Lennard-Jones parameters to the forcefield:
 
-- to add the Lennard-Jones parameters in the CP2K input file within the &QMMM subsection of the &FORCE_EVAL section. You must specify the Lennard-Jones parameters for each interaction each kind of hydrogen atom using the following format:
+- to add the Lennard-Jones parameters in the CP2K input file within the &QMMM subsection of the &FORCE_EVAL section. You must specify the Lennard-Jones parameters for each kind of pairwise interaction involving an hydrogen atom using the following format:
 
 .. code-block:: none
 
