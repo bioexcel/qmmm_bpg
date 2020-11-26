@@ -80,6 +80,9 @@ There are several protocols to parameterise organic molecules for each forcefiel
 
 Additionally, it is worth mentioning the `Open Force Field Initiative <https://openforcefield.org>`_ which is actively working to develop new forcefields that escape from typical forcefield atomtypes and use chemical perception to parameterise organic molecules. 
 
+The parameters for the small molecules obtained with the aforementioned methods are probably not as accurate as the rest of the MM forcefield used in the setup. There is a lot of effort in the parameterisation and validation of forcefields for proteins, nucleic acids and solvent molecules. However, if you plan to include that small molecule in the QM region in the final QM/MM Simulations, it will probably be enough to successfully equilibrate the system at a MM level. In the QM/MM simulations, these parameters will be no longer used as the molecule will be described using a more accurate QM level of theory. 
+
+If that is not your case and your small molecule will be included in the MM region, a more extensive validation of the MM parameters is required. Usually running a short molecular dynamics simulation of the solvated ligand can expose problems in the parameterisation process.     
 
 
 ------------------------------------------------
