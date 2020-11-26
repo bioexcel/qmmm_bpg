@@ -106,11 +106,13 @@ In order to prepare a suitable model system, you should include:
 
 After you have built your topology and coordinate files, you must minimise these coordinates using the forcefield parameters in your topology file. Energy minimisation will find an energy minima in the potential energy surface of your system and fix any possible bad contacts in your initial structure. If possible, it is important that you use more that one minimisation algorithm ( steepest descent and conjugate gradient ) in order to avoid getting stuck in a local minima. 
 
-Once the system is minimised, it has to be subsequently heated (from 0K to your target conditions i.e. 300K ) and equilibrated. Since a sudden increase in the kinetic energy of your system may lead to system instabilities, a gradual and slow heating process is recommended were possible. 
+Once the system is minimised, it has to be subsequently heated (from 0 K to your target conditions i.e. 300 K ) and equilibrated. Since a sudden increase in the kinetic energy of your system may lead to system instabilities, a gradual and slow heating process is recommended were possible. 
 
-Afterwards the pressure and volume of the system must be equilibrated. However, the nature of your simulation (for instance globular and membrane proteins), might require a specific equilibration recipe. Therefore, we will point out to several tutorials that cover the specifics of each kind of simulation. 
+Afterwards the pressure and volume of the system must be equilibrated. However, the nature of your simulation (for instance globular and membrane proteins) might require a specific equilibration recipe. Therefore, we will point out to several tutorials that cover the specifics of each kind of simulation. 
 
-As a general rule, you should check that all the fixed quantities of the ensemble that you use (NVT, NPT, NVE ...) are stable before you start your production runs. It is also wise to assess the stability of your biomolecule during all the themalisation and equilibration process.  
+As a general rule, you should check that all the fixed quantities of the ensemble that you use (NVT, NPT, NVE ...) are stable before you start your production runs. It is also wise to assess the stability of your biomolecule during all the themalisation and equilibration process. 
+
+It is worth mentioning that the equilibrated system using MM forcefield would be equilibrated only at this level of theory, it will have to be equilibrated again at the QM/MM level of theory (see **4) Monitorisation using QM/MM methods** ) before starting our QM/MM production runs.
 
 
 **3) Adding missing parameters to the MM forcefield**
