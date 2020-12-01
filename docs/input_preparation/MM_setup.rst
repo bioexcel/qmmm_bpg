@@ -52,9 +52,10 @@ method used in CP2K MM calculations.
 
 
 
-The MM and SUBSYS sections of FORCE_EVAL are required for this calculation. The MM section will contain 
-all the parameters for MM such as the forcefield, and the poisson and spline information.
-The subsys section contains the systems topology information
+The MM and SUBSYS sections of FORCE_EVAL are required for this calculation. The MM section contains 
+all the parameters related to the atomic interations such as the forcefield, and Poisson  solver and splines
+used in the non-bonded interations.
+The SUBSYS section contains the systems topology information
 such as the atomic coordinates, the cell size and the connectivity.
 
 .. _ref_ffield:
@@ -142,19 +143,22 @@ in the potential definition and is global for all potentials.
 EWALD_TYPE
 ----------
 
-EWALD is the standard non-fft based ewald
-NONE standard real-space coulomb potential is computed together with the non-bonded contributions
-PME is the particle mesh using fft interpolation
-SPME is the smooth particle mesh using beta-Euler splines (recommended)
+This parameter specifies the type of non-bonded long-range interaction method should be used in the calculation.
+The following options are available.
+
+NONE - standard real-space coulomb potential is computed together with the non-bonded contributions
+EWALD - standard non-fft based ewald
+PME - particle mesh using fft interpolation
+SPME - smooth particle mesh using beta-Euler splines (recommended)
 
 .. _ref_gmax:
 
 GMAX
 ----
 
-Number of grid points (SPME and EWALD). Supply a single variable N for all three dimensions or Nx, Ny, Nz 
-for individiual dimensions. One point per Angstrom is common, however this may cause the calculation to be
-slow for larger cells.
+Number of grid points (SPME and EWALD). Supply a single value N for all three dimensions or Nx, Ny, Nz 
+for individiual dimensions. One grid point per Angstrom is a typical chocie, however such a value may 
+cause the calculation to become too slow for large cells.
 
 ---------------
 Troubleshooting
@@ -170,7 +174,8 @@ This is usually means there is a problem with the MM forcefield or the geometry 
 KIND not found
 ---------------
 
-You may get an error message from CP2K saying "Unknown element for KIND". This is becasue CP2K only expects
-proper element symbols in the coordinate and force field files. The work around for this is
-to let CP2K know what element the symbol should correspond to. This is done by adding it as its own KIND section
-in the SUBSYS section, or by specifying elements in the PDB coordinates file.
+You may get an error message from CP2K saying "Unknown element for KIND". This happens when a symbol
+that does not match a proper element is found in the coordinate and force field files. The workaround
+for this is to let CP2K know what element the offended symbol should correspond to. This is done by
+adding in the SUBSYS section a new KIND section for the novel symbol where to specify the element
+via the keyword ELEMENT. Alternatively, one can specify the element symbol in the PDB coordinate file.
