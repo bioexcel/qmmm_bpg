@@ -19,7 +19,7 @@ The first step is to prepare your system - i.e. to generate the desired starting
 system and forcefield files. The starting point for this is usually a pdb file 
 which may have been downloaded from the PDB data bank. Usually these structures are not
 ready to use and will require fixing to obtain the desired protonation state of the protein.
-Details of how to this are described in the system prepartion guide here: 
+Details of how to do this are described in the system prepartion guide here: 
 :doc:`../system_preparation/system_preparation`
 
 
@@ -29,16 +29,17 @@ forcefields can be used. The relevant tools and their tutorials can be found bel
 
 - Ambertools - https://ambermd.org/tutorials/ForceField.php
 - Charmm - https://www.charmm.org/charmm/documentation/tutorials/
-- Gromos -
+- Gromos - http://www.gromos.net
 
 
 ----------------------------------------------
 Minimisation, Equilibration and Thermalisation
 ----------------------------------------------
 
-After you have built your topology and coordinate files you must minimise your system. 
+After you have built your topology and coordinate files you must first minimise your system at the MM level before running
+and QM/MM simulations. 
 This will find the energy minima for your system and fix any possible bad contacts in your initial structure.
-Once the system is minimised, it has to be subsequently heated (from 0K to your target conditions i.e. 300K ) and equilibrated. 
+Once the system is minimised, it has to be subsequently heated (from 0 K to your target conditions i.e. 300 K ) and equilibrated. 
 This gradual and slow heating process prevents instabilities arising due to the
 sudden increase in the kinetic energy.
 
@@ -71,7 +72,7 @@ QM/MM parameters. The MM calculation should be fast to run and if the calculatio
 error and the energy is sensible then it is a good indicator that the system has been
 prepared correctly for CP2K. 
 
-Details of how to this are given here: :doc:`../input_preparation/MM_setup`
+Details of how to do this are given here: :doc:`../input_preparation/MM_setup`
 
 If this is your first time using CP2K then it is recommended to read the Running CP2K section of guide (:doc:`../running_cp2k/running_cp2k`),
 as well as the CP2K Output Guide (:doc:`../running_cp2k/cp2k_output`). If you encouter any errors while runnning
@@ -131,16 +132,16 @@ The structure of your input will look something like this:
 
 Information on setting up the parameters for the QMMM section can be found here: :doc:`../input_preparation/QMMM_parameterisation`
 
-Settings for this will depend highly on your choice of QM region.
+Settings for this will depend highly on your choice of the QM region.
 
 Information on setting the QM treatment can be found here: :doc:`../input_preparation/QM_treatment`
 
-It is good practice to start with simple method for the XC functional and then check that the QM set up 
-has been done correctly before increasing the complexity and deciding on most accurate or appropirate
+It is good practice to start with a simple method for the XC functional and then check that the QM set up 
+has been done correctly before increasing the complexity and deciding on a more accurate or appropirate
 method for your system.
 
-You should first calculate just the ENERGY of the system and check that this is sensible and that the SCF
-converges. This will ensure that there are not any errors in your DFT setup or QM atom selection.
+You should first calculate just the ENERGY of the system and check that the SCF
+converges and that the energy is sensible. This will ensure that there are no errors in your DFT setup or QM atom selection.
 
 Before running a production QM/MM calculation the value of the CUTOFF should be converged
 for the final choice of BASIS_SET, XC_FUNCTIONAL and any other parameters. How to do this
@@ -157,12 +158,12 @@ is documented here: https://www.cp2k.org/howto:converging_cutoff
 Run MD with CP2K
 -----------------
 
-Once you  have setup a simple single energy QM/MM calculation CP2K it is fairly 
+Once you  have setup a simple single energy QM/MM CP2K calculation it is fairly 
 straightfoward to adjust the input file to run a production molecular dynamics simulation.
 
 The first change is to set the ``RUN_TYPE`` to MD. You will also need to add an MD section 
 in the MOTION section which will list the parameters to do with the dynamics of the 
-simulation. For a simple NVE MD ensemble this would look like this:
+simulation. For a simple NVE ensemble MD this would look like this:
 
 .. code-block:: none
 
@@ -186,11 +187,12 @@ Ensembles
 ------------
 
 
-CP2K offers a range of MD ensembles which are listed here: https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/MD.html#ENSEMBLE
+CP2K offers a range of MD integrators for sampling different 
+ensembles which are listed here: https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/MD.html#ENSEMBLE
 
 Common ones are the NVT and NPT_I (iosbaric) ensemble. For an NVT ensemble 
 you will need to add information about the thermostat in the &THERMOSTAT section
-within the MD section, and the NPT_I ensemble will need both and THERMOSTAT and 
+within the MD section, while the NPT_I ensemble will need both and THERMOSTAT and 
 BARASTAT section as shown below.
 
 .. code-block:: none
