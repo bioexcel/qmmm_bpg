@@ -8,12 +8,12 @@ Selecting QM atoms
 Initial selection
 -----------------
 
-The starting point for deciding which atoms should be treated with QM is the ligand, or
-region of interest in you system (such as an metal ion). The size of the ligend will usually 
-dictate whether you can treat the whole ligend, a subsection of the ligend, 
-or the ligend plus some neighbouring residues with QM. As previously mentioned, ideally the 
+The starting point for deciding which atoms should be treated at a quantum level is the ligand or the
+region of interest in your system (such as a metal ion). The size of the ligand will usually 
+dictate whether you can treat the whole ligend, a subsection of the ligand, 
+or the ligand plus some neighbouring residues with QM. As previously mentioned, ideally the 
 number of QM atoms should not be too large (over 200 QM atoms) as this will become too 
-computationally intensive. However we want to be able to include all regions 
+computationally demanding. However we want to be able to include all the regions 
 involved in the chemical reaction as much as possible.
 
 A good approach for selecting the QM region is therefore to select the entire ligand plus
@@ -21,13 +21,13 @@ some residues nearby, say within x Angstrom of the ligand. The size you consider
 around the ligand will depend on the number of atoms in your ligand. If you have a ligand of
 50 or more atoms then you might only include residues within 2-3 Angstroms, in order to limit 
 the overall size of the QM region. For a smaller ligand you may be able to include more atoms around it
-(up to approximately 6 Angstoms).
+(up to approximately 6 Angstroms).
 
 
 Creating the QM atoms list for CP2K
 -----------------------------------
 
-Creating a list of  QM atoms that can be read by CP2K can be done using vmd. (LINK)
+Creating a list of  QM atoms that can be read by CP2K can be done using vmd. (https://www.ks.uiuc.edu/Research/vmd/)
 
 1) Open the entire system pdb file with ``vmd``.
 
@@ -38,16 +38,16 @@ Creating a list of  QM atoms that can be read by CP2K can be done using vmd. (LI
 2) Go to File >> Save coordinates
 
 3) Use Selected Atoms to save a pdb containing the desired QM atoms. 
-To select atoms in entire residues within x Angstrom around a ligand with residue
-index i (excluding water) the following command is used:
+To select all the atom indexes of the residues with some atoms within x Angstrom from the ligand with residue
+index i (excluding the water molecules) the following command is used:
 
 .. code-block:: none
 
  ((same resid as (protein within x of resid i)) or resid i) and not water
 
 4) Use Save to save a list of atoms (and their residues) in a pdb file. Note that
-vmd does not preserve the atomic index from the original pdb file (wihch is the required
-ID needed for setting up the QM atoms). To get the correct the atoms can be pulled directly 
+vmd does not preserve the atomic index from the original pdb file (which is the required
+ID needed for setting up the QM atoms). The correct atom indexes can be pulled directly 
 from the pdb file using the residue ID.
 
 5) Use ``awk`` to get the atoms in the selected residues. e.g.
@@ -70,9 +70,12 @@ atoms to the format required in the CP2K input (requires python).
 Including waters
 ----------------
 
-Generally including water atoms in the QM region is more complicated as they move around 
-more readily than proteins and may not stay within the QM cell (see section on this).
-However in some circumstances water atoms may be important to the reaction chemistry.
+Generally, including water molecules in the QM region and treat them at quantum level
+may be complicated. In fact, the water molecules usually move around more
+readily than larger protein molecules and they may not remain far enough from the
+boundaries of the QM box during the simulation, thus producing artefacts.
+However in some circumstances water molecules may be important for the reaction chemistry
+and/or can remain localised during the entire simulation (e.g. when coordinating a metal ion).
 In this case negihbouring water molecules can be included in the selection using:
 
 .. code-block:: none
@@ -84,16 +87,17 @@ In this case negihbouring water molecules can be included in the selection using
 Dealing with breaking bonds
 ---------------------------
 
-Across the boundary between QM and MM atoms the broken bonds have to be deal with 
-correctly. In CP2K this involves adding link atoms where the dangling QM bond is capped. 
+When the boundary between the QM and MM region breaks a covalent bond, 
+this bond has to be treated with care. CP2K offers some alternatives.
+One of the most simple is adding a link atom to saturate the valence of the QM dangling atom.  
 More about this can be found in the QMMM input part of the guide.
-The boundary between the QM and MM part should not be arbitrarily chosen, as to avoid 
-charge transfer between the QM and MM parts. Based on this breaking a C-C bond 
-is usually a good choice.
+To avoid spurious polarisations at the boundary between the QM and MM part,
+the bonds to be cut should not be chosen arbitrarily. When possible, one should 
+break only C-C bonds, due to their symmetry and the total absence of electronegativity.
  
-The bonds can be identied through visualisation, e.g. with vmd or other pdb viewer, or by observation
+The bonds can be identified via visual inspection, e.g. with vmd or another pdb viewer, or by observation
 of the pdb file. You should first find the residues within the QM region which are bonded
-to residues which are treated without QM. Within these residues you can then find 
+to residues treated without QM. Within these residues you can then find 
 the C-C bond to break, and record the atomic indexes of the QM and MM C atoms.
 These will be needed to correctly treat a QM-MM bond in CP2K (see section).
 
