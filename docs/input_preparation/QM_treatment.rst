@@ -2,7 +2,7 @@
  QM treatment
 ==============================
 
-The section of the guide will focus on setting up the QM parameters in a QM/MM simualtion.
+This section of the guide will focus on setting up the QM parameters in a QM/MM simulation.
 
 
 It will guide on how to use various options within CP2K, and give some general advice but
@@ -14,17 +14,18 @@ Mechanics of a DFT calculation in CP2K
 --------------------------------------
 
 CP2K uses the Quickstep (QS) method when performing a QM calculation.
-Quickstep is the particular electronic stucture method within CP2K which handles
-the calculation of forces and energies on the QM atoms. This is done using 
-self-consistent Kohn-Sham Density Functional Theory (DFT). Within Quickstep
-there is the option to use Semi-empirical (SE), Tight-Binding DFT (DFTB),
-and Gaussian Planewaves (GPW) methods, among many others. The GPW method is a 
-key part of CP2K, this involves using a mixed basis of atom centred Gaussian
+Quickstep is the part of the code in CP2K devoted to solve the electronic
+structure problem in order to get energies in the QM region and forces
+on the QM atoms. The default electronic structure method is the
+self-consistent Kohn-Sham Density Functional Theory (DFT). Alternatively, within Quickstep
+there is also the option to use Semi-empirical (SE), Tight-Binding DFT (DFTB),
+and Gaussian Plane Waves (GPW) methods, among many others. The GPW method is a 
+key part of CP2K, which involves using a mixed basis of atom centred Gaussian
 orbitals and plane waves (regular grids) to improve on the performance compared
-to other QM methods. You can find information about GPW here:
+to other QM methods. You can find information about GPW here: https://www.cp2k.org/quickstep
 
-Basis functions descibted in the Gaussian type orbitals for each element are supplied
-through the basis set file. There are multiple choices for the Basis Set, Section x 
+Basis functions described in the Gaussian type orbitals for each element are supplied
+through the basis set file. For the basis set, multiple choices are available. Section x 
 will give an overview of these choices. Likewise the pseudopotentials for using with
 plane waves must also be supplied.
 
@@ -42,13 +43,15 @@ This involves performing a number of SCF steps
 where in each step the potential is calculated from the electronic density and 
 then this is used to construct a new electron density by solving the KS equations 
 (this density is then used in the next SCF step). The SCF converges when the
-required tolarence for self-consistency is met. This will correspond to ground
-state energy minimum. As this calculation is self-consistent it will depend
-highly on the starting electronic density, a good starting density will allow
-the calculation to converge faster. If the SCF has not converged after it has
+required tolarence for self-consistency is met. The electronic state found at the
+end of a converged SCF calculation represents the best prediction of the employed
+method for the electronic ground state energy minimum.  As this calculation is self-consistent,
+its convergence properties will highly depend on the starting electronic density. Therefore,
+a good starting electronic density will allow the calculation to converge faster.
+If the SCF has not converged after it has
 exceeded the maximum number of steps (set by MAX_SCF) the SCF calculation will 
 terminate and print the warning message: "SCF has not converged". Information on 
-how to overcome the SCF not converging can be found in section x.
+how to overcome the issue of a non-converging SCF calculation can be found in section x.
 
 The SCF calculation involves inner and outer loops. If the inner SCF loop does not
 converge in the desired number of steps (set in MAX_SCF) then the inner loop will exit in order to
@@ -72,7 +75,7 @@ A basic DFT input section for a calculation using the Gaussian Plane Wave (GPW) 
 This is designed to act as a rough guide for how to build your DFT section, and contains some example
 parameter settings with descriptions in the comments. However it should not be taken as an example set
 up for your system, and should certainly not be used without first considering the choices for the
-important paramters outlined below.
+important parameters outlined below.
 
 .. Examples for using a Semi-emperical method (SE) and the Tight Binding method (TDFT) are provided here:
 
@@ -134,16 +137,17 @@ sets and potentials to use. This is done in the SUBSYS section, under KIND.
 Basis sets
 ------------
 
-The basis set can be changed by editing the bs_filename, and the bs_identifier 
-under each element within the SUBSYS&KIND section. The bs_identifier should correspond
+The basis set for each element can be changed by editing the bs_filename within the DFT section, and the bs_identifier 
+ in the KIND section of that element within the SUBSYS section. The bs_identifier should correspond
 to one of the basis sets for the given element within the basis set file.
 The q number proceeding the basis set in the identifer gives the number of 
 valence electrons. It depends on the element, for example H:1, C:4, O:6, N:5.
 
-Basis set files are provided within the /data directory in CP2K (link).
-If your install of CP2K  has been built correctly then
+Basis set files are provided within the /data directory of the CP2K source code
+(https://github.com/cp2k/cp2k/tree/master/data).
+If your installation of CP2K  has been built correctly then
 the files within this directory should be automatically included, so there is no
-need to provide these in you working directory. 
+need to copy these file to your working directory. 
 
 The GTH basis sets are usually recommended in CP2K, there also exists a molecular optimisted (MOLOPT) GTH
 basis set. 
@@ -165,13 +169,13 @@ sets and their location within the basis set files are shown in the table below.
 +--------------------------------------------------+--------------------------------+--------------------------------------+-------------------------------------------------+
 
 
-The choice of basis will depend on the accuracy required, and whether it is available for the elements in your system. 
-More accurate basis sets will increase the run time of the simulation, and may not be available for some elements e.g. metal ions.
+The choice of basis depends on the accuracy required, and whether it is available for the elements in your system. 
+More accurate basis sets will increase the run time of the simulation, but may not be available for some elements e.g. metal ions.
 
-The error in due to the basis set is smaller than the error due to the XC functional so chosing a large basis may not be sensible 
-unless you require a very accurate calcaultion and are using an accurate XC functional.
+The error due to the basis set in general is smaller than the error associated to the XC functional. Therefore, chosing a large basis set may not be sensible 
+unless you require a very accurate calculation and you are employing an accurate XC functional.
 
-Using the DZVP basis set is usually a good choice. If you would like to explore more accurate options
+Using the DZVP basis set is usually a good compromise. If you would like to explore more accurate options
 then you may consider checking the convergence of your basis set by plotting the number of independent orbital functions vs. the energy.
 
 
@@ -191,12 +195,13 @@ There are many choices of XC functional,
 with different levels of accuracy, however increased accuracy usually requires longer run time,
 so this is a trade-off that you will have to consider when picking your functional. 
 
-The XC functional is set up is described in the XC section of the CP2K input. You will
-also want to consider your choice of pseudopotential in combination with your XC functional,
-some pseudopotentials have been optimised for given XC functionals, these include the functional type
-in their name e.g. GTH_PBE.
+The XC functional is setup is described in the XC section of the CP2K input. The choice of
+the functionals could also depend on the availability of the corresponding pseudopotentials.
+In fact, each pseudopotential is built using a specific XC functional and it should be used
+only in combination with that XC functional. Usually, the name of the pseudopotential file 
+reports explicitly the XC functional used to build it.
 
-The table below lists the XC functional options available in CP2K from least to
+The table below lists the XC functional types available in CP2K from least to
 most accurate, and gives a overview of each option.
 
 +----------------+-------------------------------------+-----------------+---------------------------------------------------------------------------------------------------+
@@ -219,12 +224,14 @@ most accurate, and gives a overview of each option.
 LDA
 ---
 
-The local density approximation is one the simplist approximations for the XC functional.
+The local density approximation is one of the simplest approximations for the XC functional.
 It assumes that the functional depends only on the density at one point, i.e the density
-is assumed to be smooth in space. This means they are not accurate for some properties.
+is assumed to be smooth in space.  Such an approximation is rather crude and often provide
+inaccurate results for some properties.
 
-An example for using the PADE LDA method is shown below. The functional needs to be specified
-in the XC_FUNCTIONAL section, and the complementary GTH-PADE pseudopotentials should be used.
+ An example of how to setup the PADE LDA method in the CP2K input file is shown below. 
+ The functional needs to be specified in the XC_FUNCTIONAL section, 
+ and the corresponding GTH-PADE pseudopotentials should be used.
 
 .. code-block:: none
 
@@ -251,16 +258,18 @@ and using the complementary pseudopotentials (which in this case would be GTH_PB
       &END XC_FUNCTIONAL
     &END XC
 
-Using a GGA functional is usually a good starting point for a running a QM calculation. It is not
+Using a GGA functional is usually a good starting point for running a QM calculation. It is not
 computationally expensive and it is simple to set up in CP2K. 
 
 **BLYP or PBE?**
 
 BLYP and PBE are the most commonly used GGA functionals. The main difference between them is
-are PBE is non empirical i.e. the parameters based only of QM rules, and BLYP is part-empirical 
-with some parameters chosen based on fittings. As a result PBE gives rather accurate results 
+that PBE is non-empirical i.e. the parameters are based on theoretical consideration and calculations,
+while BLYP is partially-empirical because some parameters were obtained via emperical fittings.
+As a result PBE gives rather accurate results 
 for a wide range of systems, whereas BLYP can be more accurate than PBE for some particular systems.
-This also follows for the hybrid methods PBE0 and B3LYP which use functionals from their GGA counterparts.
+This consideration also holds for the hybrid methods PBE0 and B3LYP which are derived from their GGA
+counterparts PBE and BLYP, respectively (see below).
 If BLYP/B3LYP are not widely used in your research area then it may be prudent to use PBE or PBE0 instead.
 
 
@@ -269,7 +278,7 @@ metaGGA
 -------
 
 The metaGGA builds upon the GGA methods by assuming the functional also depends on
-then non-interacting kinetic energy density, in addition to the electron density and it 
+then non-interacting kinetic energy density, in addition to the electron density and its 
 gradient. To use metaGGA methods in CP2K the libxc library is used, and therefore your
 version of CP2K needs to be built with this library enabled. An example of the XC
 section for using the metaGGA is shown below (here the oTPSS-D functional has
@@ -294,9 +303,9 @@ functional availablity is dependent on the version of libxc used).
 Hybrid methods
 --------------
 
-Hybrid methods calculate a portion fo the the exchange functional using exact Hartree Fock theory.
+Hybrid methods calculate a portion of the the exchange functional using exact Hartree Fock theory.
 The rest of the exchange and correlation functions is calcaulated with other methods, typically GGA or LDA.
-Within the XC section of the CP2K input the HF section is used for the Hartree Fock exchange set up.
+Within the XC section of the CP2K input the HF section is used for the Hartree Fock exchange setup.
 Two commonly used hybrid methods dicussed here are B3LYP and PBE0.
 
 **PBE0**
@@ -376,22 +385,23 @@ configured as follows:
    &END XC
  
 ---------------------
-Puesdopotentials
+Pseudopotentials
 ---------------------
 
-The choice of Potential should be matched to the choice of XC functional so that
-it is optimised for the exchange correlation functional. For example the GTH-PBE
-potential should be used with the PBE XC functional.
+As mentioned before, each pseudopotential is built using a specific XC functional
+and it should be used only in combination with that XC functional. For example the GTH-PBE
+pseudopotential should be used with the PBE XC functional.
 
 ----------------------
 Dispersion corrections
 ----------------------
 
-Dispersion corrections can be used in combination with XC functionals to incorporate
-Van der Waals forces, which can play an important role in interactions in protein
+DFT is known to underestimate van der Waals forces between atoms. Empirical dispersion
+corrections can be used in combination with XC functionals to improve the description of
+van der Waals forces, which can play an important role in protein
 systems.
 
-In CP2K there are three dispersion options available, DFT-D2, DFT-D3 and DFT-D3(BJ).
+In CP2K three different dispersion options are available, DFT-D2, DFT-D3 and DFT-D3(BJ).
 All three of these methods involve adding
 an extra dispersion term to the energy density functional, e.g.
 
@@ -399,13 +409,11 @@ an extra dispersion term to the energy density functional, e.g.
 
  E_{tot} = E_{DFT} + E_{disp}
 
-These methods are based on the same formalism for the dispersion energy which is
-written as a sum of the long range interaction between pairs of atoms, that decays as -1/r^6 with
-separation distance r. The DFT-D3 method offers improvements on the DFT-D2 method,
+The DFT-D3 method offers improvements on the DFT-D2 method,
 and the DFT-D3(BJ) method adds Becke-Jonson damping to the dispersion energy.
 
 To use a dispersion correction the 
-vdW_POTENTIAL section is added inside the XC_FUNCTIONAL section. The example usage of
+vdW_POTENTIAL section is added inside the XC_FUNCTIONAL section. An example of
 the vdW_POTENTIAL section is shown below:
 
 .. code-block:: none
@@ -435,7 +443,7 @@ This is used to set the charge of the QM part of the system.
 MULTIPLICITY
 ------------
 
-The multiplicity should be set to two times the total spin plus one. 
+The multiplicity should be set to twice the total spin plus one. 
 If set to 0 (the default) this will be 1 for an even number of electrons and 2 for an odd 
 number of electrons. 
 
@@ -443,22 +451,23 @@ CUTOFF
 ------
 
 The CUTOFF parameter sets the planewave cutoff (given in units of Ry). It is an important
-parameter in a QM calculation, and choosing the wrong cutoff can result in large inaccuracies 
+parameter in a QM calculation, and choosing a too small cutoff can result in large inaccuracies 
 in the energy. A larger cutoff is usually more accurate as the planewave grid becomes finer,
-however there becomes a point at which going to a larger and larger 
-cutoff no longer makes any difference to the energy, and becomes a waste computational effort.
+however at a certain point increasing the 
+cutoff would no longer make any difference to the energy, but would increase the computational cost.
 
 Before doing a production run it is important to converge the cutoff. This process is
 described in detail here: https://www.cp2k.org/howto:converging_cutoff .
 It essentially involves tracking the energy as the cutoff is varied
-and then selecting a large enough cutoff such that the energy has converged. The correct choice
-of cutoff is dependent on the basis set, pseudopotentals, XC functional and the system itself
-so this convergence check must be done whenever these options are changed.
+and then selecting a cutoff large enough such that the energy reaches convergence. The correct value
+of the cutoff depends on the basis set, the pseudopotentals, the XC functional and the system itself.
+Therefore, the above convergence test must be performed whenever one of these elements is changed.
 
 REL_CUTOFF
 ----------
 
-The REL_CUTOFF is similar to the CUTOFF and sets the cutoff for the gaussian grid. 
+The REL_CUTOFF is similar to the CUTOFF and sets the planewave cutoff of a reference grid
+covered by a Gaussian function with unit standard deviation. This parameter is important to map Gaussian functions on a grid.
 Converging this parameter is also covered in this guide: https://www.cp2k.org/howto:converging_cutoff.
 
 COMMENSURATE
@@ -470,23 +479,25 @@ calculation this must be set to true.
 EPS_DEFAULT
 -----------
 
-This is an easy way to set all EPS_xxx to values, which will lead to an energy correct to within this value. 
-The default value for this is 1.0E-10. Decreasing this increases the accuracy slightly, but will increase the run time.
+This parameter provides an easy way to set all the EPS_xxx parameters to
+values such that the energy will be correct up to this value. 
+The default value for this is 1.0E-10. Decreasing this value will slightly increase the 
+accuracy of the energy, but will also increase significantly the run time.
 
 EPS_SCF
 -------
 
 This sets the target accuracy for the SCF convergence. The SCF will be converged when the energy change between two SCF
 steps is less than this value. The default for this value is 1.0E-5. It is possible to set different values for the inner
-and outer SCF loops, however the EPS_SCF of the outer SCF must be smaller than or equal to EPS_SCF of the inner loop. As
-the EPS_SCF of the inner loop determines the value at can be reached in the outer loop.
+and outer SCF loops, however the EPS_SCF of the outer SCF must be smaller than or equal to EPS_SCF of the inner loop. In fact
+the EPS_SCF of the inner loop determines the value that can be reached in the outer loop.
 
 MAX_SCF
 -------
 
-In the main SCF section of the input this sets the maximum number of SCF iterations to be performed in the inner SCF loop.
-In the OUTER_SCF section this sets the maximum number of outer loops. The total number of SCF steps will be  the product
-of the inner SCF MAX_SCF and the outer SCF MAX_SCF.
+In the main SCF section of the input this keyword sets the maximum number of SCF iterations to be performed in the inner SCF loop.
+In the OUTER_SCF section this keyword sets the maximum number of outer loops. The total number of SCF steps will be at maximum the product
+of the MAX_SCF for the inner SCF loop and MAX_SCF for the outer SCF loop.
 
 -----------------
 Troubleshooting
@@ -495,25 +506,28 @@ Troubleshooting
 Simulation fails or gives strange results
 -----------------------------------------
 
-Providing you have used a sensible QM set up with a large enough cutoff then the error is usually to do with the set up of your 
-system. If running a periodic calculation check that the CELL boundaries are large enough to separate the periodic images.
+Providing that you have used a sensible QM setup with a sufficiently large cutoff then
+the error is usually related to the setup of your system. When running a calculation with periodic boundary 
+conditions check that the CELL boundaries are large enough to keep the periodic
+images sufficiently separated. A convergence test for the CELL size can be crucial in this case.
 Also check the initial atomic coordinates are sensible by visualising your system. 
 
-If this looks correct then consider simpifying 
-you input, starting with the most simple settings, and choices for basis sets and functionals. If the QM/MM simulation fails then
+If the initial coordinates look reasonable then consider simplifying 
+your input, starting with the most simple settings, including basis sets and functionals. If the QM/MM simulation fails then
 may want to try running a simple MM calcaultion first (RUN_TYPE FIST) to check the geometries, and then slowly increase the complexity
-adding in QM and QMMM sections.
+adding in QM and QM/MM sections.
 
 SCF does not converge
 ---------------------
 
-If the energies are rapidly varying then it is likely that the SCF is failing to converge. This will be reported in the cp2k output
-with the message "WARNING SCF has not converged. You can quickly double whether the SCF has failed top converge by using grep to 
-search your output for this message:
+If during the SCF calculation the energies varies rapidly then it is likely that
+the SCF will not converge. This will be reported in the CP2K output with the message 
+"WARNING SCF has not converged. You can quickly verify if the SCF has failed to converge by 
+looking for this text in your output file:
 
 ``grep 'WARNING SCF' output-file.log``
 
-If this occurs then the easiest variables to change to try and fix this are the MAX_SCF and EPS_SCF.
+If this occurs then the easiest parameters to change to try to tune in order to reach SCF convergence are the MAX_SCF and EPS_SCF.
 
 Some things to try are listed below:
 
