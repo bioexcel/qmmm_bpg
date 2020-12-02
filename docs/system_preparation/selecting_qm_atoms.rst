@@ -38,17 +38,17 @@ Creating a list of  QM atoms that can be read by CP2K can be done using vmd. (ht
 2) Go to File >> Save coordinates
 
 3) Use Selected Atoms to save a pdb containing the desired QM atoms. 
-To select all the atom indexes of the residues with some atoms within x Angstrom from the ligand with residue
-index i (excluding the water molecules) the following command is used:
+   To select all the atom indexes of the residues with some atoms within x Angstrom from the ligand with residue
+   index i (excluding the water molecules) the following command is used:
 
 .. code-block:: none
 
  ((same resid as (protein within x of resid i)) or resid i) and not water
 
 4) Use Save to save a list of atoms (and their residues) in a pdb file. Note that
-vmd does not preserve the atomic index from the original pdb file (which is the required
-ID needed for setting up the QM atoms). The correct atom indexes can be pulled directly 
-from the pdb file using the residue ID.
+   vmd does not preserve the atomic index from the original pdb file (which is the required
+   ID needed for setting up the QM atoms). The correct atom indexes can be pulled directly 
+   from the pdb file using the residue ID.
 
 5) Use ``awk`` to get the atoms in the selected residues. e.g.
 
@@ -61,7 +61,7 @@ from the pdb file using the residue ID.
  done
 
 6) Use the get_qm_kind.py script (path/to/script) to convert the pdb containing the QM 
-atoms to the format required in the CP2K input (requires python).
+   atoms to the format required in the CP2K input (requires python).
 
 .. code-block:: none
 
