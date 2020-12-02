@@ -7,9 +7,9 @@ Running QM/MM simulations with CP2K
 Running a CP2K job
 ---------------------------------
 
-A standard CP2K build creates multiple executables. It is advised to used the cp2k.psmp
-executable as this allows the use of hybrid MPI+OpenMP calculations, which can have some
-performance benefit over using MPI only on some machines.
+A standard CP2K build creates multiple executables. It is advised to use the cp2k.psmp
+executable as this enables the hybrid MPI+OpenMP parallelisation scheme, which can have some
+performance benefit over using only MPI parallelisation on some machines.
 
 CP2K should be run through a job submission script to run on the compute nodes.
 The following command will launch CP2K (MPI only), specifing the input and output files, and the
@@ -23,12 +23,12 @@ number of mpi processes.
 The joblauncher will depend on the job launcher on your system, common examples are
 mpiexec, srun and aprun. 
 
-To run with multiple threads (MPI+OpenMP) the number of threads should be set to greater
-than 1. Typical values where performance may be improved over pure MPI are 2, 4, 6, and 8
-threads, although this will depend on many things such as your machine, your calcultion type and
-your system of interest. The number of threads to be chosen so that it evenly divides the number
-of processes on a node, whilst ensuring that threads sharing memory are in the same NUMA region.
-The number of processes will need to be set so that the threads multiplied by the number of MPI
+To run with multiple threads (MPI+OpenMP) the number of threads should be set to a value greater
+than 1. Typical values where performance may be improved over pure a MPI job are 2, 4, 6, and 8
+threads, although this will depend on many things such as your machine architecture, the type of calculation and
+your system size. As a general rule the number of threads per MPI process has to be chosen so that it evenly divides the number
+of MPI processes on a node, whilst ensuring that threads sharing memory are in the same NUMA region.
+The total number of MPI processes will need to be set so that the number of threads per process multiplied by the number of MPI
 processes gives the total number of cores requested.
 
 
@@ -60,8 +60,10 @@ Run times on ARCHER
 -------------------
 
 The run times per MD step for each of the benchmarks is reported in the Table below. The simulations
-were run on ARCHER, on full 24 core nodes containing two 2.7 GHz, 12-core E5-2697 v2 (Ivy Bridge) series
-processors. The results shown each use a single thread (i.e they are non hybrid calculations).
+were run on the ARCHER supercomputer (https://www.archer.ac.uk), on full 24 core compute nodes 
+containing two 2.7 GHz, 12-core E5-2697 v2 (Ivy Bridge) series
+processors. Threading was not enabled in any of the benchmarks (i.e all the simulations were run in pure MPI configuration).
+
 
 +---------------+-----------------+-----------------+-----------------+-----------------+---------------------+
 | Cores         | MQAE            | ClC (QM 19)	    | CIC (QM 253)    | CBD_PHY         | GFP_QM              |
