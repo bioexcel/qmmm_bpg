@@ -146,10 +146,10 @@ EWALD_TYPE
 This parameter specifies the type of non-bonded long-range interaction method should be used in the calculation.
 The following options are available.
 
-NONE - standard real-space coulomb potential is computed together with the non-bonded contributions
-EWALD - standard non-fft based ewald
-PME - particle mesh using fft interpolation
-SPME - smooth particle mesh using beta-Euler splines (recommended)
+- **NONE** - standard real-space coulomb potential is computed together with the non-bonded contributions
+- **EWALD** - standard non-fft based ewald
+- **PME** - particle mesh using fft interpolation
+- **SPME** - smooth particle mesh using beta-Euler splines (recommended)
 
 .. _ref_gmax:
 
