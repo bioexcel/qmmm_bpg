@@ -67,8 +67,8 @@ Creating a list of  QM atoms that can be read by CP2K can be done using vmd. (ht
 
  python get_qm_kind.py QMatoms.pdb
 
-Including waters
-----------------
+Including water molecules
+-------------------------
 
 Generally, including water molecules in the QM region and treat them at quantum level
 may be complicated. In fact, the water molecules usually move around more
