@@ -9,19 +9,19 @@ General Output
 Standard output
 ---------------
 
-The start of the standard output contains information about the set up of the run. 
-This will  print the important input paramters and details of how CP2K was built and run
+The beginning of the standard output contains information about the setup of the run. 
+This will  print the important input parameters and details of how CP2K was built and run
 e.g. the number of processes and threads that were specifed when running. It can be
 used for future reference.
 
-After this it will then print details of the individual set up for the important
+After this part, the output will then print details of the individual setup for the important
 sections in the input file. These will appear under clear headings e.g. FIST for the MM section, 
-Quickstep for the DFT section, and QMMM. Input parameters are printed, along with some more information
+Quickstep for the DFT section, and QMMM. Input parameters are reported, along with some more information
 such as for example the number of basis functions.
 
-After this the output from the calculation is usually printed. This will start with the
-output from the self-consistent Kohn-Sham ground state calculation (SCF optimisation).
-This will look similar to the below.
+The report of the calculation then follows in the output file. It will start with the
+results from the self-consistent Kohn-Sham ground state calculation (SCF optimisation).
+This will look similar to the snippet below.
 
 
 .. code-block:: none
@@ -53,10 +53,10 @@ This will look similar to the below.
 
 
 The OT block prints information about the orbital transform solver. This again,
-reiterates the options set in the input file.
+reports the options set in the input file.
  
 The SCF steps are then printed as they are calculated, listing the Step number, Method,
-run Time, Convergence, Total Energy and the Change (in energy from the last step). 
+run Time, Convergence, Total Energy and the Change in energy from the last step. 
 The first step will usually take longer as there are set up overheads.
 
 In an ideal calculation the Total Energy should decrease with each step
@@ -70,13 +70,14 @@ exit and a message stating that convergence has been acheived is printed.
 
  *** SCF run converged in     3 steps ***
 
-Alternatively if the SCF does not converge SCF steps will continue until the MAX_SCF is 
-reached. The inner SCF loop will finish and then move on to the next outer SCF step, 
-recalcailting the preconditioner. If then the outer scf MAX_SCF steps are exceeded then
-and the SCF calculation has not converged a warning will be printed and the SCF will be abandoned.
+Otherwise, if the SCF does not converge, it continues until the number of steps equals the MAX_SCF in the
+input file. The inner SCF loop will finish and then move to the next outer SCF step, 
+recalculating the preconditioner. Finally, if the number of outer SCF steps equals to
+the corresponding MAX_SCF value in the input file, then the SCF calculation has not converged,
+a warning will be printed to the standard output and the SCF will be abandoned.
 Information on how to handle this is given in the troubleshooting chapter.
 
-Upon successful convergence energy (and force if specified) information is printed.
+Upon successful convergence, electronic densities and energies (and forces if specified) information is printed.
 
 
 .. code-block:: none
@@ -169,16 +170,21 @@ Output from an MD run
 
 The .ener file shows the important information about the system as the simulation 
 progresses. For each step the Temperature, Kinetic energy, Potential energy, CPU time
-and the Conserved Quantity are printed. The Conserved Quantity is the total energy of 
-the system and its constitutes will depend on the MD ensemble used.
+and the Conserved Quantity are printed. The Conserved Quantity can represent different
+quantities according to the statistical ensemble we are sampling on. For example, if we
+are running an NVE simulation the Conserved Quantity corresponds to the total energy of
+the system of interest, while if we run an NVT simulation then the Conserved Quantity
+is the total energy of a system that includes the system of interest and also the
+thermostat degrees of freedom.
+
 
 MD trajectory
 -------------
 
 This will look similar to the geometry trajectory from a geometry optimation and 
 will appear as a .xyz file as default. The coordinates at each MD step are printed in order
-in this file. You can control how often this file is printed using the following settings
-within the motion section:
+in this file. You can control how often this file is updated with new coordinates by using the
+following settings within the motion section:
 
 .. code-block:: none
 
@@ -195,12 +201,12 @@ within the motion section:
 .restart file
 -------------
 
-This lists the information at the end of an MD step which can be used to restart the
-MD simulation. This file is human readable and lists information about the system 
-set up along with the current positions and velocities of the atoms in the system.
+The .restart file is written at the end of an MD step and it contains the information
+to restart the MD simulation from that step. This file is human readable and reports information about the system 
+setup along with the current positions and velocities of the atoms in the system.
 
-To restart an MD the restart section can be added to the input file to instruct the code
-to use this file as the restart point:
+To restart an MD simulation the EXT_RESTART section has to be added to the input file to instruct the code
+to use the .restart file as the restart point:
 
 .. code-block:: none
 
@@ -208,7 +214,7 @@ to use this file as the restart point:
      EXTERNAL_FILE_NAME  project-1.restart
   &END EXT_RESTART
 
-You can also use this file as if it were an input file, and supply it straight to 
-the executable in the job submission script:
+You can also use the .restart file as if the input file for restarting the simulation,
+supplying it directly to the CP2K executable in the job submission script:
 
 ``cp2k.psmp –i project-1.restart``
