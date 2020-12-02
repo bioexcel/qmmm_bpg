@@ -138,7 +138,7 @@ Basis sets
 ------------
 
 The basis set for each element can be changed by editing the bs_filename within the DFT section, and the bs_identifier 
- in the KIND section of that element within the SUBSYS section. The bs_identifier should correspond
+in the KIND section of that element within the SUBSYS section. The bs_identifier should correspond
 to one of the basis sets for the given element within the basis set file.
 The q number proceeding the basis set in the identifer gives the number of 
 valence electrons. It depends on the element, for example H:1, C:4, O:6, N:5.
