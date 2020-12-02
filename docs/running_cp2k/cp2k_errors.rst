@@ -29,18 +29,19 @@ GEOMETRY wrong or EMAX_SPLINE too small!
 ----------------------------------------
 
 This is usually means there is a problem with the MM forcefield or the geometry of your system.
-You may want to try and increase EMAX_SPLINE first off as to rule this possibility out.
-If this does not fix the error then you should then double check you MM forcefield and
-geomertries are correct.
+You can first try to increase EMAX_SPLINE to verify if this was the issue.
+If this does not fix the error then you should double check the correctness of the MM forcefield and
+geometries.
 
 
 KIND not found
 ---------------
 
 You may get an error message from CP2K saying "Unknown element for KIND". This is becasue CP2K only expects
-proper element symbols in the coordinate and force field files. The work around for this is
-to let CP2K know what element the symbol should correspond to. This is done by adding it as its own KIND section
-in the SUBSYS section, or by specifying elements in the PDB coordinates file.
+proper element symbols in the coordinate and forcefield files. The work around for this is
+to let CP2K know what element the symbol should correspond to. This is done by adding a new KIND section
+in the SUBSYS section for the unknown symbol, or by specifying the corresponding element symbol directly
+in the PDB coordinates file.
 
 Use the LSD option for an odd number of electrons
 -------------------------------------------------
@@ -52,8 +53,8 @@ DFT&MULTIPLICITY if necessary (see section QM_treatmenent).
 You will also get this message if the total number of QM electrons is odd.
 
 If indeed the charge is odd then you will need to do a spin polarised calculation 
-by specifying LSD under DFT. This will take up to twice as long as a non-spin polarised 
-calculation so should be avoided unless if necessary.
+by specifying LSD under DFT. This will take up to twice the time for a non-spin polarised 
+calculation so it should be avoided unless really necessary.
 
 Cholesky decomposition failed. Matrix ill conditioned ?
 -------------------------------------------------------
@@ -61,14 +62,14 @@ Cholesky decomposition failed. Matrix ill conditioned ?
 Check that the multiplicity is correct. The default is 1 (singlet) for an even
 number and 2 (doublet) for an odd number of electrons.
 
-Check that the potentials used are correct e.g. you are specfying the right
-potential set for the elements that you are using.
+Check that employed pseudopotentials are correct e.g. you are specifying the right
+pseudopotentials set for the elements in the QM system.
 
 The requested basis set for element was not found in the basis set files
 --------------------------------------------------------------------------
 
-This will also give you the name 
-Check the basis set file name is correct for the basis sets named in the SUBSYS section.
+This message will also report the name of the element.
+Check that the basis set file name in the SUBSYS section is the correct one.
 
 Error in QM/MM Connectivity
 ---------------------------
@@ -109,14 +110,14 @@ Runtime issues
 ---------------------
 
 Runtime issue are those that do not produce an error or cause the calculation to 
-crash. Sometimes a warning message may be printed in the output to signify
+crash. Sometimes a warning message may be printed in the output file to highlight that
 something is not behaving as expected, or the calculation might produce 
 unexpected results. 
 
 Simulation fails or gives strange results
 -----------------------------------------
 
-Providing you have used a sensible QM set up with a large enough cutoff then the error is usually to do with the set up of your 
+Providing you have used a sensible QM setup with sufficiently large enough cutoffs then the error has usually to do with the setup of your 
 system. If running a periodic calculation check that the CELL boundaries are large enough to separate the periodic images.
 Also check the initial atomic coordinates are sensible by visualising your system. 
 
