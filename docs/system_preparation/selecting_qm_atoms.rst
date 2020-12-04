@@ -60,12 +60,12 @@ Creating a list of  QM atoms that can be read by CP2K can be done using vmd. (ht
     awk '$5~/$res/{print}' system.pdb >> QMatoms.pdb
  done
 
-6) Use the get_qm_kind.py script (path/to/script) to convert the pdb containing the QM 
-   atoms to the format required in the CP2K input (requires python).
+6) Use the get_qm_kind.py script (https://github.com/bioexcel/CP2K_qmmm_input_preparation_scripts/blob/main/get_qm_kind.py)
+to convert the pdb containing the QM atoms to the format required in the CP2K input (requires python3).
 
 .. code-block:: none
 
- python get_qm_kind.py QMatoms.pdb
+ python3 get_qm_kind.py QMatoms.pdb
 
 Including water molecules
 -------------------------
