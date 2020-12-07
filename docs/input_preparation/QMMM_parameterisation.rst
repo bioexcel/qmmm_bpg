@@ -222,7 +222,7 @@ QM-MM Link parameterisation
 The CP2K  treatment of the dangling bonds involves adding an atom (usually a hydrogen) to
 saturate the valence of the unpaired QM atom.
 
-This must be done for all dangling QM bonds or you will get the following error "
+This must be done for all dangling QM bonds or you will get an error message beginning with the following: "ERROR in the QM/MM connectivity..."
 
 There are three different link treatments in CP2K which can be set using the LINK_TYPE option. These are as follows:
 
