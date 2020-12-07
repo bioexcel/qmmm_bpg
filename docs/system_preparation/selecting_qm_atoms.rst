@@ -112,8 +112,9 @@ is taking too long you could consider reducing the number of QM atoms in the reg
 shrinking the region), or if the chemistry is not sufficiently included the region can be expanded.
 This can be done by increasing or decreasing the  distance around the ligand (or region
 of interest) using the above approach. The property of interest can be measured for different
-QM region sizes and used to determine the optimum size. This approach has been 
-documented in:
+QM region sizes and used to determine the optimum size. 
+
+.. This approach has been documented in:
 
 .. references
 
