@@ -25,8 +25,8 @@ orbitals and plane waves (regular grids) to improve on the performance compared
 to other QM methods. You can find information about GPW here: https://www.cp2k.org/quickstep
 
 Basis functions described in the Gaussian type orbitals for each element are supplied
-through the basis set file. For the basis set, multiple choices are available. Section x 
-will give an overview of these choices. Likewise the pseudopotentials for using with
+through the basis set file. For the basis set, multiple choices are available. The :ref:`ref_basis_sets`
+section of the guide will give an overview of these choices. Likewise the pseudopotentials for using with
 plane waves must also be supplied.
 
 The exchange-correlation (XC) functional within DFT contains approximations which make 
@@ -34,7 +34,7 @@ it a source of inaccuracy in a DFT calculation. This stems from the fact that
 the exact functionals for exchange and correlation are not known.
 There are many choices of XC functional,
 with different levels of accuracy (see Jacobs ladder). However greater accuracy 
-usually comes with more computational cost.  Section x will outline the available options
+usually comes with more computational cost.  The :ref:`ref_xc` section will outline the available options
 for XC functionals in CP2K and how to use them.
 
 In Quickstep, a self-consistant (SCF) calculation is performed in order to find the ground 
@@ -51,7 +51,7 @@ a good starting electronic density will allow the calculation to converge faster
 If the SCF has not converged after it has
 exceeded the maximum number of steps (set by MAX_SCF) the SCF calculation will 
 terminate and print the warning message: "SCF has not converged". Information on 
-how to overcome the issue of a non-converging SCF calculation can be found in section x.
+how to overcome the issue of a non-converging SCF calculation can be found under :ref:`ref_troubleshooting.
 
 The SCF calculation involves inner and outer loops. If the inner SCF loop does not
 converge in the desired number of steps (set in MAX_SCF) then the inner loop will exit in order to
@@ -131,7 +131,7 @@ sets and potentials to use. This is done in the SUBSYS section, under KIND.
     &END KIND
   &END SUBSYS
  
-
+.. _ref_basis_sets:
 
 ------------
 Basis sets
@@ -178,6 +178,7 @@ unless you require a very accurate calculation and you are employing an accurate
 Using the DZVP basis set is usually a good compromise. If you would like to explore more accurate options
 then you may consider checking the convergence of your basis set by plotting the number of independent orbital functions vs. the energy.
 
+.. _ref_xc:
 
 ---------------------
 XC functionals
@@ -498,6 +499,8 @@ MAX_SCF
 In the main SCF section of the input this keyword sets the maximum number of SCF iterations to be performed in the inner SCF loop.
 In the OUTER_SCF section this keyword sets the maximum number of outer loops. The total number of SCF steps will be at maximum the product
 of the MAX_SCF for the inner SCF loop and MAX_SCF for the outer SCF loop.
+
+.. _ref_troubleshooting:
 
 -----------------
 Troubleshooting
