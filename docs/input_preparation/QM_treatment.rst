@@ -351,7 +351,7 @@ Three parameters are used in its description:
 
     E^{B3LYP}_{XC} = E_X^{LDA} + a_0(E_X^{HF} - E_X^{LDA}) + a_x(E_X^{GGA} - E_X^{LDA}) + E_C^{LDA} + a_c(E_C^{GGA} - E_C^{LDA})
     
-where a_0 = 0.2, a_x = 0.72 and a_c = 0.81.
+where :math:`a_0` = 0.2, :math:`a_x` = 0.72 and :math:`a_c` = 0.81.
 To use B3LYP in CP2K the XC section of the input file should be
 configured as follows:
 
