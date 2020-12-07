@@ -17,11 +17,11 @@ computationally demanding. However we want to be able to include all the regions
 involved in the chemical reaction as much as possible.
 
 A good approach for selecting the QM region is therefore to select the entire ligand plus
-some residues nearby, say within x Angstrom of the ligand. The size you consider for this region
+some residues nearby, say within x :math:`\AA` of the ligand. The size you consider for this region
 around the ligand will depend on the number of atoms in your ligand. If you have a ligand of
-50 or more atoms then you might only include residues within 2-3 Angstroms, in order to limit 
+50 or more atoms then you might only include residues within 2-3 :math:`\AA`, in order to limit 
 the overall size of the QM region. For a smaller ligand you may be able to include more atoms around it
-(up to approximately 6 Angstroms).
+(up to approximately 6 :math:`\AA`).
 
 
 Creating the QM atoms list for CP2K
@@ -38,7 +38,7 @@ Creating a list of  QM atoms that can be read by CP2K can be done using vmd. (ht
 2) Go to File >> Save coordinates
 
 3) Use Selected Atoms to save a pdb containing the desired QM atoms. 
-   To select all the atom indexes of the residues with some atoms within x Angstrom from the ligand with residue
+   To select all the atom indexes of the residues with some atoms within x :math:`\AA` from the ligand with residue
    index i (excluding the water molecules) the following command is used:
 
 .. code-block:: none
