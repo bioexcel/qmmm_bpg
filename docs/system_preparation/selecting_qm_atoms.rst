@@ -15,11 +15,10 @@ number of QM atoms should not be too large (over 200 QM atoms) as this will beco
 computationally demanding. However we want to be able to include all the regions 
 involved in the chemical reaction as much as possible.
 
-$\require{mediawiki-texvc}$
 A good approach for selecting the QM region is therefore to select the entire ligand plus
 some residues nearby, say within x :math:`\AA` of the ligand. The size you consider for this region
 around the ligand will depend on the number of atoms in your ligand. If you have a ligand of
-50 or more atoms then you might only include residues within $\pu{2-3 \AA}$ 2-3 :math:`\\AA`, in order to limit 
+50 or more atoms then you might only include residues within 2-3 Å in order to limit 
 the overall size of the QM region. For a smaller ligand you may be able to include more atoms around it
 (up to approximately 6 :math:`\AA`).
 
