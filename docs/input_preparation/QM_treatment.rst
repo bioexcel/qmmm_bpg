@@ -51,7 +51,7 @@ a good starting electronic density will allow the calculation to converge faster
 If the SCF has not converged after it has
 exceeded the maximum number of steps (set by MAX_SCF) the SCF calculation will 
 terminate and print the warning message: "SCF has not converged". Information on 
-how to overcome the issue of a non-converging SCF calculation can be found under :ref:`ref_troubleshooting.
+how to overcome the issue of a non-converging SCF calculation can be found under :ref:`ref_troubleshooting`.
 
 The SCF calculation involves inner and outer loops. If the inner SCF loop does not
 converge in the desired number of steps (set in MAX_SCF) then the inner loop will exit in order to
