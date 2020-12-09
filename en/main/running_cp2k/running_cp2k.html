@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Running QM/MM simulations with CP2K &mdash; CP2K QM/MM Best Practice Guide  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Understanding the CP2K output" href="cp2k_output.html" />
+    <link rel="prev" title="QM/MM parameterisation" href="../input_preparation/QMMM_parameterisation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> CP2K QM/MM Best Practice Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Overview:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">QM/MM overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">System preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/system_preparation.html">System preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/selecting_qm_atoms.html">Selecting QM atoms</a></li>
+</ul>
+<p class="caption"><span class="caption-text">CP2K input preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/MM_setup.html">MM setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/QM_treatment.html">QM treatment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/QMMM_parameterisation.html">QM/MM parameterisation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running CP2K:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running QM/MM simulations with CP2K</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-cp2k-job">Running a CP2K job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-considerations">Performance considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#run-times-on-archer">Run times on ARCHER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clc-19">ClC-19</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cp2k_output.html">Understanding the CP2K output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cp2k_errors.html">CP2K Troubleshooting</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CP2K QM/MM Best Practice Guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Running QM/MM simulations with CP2K</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/running_cp2k/running_cp2k.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="running-qm-mm-simulations-with-cp2k">
+<h1>Running QM/MM simulations with CP2K<a class="headerlink" href="#running-qm-mm-simulations-with-cp2k" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="running-a-cp2k-job">
+<h2>Running a CP2K job<a class="headerlink" href="#running-a-cp2k-job" title="Permalink to this headline">¶</a></h2>
+<p>A standard CP2K build creates multiple executables. It is advised to use the cp2k.psmp
+executable as this enables the hybrid MPI+OpenMP parallelisation scheme, which can have some
+performance benefit over using only MPI parallelisation on some machines.</p>
+<p>CP2K should be run through a job submission script to run on the compute nodes.
+The following command will launch CP2K (MPI only), specifing the input and output files, and the
+number of mpi processes.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>export OMP_NUM_THREADS=1
+joblauncher (-n procs) cp2k.pmsp -i inputfile.inp -o outputfile.out
+</pre></div>
+</div>
+<p>The joblauncher will depend on the job launcher on your system, common examples are
+mpiexec, srun and aprun.</p>
+<p>To run with multiple threads (MPI+OpenMP) the number of threads should be set to a value greater
+than 1. Typical values where performance may be improved over pure a MPI job are 2, 4, 6, and 8
+threads, although this will depend on many things such as your machine architecture, the type of calculation and
+your system size. As a general rule the number of threads per MPI process has to be chosen so that it evenly divides the number
+of MPI processes on a node, whilst ensuring that threads sharing memory are in the same NUMA region.
+The total number of MPI processes will need to be set so that the number of threads per process multiplied by the number of MPI
+processes gives the total number of cores requested.</p>
+</div>
+<div class="section" id="performance-considerations">
+<h2>Performance considerations<a class="headerlink" href="#performance-considerations" title="Permalink to this headline">¶</a></h2>
+<p>A selection of CP2K QM/MM benchmarks are available at: <a class="reference external" href="https://github.com/bioexcel/qmmm_benchmark_suite">https://github.com/bioexcel/qmmm_benchmark_suite</a></p>
+<p>The table below gives an overview of them.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 22%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 17%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>QM atoms</p></th>
+<th class="head"><p>Total atoms</p></th>
+<th class="head"><p>XC Functional</p></th>
+<th class="head"><p>Basis set</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MQAE</p></td>
+<td><p>solute-solvent</p></td>
+<td><p>34</p></td>
+<td><p>16,396</p></td>
+<td><p>BLYP</p></td>
+<td><p>DZVP-MOLOPT-GTH</p></td>
+</tr>
+<tr class="row-odd"><td><p>ClC</p></td>
+<td><p>ion channel</p></td>
+<td><p>19, 253</p></td>
+<td><p>150,925</p></td>
+<td><p>BLYP</p></td>
+<td><p>DZVP-MOLOPT-GTH</p></td>
+</tr>
+<tr class="row-even"><td><p>CBD_PHY</p></td>
+<td><p>phytochrome</p></td>
+<td><p>68</p></td>
+<td><p>167,922</p></td>
+<td><p>PBE</p></td>
+<td><p>DZVP-MOLOPT-GTH</p></td>
+</tr>
+<tr class="row-odd"><td><p>GFP_QM</p></td>
+<td><p>fluorescent protein</p></td>
+<td><p>20, 32, 53, 77</p></td>
+<td><p>28,264</p></td>
+<td><p>BLYP</p></td>
+<td><p>DZVP-GTH-BLYP</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="run-times-on-archer">
+<h3>Run times on ARCHER<a class="headerlink" href="#run-times-on-archer" title="Permalink to this headline">¶</a></h3>
+<p>The run times per MD step for each of the benchmarks is reported in the Table below. The simulations
+were run on the ARCHER supercomputer (<a class="reference external" href="https://www.archer.ac.uk">https://www.archer.ac.uk</a>), on full 24 core compute nodes
+containing two 2.7 GHz, 12-core E5-2697 v2 (Ivy Bridge) series
+processors. Threading was not enabled in any of the benchmarks (i.e all the simulations were run in pure MPI configuration).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Cores</p></th>
+<th class="head"><p>MQAE</p></th>
+<th class="head"><p>ClC (QM 19)</p></th>
+<th class="head"><p>CIC (QM 253)</p></th>
+<th class="head"><p>CBD_PHY</p></th>
+<th class="head"><p>GFP_QM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>25.755</p></td>
+<td><p>57.53442</p></td>
+<td><p>352.89425</p></td>
+<td><p>185.36867</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>48</p></td>
+<td><p>16.81833</p></td>
+<td><p>34.4685</p></td>
+<td><p>282.38286</p></td>
+<td><p>109.10971</p></td>
+<td><p>150.7599</p></td>
+</tr>
+<tr class="row-even"><td><p>96</p></td>
+<td><p>12.18783</p></td>
+<td><p>21.63885</p></td>
+<td><p>238.87591</p></td>
+<td><p>68.35487</p></td>
+<td><p>103.39486</p></td>
+</tr>
+<tr class="row-odd"><td><p>144</p></td>
+<td><p>10.3228</p></td>
+<td><p>18.56412</p></td>
+<td><p>213.3793</p></td>
+<td><p>53.63196</p></td>
+<td><p>85.17014</p></td>
+</tr>
+<tr class="row-even"><td><p>192</p></td>
+<td><p>9.90894</p></td>
+<td><p>16.5546</p></td>
+<td><p>208.10938</p></td>
+<td><p>46.06454</p></td>
+<td><p>77.17757</p></td>
+</tr>
+<tr class="row-odd"><td><p>240</p></td>
+<td><p>9.85336</p></td>
+<td><p>13.76657</p></td>
+<td><p>199.87593</p></td>
+<td><p>43.44091</p></td>
+<td><p>72.0526</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="clc-19">
+<h3>ClC-19<a class="headerlink" href="#clc-19" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="../_images/CIC-19-thread-improvements-su.png"><img alt="alternate text" class="align-center" src="../_images/CIC-19-thread-improvements-su.png" style="width: 500px; height: 366px;" /></a>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cp2k_output.html" class="btn btn-neutral float-right" title="Understanding the CP2K output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../input_preparation/QMMM_parameterisation.html" class="btn btn-neutral float-left" title="QM/MM parameterisation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
