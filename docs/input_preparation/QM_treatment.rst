@@ -325,20 +325,21 @@ configured as follows:
 
     &XC
        &XC_FUNCTIONAL
-       &PBE
-         SCALE_X 0.75         ! 75% GGA exchange
-         SCALE_C 1.0          ! 100% GGA correlation
-       &END PBE
+         &PBE
+            SCALE_X 0.75         ! 75% GGA exchange
+            SCALE_C 1.0          ! 100% GGA correlation
+         &END PBE
       &END XC_FUNCTIONAL
       &HF
-        FRACTION 0.25         ! 25 % HF exchange
-        &SCREENING        
-          EPS_SCHWARZ 1.0E-6  ! Important to improve scaling
-        &END
-        &MEMORY
-          MAX_MEMORY 1500     ! In MB per MPI rank
-        &END
-    &END
+         FRACTION 0.25         ! 25 % HF exchange
+         &SCREENING        
+            EPS_SCHWARZ 1.0E-6  ! Important to improve scaling
+         &END
+         &MEMORY
+            MAX_MEMORY 1500     ! In MB per MPI rank
+         &END
+      &END HF
+    &END XC
 
 
 **B3LYP**
@@ -382,7 +383,7 @@ configured as follows:
          &MEMORY
             MAX_MEMORY  1500     ! In MB per MPI rank
          &END
-      &END
+      &END HF
    &END XC
  
 ---------------------
