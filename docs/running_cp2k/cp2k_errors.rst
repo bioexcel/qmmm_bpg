@@ -46,11 +46,9 @@ in the PDB coordinates file.
 Use the LSD option for an odd number of electrons
 -------------------------------------------------
 
-You will get this option if specifying a non-even charge for the QM region. First you
+You will also get this message if the total number of QM electrons is odd. First you
 should check that the charge of you QM region is correct and adjust DFT&CHARGE and 
 DFT&MULTIPLICITY if necessary (see section QM_treatmenent).
-
-You will also get this message if the total number of QM electrons is odd.
 
 If indeed the charge is odd then you will need to do a spin polarised calculation 
 by specifying LSD under DFT. This will take up to twice the time for a non-spin polarised 
