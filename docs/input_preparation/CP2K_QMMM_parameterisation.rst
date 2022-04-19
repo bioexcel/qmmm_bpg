@@ -1,6 +1,6 @@
-==========================
-CP2K QMMM parameterisation
-==========================
+============================
+CP2K QM/MM parameterisation
+============================
 
 The chapter describes important topics related to the QM/MM settings in CP2K once you have decided which are the QM atoms.
 This includes how to get the QM atoms into the right format for CP2K, and how to parameterise
