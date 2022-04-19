@@ -72,7 +72,7 @@ QM/MM parameters. The MM calculation should be fast to run and if the calculatio
 error and the energy is sensible then it is a good indicator that the system has been
 prepared correctly for CP2K. 
 
-Details of how to do this are given here: :doc:`../input_preparation/MM_setup`
+Details of how to do this are given here: :doc:`../input_preparation/CP2K_MM_setup`
 
 If this is your first time using CP2K then it is recommended to read the Running CP2K section of guide (:doc:`../running_cp2k/running_cp2k`),
 as well as the CP2K Output Guide (:doc:`../running_cp2k/cp2k_output`). If you encouter any errors while runnning
@@ -130,7 +130,7 @@ The structure of your input will look something like this:
     .... contents of MOTION section
   &END MOTION
 
-Information on setting up the parameters for the QMMM section can be found here: :doc:`../input_preparation/QMMM_parameterisation`
+Information on setting up the parameters for the QMMM section can be found here: :doc:`../input_preparation/CP2K_QMMM_parameterisation`
 
 Settings for this will depend highly on your choice of the QM region.
 

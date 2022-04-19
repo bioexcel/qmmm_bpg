@@ -19,11 +19,12 @@ This guide provides practical advice on how to use CP2K to perform QM/MM simulat
 
 .. toctree::
    :maxdepth: 2
-   :caption: CP2K input preparation:
+   :caption: Input preparation:
 
-   input_preparation/MM_setup
+   input_preparation/CP2K_MM_setup
    input_preparation/QM_treatment
-   input_preparation/QMMM_parameterisation
+   input_preparation/CP2K_QMMM_parameterisation
+   input_preparation/interface_QMMM_parameterisation
    
 .. toctree::
    :maxdepth: 2

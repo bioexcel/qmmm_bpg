@@ -1,5 +1,5 @@
 =================
-MM setup
+CP2K MM setup
 =================
 
 An example CP2K input for a simple single energy MM calculation is shown below.
