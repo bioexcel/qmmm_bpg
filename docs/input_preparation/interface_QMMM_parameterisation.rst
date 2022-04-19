@@ -1,5 +1,5 @@
 =============================
-QM/MM parameterisation
+QM/MM parameterisation with the GROMACS/CP2K interface
 =============================
 
 This chapter describes how to set up a QM/MM system within the GROMACS/CP2K interface.

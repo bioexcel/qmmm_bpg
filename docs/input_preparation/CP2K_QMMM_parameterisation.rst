@@ -1,5 +1,5 @@
 ==========================
-CP2K QM/MM parameterisation
+CP2K QMMM parameterisation
 ===========================
 
 The chapter describes important topics related to the QM/MM settings in CP2K once you have decided which are the QM atoms.
