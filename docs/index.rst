@@ -30,6 +30,7 @@ This guide provides practical advice on how to use CP2K to perform QM/MM simulat
    :maxdepth: 2
    :caption: Running CP2K:
 
+   running_cp2k/building_cp2k
    running_cp2k/running_cp2k
    running_cp2k/cp2k_output
    running_cp2k/cp2k_errors
