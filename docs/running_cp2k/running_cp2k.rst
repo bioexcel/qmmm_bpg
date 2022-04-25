@@ -83,7 +83,7 @@ Running on GPUs
 The time per MD step (s) on Cirrus GPU nodes is reported in the Table below for the benchmark systems.
 The Cirrus GPU nodes contain 4 GPUs per node and 20 CPU cores. The GPUs are Nvidia Volta V100's
 Here we assign one MPI process per GPU and 10 OpenMP threads per process to make use of the CPU cores. 
- More details are given in the `Cirrus documentation <https://cirrus.readthedocs.io/en/main/user-guide/gpu.html>`_
+More details are given in the `Cirrus documentation <https://cirrus.readthedocs.io/en/main/user-guide/gpu.html>`_
 
 Using the GPU enabled `COSMA library <https://github.com/eth-cscs/COSMA>`_ was found to not significantly 
 improve the performance.
