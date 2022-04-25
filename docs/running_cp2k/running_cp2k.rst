@@ -59,8 +59,8 @@ Running on CPUs
 ---------------
 
 The time per MD step (s) on ARCHER2 is reported in the Table below for the benchmark systems. ARCHER2 has 
-128 cores per node, comprised of two 64-core AMD EYPC processors. More details are given on the [ARCHER2 website]
-(https://www.archer2.ac.uk) The results below use MPI+OpenMP with 4 threads per MPI process which was found
+128 cores per node, comprised of two 64-core AMD EYPC processors. More details are given on the 
+`ARCHER2 website <https://www.archer2.ac.uk>`_ The results below use MPI+OpenMP with 4 threads per MPI process which was found
 to, in general, give the best performance.
 
 +-------+--------------+--------------+-------------+--------------+----------------+-----------------+
@@ -83,9 +83,9 @@ Running on GPUs
 The time per MD step (s) on Cirrus GPU nodes is reported in the Table below for the benchmark systems.
 The Cirrus GPU nodes contain 4 GPUs per node and 20 CPU cores. The GPUs are Nvidia Volta V100's
 Here we assign one MPI process per GPU and 10 OpenMP threads per process to make use of the CPU cores. 
- More details are given in the [Cirrus documentation](https://cirrus.readthedocs.io/en/main/user-guide/gpu.html) 
+ More details are given in the `Cirrus documentation <https://cirrus.readthedocs.io/en/main/user-guide/gpu.html>`_
 
-Using the GPU enabled [COSMA library](https://github.com/eth-cscs/COSMA) was found to not significantly 
+Using the GPU enabled `COSMA library <https://github.com/eth-cscs/COSMA>`_ was found to not significantly 
 improve the performance.
 
 +-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+

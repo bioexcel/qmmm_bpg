@@ -12,7 +12,7 @@ toolchain to do this.
 Downloading CP2K
 ----------------
 
-CP2K can be downloaded from the [CP2K github repositry](https://github.com/cp2k/cp2k/releases/)
+CP2K can be downloaded from the `CP2K github repositry <https://github.com/cp2k/cp2k/releases/>`_
 
 
 ------------------
@@ -79,24 +79,24 @@ we suggest these be excluded from the build as these can make the
 build process more complex.
 
 
-For CPU and GPU builds the important options to set are the --math-mode and the --mpi-mode
+For CPU and GPU builds the important options to set are the ``--math-mode`` and the ``--mpi-mode``
 
-`--math-mode`, which sets the maths library, has the following choices:
+``--math-mode``, which sets the maths library, has the following choices:
 
-* `mkl` - use Intel MKL
-* `acml` - use the AMD core maths library
-* `cray` - use cray-libsci on cray machines
-* `openblas` - use openblas
+* ``mkl`` - use Intel MKL
+* ``acml`` - use the AMD core maths library
+* ``cray`` - use cray-libsci on cray machines
+* ``openblas`` - use openblas
 
-`--mpi-mode`, which sets the mpi library, has the following choices:
+``--mpi-mode``, which sets the mpi library, has the following choices:
 
-* `mpich`
-* `openmpi`
-* `intelmpi`
-* `no` - disable mpi
+* ``mpich``
+* ``openmpi``
+* ``intelmpi``
+* ``no`` - disable mpi
 
-Additionally for GPU builds you need to either use `--enable-cuda` for
-Nvidia GPUs or `--enable-hip` for AMD GPUs, and also set the `--gpu-ver`
+Additionally for GPU builds you need to either use ``--enable-cuda`` for
+Nvidia GPUs or ``--enable-hip`` for AMD GPUs, and also set the ``--gpu-ver``
 to your GPU version (see below).
 
 
@@ -156,9 +156,9 @@ in:
 
   cp2k/tools/toolchain/install/setup
 
-and a selection of arch files e.g. `local.ssmp`, `local.psmp`, `local.popt`
+and a selection of arch files e.g. ``local.ssmp``, ``local.psmp``, ``local.popt``
 
-The `.psmp` file which has MPI and threading enabled is the most useful of these.
+The ``.psmp`` file which has MPI and threading enabled is the most useful of these.
 You should first source the setup:
 
 .. code-block:: none
@@ -171,7 +171,7 @@ and then copy the arch files to cp2k/arch
 
   cp install/arch/* ../../../../arch
 
-For a CUDA or HIP build there will be a `local_cuda.psmp` or a `local_hip.psmp`
+For a CUDA or HIP build there will be a ``local_cuda.psmp`` or a ``local_hip.psmp``
 arch file created in addition. You should use this if you 
 wish to use the GPU offloading.
 
@@ -196,4 +196,4 @@ Building the interface
 
 
 For information on building the GROMACS/CP2K interface please see the 
-dedicated [GROMACS page](https://manual.gromacs.org/documentation/2022-beta1/install-guide/index.html#installing-with-cp2k)
+dedecated `GROMACS page <https://manual.gromacs.org/documentation/2022-beta1/install-guide/index.html#installing-with-cp2k>`_
