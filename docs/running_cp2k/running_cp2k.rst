@@ -31,13 +31,13 @@ of MPI processes on a node, whilst ensuring that threads sharing memory are in t
 The total number of MPI processes will need to be set so that the number of threads per process multiplied by the number of MPI
 processes gives the total number of cores requested.
 
-==========================================================
+----------------------------------------------------------
 Running QM/MM simulations with the GROMACS/CP2K interface
-==========================================================
+----------------------------------------------------------
 
 
 Once all the required input files for the GROMACS/CP2K interface have been created
-as described in the :doc:`../input_preparation/interface_QMMM_parameterisation.rst` section
+as described in the :doc:`../input_preparation/interface_QMMM_parameterisation` section
 you can create the GROMACS ``tpr`` file and then launch the MD simulation.
 
 
@@ -65,7 +65,7 @@ simulation will be dominated by the QM and QM/MM contributions within CP2K. The 
 of a CP2K standlone QM/MM calculation is equivalent to that of the GROMACS/CP2K interface.
 Here performance results are resported for CP2K QM/MM benchmarks.
 
-The selection of CP2K QM/MM benchmarks are available one the `Bioexel QM/MM benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_
+The selection of CP2K QM/MM benchmarks are available from the `Bioexel QM/MM benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_
 
 The table below gives an overview of them.
 
