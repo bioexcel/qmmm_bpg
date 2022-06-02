@@ -220,7 +220,8 @@ most accurate, and gives a overview of each option.
 +----------------+-------------------------------------+-----------------+---------------------------------------------------------------------------------------------------+
 
 
-
+Examples of their usage can be found in the 
+`Bioexcel QM/MM benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_.
 
 LDA
 ---
@@ -282,8 +283,8 @@ The metaGGA builds upon the GGA methods by assuming the functional also depends 
 then non-interacting kinetic energy density, in addition to the electron density and its 
 gradient. To use metaGGA methods in CP2K the libxc library is used, and therefore your
 version of CP2K needs to be built with this library enabled. An example of the XC
-section for using the metaGGA is shown below (here the oTPSS-D functional has
-been used (http://doi.org/10.1021/ct900489g) ).
+section for using the metaGGA is shown below (here the 
+`oTPSS-D functional <http://doi.org/10.1021/ct900489g>`_ has been used.
 
 
 .. code-block:: none
