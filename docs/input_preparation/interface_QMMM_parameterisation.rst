@@ -13,7 +13,7 @@ Selecting QM atoms
 ----------------------
 
 The atoms for the QM region must be given through a GROMACS index file (``.ndx``). You can
-select a group of atoms and then name the group appropirately e.g. QMatoms.
+select a group of atoms and then name the group appropirately e.g. ``QMatoms``.
 
 
 For example to select all non-water atoms to be treated with QM:
@@ -83,11 +83,11 @@ qmmm-cp2k-qmmthod
 
 The method to use for the QM atoms. At present the available options are:
 
-* PBE - Use the PBE method in CP2K.
+* ``PBE`` - Use the PBE method in CP2K.
 
-* BLYP - Use the BLYP method in CP2K.
+* ``BLYP`` - Use the BLYP method in CP2K.
 
-* INPUT - pass your own CP2K input file contain the QM set up. See below.
+* ``INPUT`` - pass your own CP2K input file contain the QM set up. See below.
 
 ------------------
 Using a CP2K input
@@ -109,7 +109,7 @@ the ``qmmethod`` to ``INPUT`` in the ``.mdp`` file as shown below:
   qmmm-cp2k-qmmethod            = INPUT    ; use own cp2k.inp
 
 
-To generate the tpr file for running you also need to add the name of the cp2k
+To generate the ``tpr`` file for running you also need to add the name of the cp2k
 input file with the ``-qmi`` option:
 
 .. code-block:: none

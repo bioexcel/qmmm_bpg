@@ -1,10 +1,10 @@
-===================================
-Running QM/MM simulations with CP2K
-===================================
+==========================
+Running QM/MM simulations
+==========================
 
 
 ---------------------------------
-Running a CP2K job
+Running a CP2K standalone job
 ---------------------------------
 
 A standard CP2K build creates multiple executables. It is advised to use the cp2k.psmp
@@ -20,8 +20,8 @@ number of mpi processes.
   export OMP_NUM_THREADS=1
   joblauncher (-n procs) cp2k.pmsp -i inputfile.inp -o outputfile.out
 
-The joblauncher will depend on the job launcher on your system, common examples are
-mpiexec, srun and aprun. 
+The ``joblauncher`` will depend on the job launcher on your system, common examples are
+``mpiexec``, ``srun`` and ``aprun``. 
 
 To run with multiple threads (MPI+OpenMP) the number of threads should be set to a value greater
 than 1. Typical values where performance may be improved over pure a MPI job are 2, 4, 6, and 8
@@ -31,13 +31,41 @@ of MPI processes on a node, whilst ensuring that threads sharing memory are in t
 The total number of MPI processes will need to be set so that the number of threads per process multiplied by the number of MPI
 processes gives the total number of cores requested.
 
+==========================================================
+Running QM/MM simulations with the GROMACS/CP2K interface
+==========================================================
+
+
+Once all the required input files for the GROMACS/CP2K interface have been created
+as described in the :doc:`../input_preparation/interface_QMMM_parameterisation.rst` section
+you can create the GROMACS ``tpr`` file and then launch the MD simulation.
+
+
+.. code-block:: none
+
+  gmx grompp -f sys.mdp -p sys.top -c sys.gro -n sys.ndx  -o sys.tpr
+
+  joblauncher (n proces) gmx_mpi -s sys.tpr
+
+
+When genreating the ``tpr`` file you may get a warning about your system having non-zero
+charge. This can safely be ignored for QM/MM calculations by using the ``-maxwarn`` option.
+
+The ``joblauncher`` will depend on the job launcher on your system, common examples are
+``mpiexec``, ``srun`` and ``aprun``
+
 
 
 --------------------------
 Performance considerations
 --------------------------
 
-A selection of CP2K QM/MM benchmarks are available at: https://github.com/bioexcel/qmmm_benchmark_suite
+When running with either CP2K standalone or the  GROMACS/CP2K interface the run times of the
+simulation will be dominated by the QM and QM/MM contributions within CP2K. The performance 
+of a CP2K standlone QM/MM calculation is equivalent to that of the GROMACS/CP2K interface.
+Here performance results are resported for CP2K QM/MM benchmarks.
+
+The selection of CP2K QM/MM benchmarks are available one the `Bioexel QM/MM benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_
 
 The table below gives an overview of them.
 

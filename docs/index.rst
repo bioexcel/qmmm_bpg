@@ -1,8 +1,9 @@
-=============================
- Biomolecular QM/MM with CP2K
-=============================
+==========================================
+ Biomolecular QM/MM with CP2K and GROMACS
+==========================================
 
-This guide provides practical advice on how to use CP2K to perform QM/MM simulation of biomolecular systems
+This guide provides practical advice on how to use CP2K and the GROMACS/CP2K intreface
+to perform QM/MM simulation of biomolecular systems
 
 .. toctree::
    :maxdepth: 2
@@ -28,7 +29,7 @@ This guide provides practical advice on how to use CP2K to perform QM/MM simulat
    
 .. toctree::
    :maxdepth: 2
-   :caption: Running CP2K:
+   :caption: Running:
 
    running_cp2k/building_cp2k
    running_cp2k/running_cp2k
