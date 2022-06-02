@@ -129,15 +129,35 @@ improve the performance.
 +-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+
 
 
-ClC-19
-------
+CPU benchmark results
+---------------------
 
+**MQAE-BLYP**
 
-.. image:: /_static/CIC-19-thread-improvements-su.png
-    :width: 500px
+.. figure:: /_static/ARCHER2/CPU/MQAE-BLYP_total_diff6-1_4threads.out-time.png
     :align: center
-    :height: 366px
     :alt: alternate text
+    :scale: 50
+
+    MQAE-BLYP - 4 threads per rank
+    Performance@256 cores: 24 ps/day
+    Parallel efficiency@256 cores: 45%
+
+**MQAE-B3LYP**
+
+**MQAE-B3LYP-large**
+
+**CBD_PHY-PBE**
+
+
+**CBD_PHY-PBE0**
+
+**ClC-19-BLYP**
+
+**ClC-253-BLYP**
+
+GPU benchmark results
+---------------------
 
 
 
