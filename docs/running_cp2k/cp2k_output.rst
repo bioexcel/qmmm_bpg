@@ -63,7 +63,7 @@ In an ideal calculation the Total Energy should decrease with each step
 as the energy is minimised (this means the Change should be negeative). 
 The Change in energy should also decrease as it converges to the final value.
 The Convergence gives an idea of the accuracy of the SCF energy. When this value 
-becomes less than the EPS_SCF value specified in the input the SCF calculation will
+becomes less than the ``EPS_SCF`` value specified in the input the SCF calculation will
 exit and a message stating that convergence has been acheived is printed.
 
 .. code-block:: none
@@ -73,7 +73,7 @@ exit and a message stating that convergence has been acheived is printed.
 Otherwise, if the SCF does not converge, it continues until the number of steps equals the MAX_SCF in the
 input file. The inner SCF loop will finish and then move to the next outer SCF step, 
 recalculating the preconditioner. Finally, if the number of outer SCF steps equals to
-the corresponding MAX_SCF value in the input file, then the SCF calculation has not converged,
+the corresponding ``MAX_SCF`` value in the input file, then the SCF calculation has not converged,
 a warning will be printed to the standard output and the SCF will be abandoned.
 Information on how to handle this is given in the troubleshooting chapter.
 
@@ -101,7 +101,7 @@ Upon successful convergence, electronic densities and energies (and forces if sp
   outer SCF loop converged in   1 iterations or    3 steps
 
 
- ENERGY| Total FORCE_EVAL ( QMMM ) energy (a.u.):          -2134.963290942846925
+  ENERGY| Total FORCE_EVAL ( QMMM ) energy (a.u.):          -2134.963290942846925
 
 It is a good idea to check that the electronic density corresponds to the number of 
 electrons, and that the charge is as expected.
@@ -110,7 +110,7 @@ The Total energy given is the energy from only the QM part i.e from the SCF calc
 A breakdown of its components is printed above it. The total number of outer SCF loops
 and inner SCF steps that were done is also shown.
 
-The ENERGY (QMMM) is the QM/MM energy including all its components; the QM energy, MM energy
+The ``ENERGY (QMMM)``` is the QM/MM energy including all its components; the QM energy, MM energy
 and QM-MM interation energy. This is the energy you are usually interested in.
 
 
@@ -118,9 +118,9 @@ Wavefuntions - NAME-RESTART.wfn
 ----------------------------------
 
 Wavefunction files are binary files that contain the wavefunctions obtained from the last SCF step.
-They are named with the project_name preceeding '-RESTART.wfn'.
+They are named with the project_name preceeding ``'-RESTART.wfn'``.
 One is written every SCF step, and if a wavefuntion file of the same name
-already exists the older version is moved to NAME-RESTART.wfn.bak-1, rather than overwritten.
+already exists the older version is moved to ``NAME-RESTART.wfn.bak-1``, rather than overwritten.
 This is done for up to three files and so you may see the following files, where
 the third backup (bak-3) is the oldest.
 
@@ -134,7 +134,7 @@ the third backup (bak-3) is the oldest.
 Wavefunction restarts are  used when restarting a calculation in order to act
 as a guide for the first SCF step to speed up the calculation.
 In this case the project name should be consistent
-and the SCF_GUESS should be set to 'restart'. Care should be taken that
+and the ``SCF_GUESS`` should be set to 'restart'. Care should be taken that
 the wavefunction is a suitable guess for the SCF calculation otherwise it may not
 converge. 
 
@@ -205,7 +205,7 @@ The .restart file is written at the end of an MD step and it contains the inform
 to restart the MD simulation from that step. This file is human readable and reports information about the system 
 setup along with the current positions and velocities of the atoms in the system.
 
-To restart an MD simulation the EXT_RESTART section has to be added to the input file to instruct the code
+To restart an MD simulation the ``EXT_RESTART`` section has to be added to the input file to instruct the code
 to use the .restart file as the restart point:
 
 .. code-block:: none
@@ -214,7 +214,7 @@ to use the .restart file as the restart point:
      EXTERNAL_FILE_NAME  project-1.restart
   &END EXT_RESTART
 
-You can also use the .restart file as if the input file for restarting the simulation,
+You can also use the ``.restart`` file as if the input file for restarting the simulation,
 supplying it directly to the CP2K executable in the job submission script:
 
 ``cp2k.psmp –i project-1.restart``

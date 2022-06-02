@@ -3,8 +3,8 @@ CP2K MM setup
 =================
 
 An example CP2K input for a simple single energy MM calculation is shown below.
-Note that the RUN_TYPE is set to ENERGY and the METHOD in the FORCE_EVAL section
-is set to FIST for an MM run. This stands for Frontiers in Simulation Technology which is the 
+Note that the ``RUN_TYPE`` is set to ``ENERGY`` and the ``METHOD`` in the ``FORCE_EVAL`` section
+is set to ``FIST`` for an MM run. This stands for Frontiers in Simulation Technology which is the 
 method used in CP2K MM calculations.
 
 
@@ -52,10 +52,10 @@ method used in CP2K MM calculations.
 
 
 
-The MM and SUBSYS sections of FORCE_EVAL are required for this calculation. The MM section contains 
-all the parameters related to the atomic interations such as the forcefield, and Poisson  solver and splines
+The ``MM`` and ``SUBSYS`` sections of ``FORCE_EVAL`` are required for this calculation. The ``MM`` section contains 
+all the parameters related to the atomic interations such as the forcefield, and Poisson solver and splines
 used in the non-bonded interations.
-The SUBSYS section contains the systems topology information
+The ``SUBSYS`` section contains the systems topology information
 such as the atomic coordinates, the cell size and the connectivity.
 
 .. _ref_ffield:
@@ -74,7 +74,7 @@ in the TOPOLOGY section. Both the ``PARMTYPE`` and ``CONN_FILE_FORMAT`` should b
 CHARMM
 -------
 
-The CHARMM force field  (i.e. a .prm file) can be used by setting ``PARMTYPE`` to CHM. The 
+The CHARMM force field  (i.e. a ``.prm`` file) can be used by setting ``PARMTYPE`` to CHM. The 
 psf CHARMM connectivity file is used with ``CONN_FILE_FORMAT`` set to PSF. 
 Example usage can be found here: https://www.cp2k.org/exercises:2015_cecam_tutorial:forcefields
 
@@ -174,8 +174,8 @@ This is usually means there is a problem with the MM forcefield or the geometry 
 KIND not found
 ---------------
 
-You may get an error message from CP2K saying "Unknown element for KIND". This happens when a symbol
+You may get an error message from CP2K saying ``"Unknown element for KIND"``. This happens when a symbol
 that does not match a proper element is found in the coordinate and force field files. The workaround
 for this is to let CP2K know what element the offended symbol should correspond to. This is done by
-adding in the SUBSYS section a new KIND section for the novel symbol where to specify the element
-via the keyword ELEMENT. Alternatively, one can specify the element symbol in the PDB coordinate file.
+adding in the ``SUBSYS`` section a new ``KIND`` section for the novel symbol where to specify the element
+via the keyword ``ELEMENT``. Alternatively, one can specify the element symbol in the ``PDB`` coordinate file.

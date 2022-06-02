@@ -26,7 +26,7 @@ the overall size of the QM region. For a smaller ligand you may be able to inclu
 Creating the QM atoms list for CP2K
 -----------------------------------
 
-Creating a list of  QM atoms that can be read by CP2K can be done using vmd. (https://www.ks.uiuc.edu/Research/vmd/)
+Creating a list of  QM atoms that can be read by CP2K can be done using `VMD <https://www.ks.uiuc.edu/Research/vmd/>`_
 
 1) Open the entire system pdb file with ``vmd``.
 
@@ -59,7 +59,7 @@ Creating a list of  QM atoms that can be read by CP2K can be done using vmd. (ht
     awk '$5~/$res/{print}' system.pdb >> QMatoms.pdb
  done
 
-6) Use the get_qm_kind.py script (https://github.com/bioexcel/CP2K_qmmm_input_preparation_scripts/blob/main/get_qm_kind.py)
+6) Use the `get_qm_kind.py script <https://github.com/bioexcel/CP2K_qmmm_input_preparation_scripts/blob/main/get_qm_kind.py>`_
 to convert the pdb containing the QM atoms to the format required in the CP2K input (requires python3).
 
 .. code-block:: none
@@ -112,10 +112,6 @@ shrinking the region), or if the chemistry is not sufficiently included the regi
 This can be done by increasing or decreasing the  distance around the ligand (or region
 of interest) using the above approach. The property of interest can be measured for different
 QM region sizes and used to determine the optimum size. 
-
-.. This approach has been documented in:
-
-.. references
 
 
 

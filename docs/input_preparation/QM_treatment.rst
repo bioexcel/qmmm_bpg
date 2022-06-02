@@ -19,10 +19,10 @@ structure problem in order to get energies in the QM region and forces
 on the QM atoms. The default electronic structure method is the
 self-consistent Kohn-Sham Density Functional Theory (DFT). Alternatively, within Quickstep
 there is also the option to use Semi-empirical (SE), Tight-Binding DFT (DFTB),
-and Gaussian Plane Waves (GPW) methods, among many others. The GPW method is a 
+and Gaussian Plane Waves (GPW) methods, among many others. The `GPW method <https://www.cp2k.org/quickstep>`_ is a 
 key part of CP2K, which involves using a mixed basis of atom centred Gaussian
 orbitals and plane waves (regular grids) to improve on the performance compared
-to other QM methods. You can find information about GPW here: https://www.cp2k.org/quickstep
+to other QM methods.
 
 Basis functions described in the Gaussian type orbitals for each element are supplied
 through the basis set file. For the basis set, multiple choices are available. The :ref:`ref_basis_sets`
@@ -49,17 +49,17 @@ method for the electronic ground state energy minimum.  As this calculation is s
 its convergence properties will highly depend on the starting electronic density. Therefore,
 a good starting electronic density will allow the calculation to converge faster.
 If the SCF has not converged after it has
-exceeded the maximum number of steps (set by MAX_SCF) the SCF calculation will 
+exceeded the maximum number of steps (set by ``MAX_SCF)`` the SCF calculation will 
 terminate and print the warning message: "SCF has not converged". Information on 
 how to overcome the issue of a non-converging SCF calculation can be found under :ref:`ref_troubleshooting`.
 
 The SCF calculation involves inner and outer loops. If the inner SCF loop does not
-converge in the desired number of steps (set in MAX_SCF) then the inner loop will exit in order to
+converge in the desired number of steps (set in ``MAX_SCF``) then the inner loop will exit in order to
 prevent wasting time heading in the wrong direction. The preconditioner is
 recalculated and then a new inner loop SCF begins, with the number of outer 
 steps incremented by one. This will hopefully stand a better chance of converging
 than the previous inner cycle. This process will be repeated for a number of outer
-steps (set in the &OUTER_SCF section). After this the SCF calculation is
+steps (set in the ``&OUTER_SCF`` section). After this the SCF calculation is
 terminated. Hence, the maximum number of SCF steps attempted is given as the product
 of the inner SCF steps and the outer SCF steps.
 
@@ -119,7 +119,7 @@ important parameters outlined below.
   &END DFT
 
 Additionally for each element identifier in your topology you need to tell CP2K which basis 
-sets and potentials to use. This is done in the SUBSYS section, under KIND. 
+sets and potentials to use. This is done in the ``SUBSYS`` section, under ``KIND``. 
 
 .. code-block:: none
 
@@ -138,13 +138,13 @@ Basis sets
 ------------
 
 The basis set for each element can be changed by editing the bs_filename within the DFT section, and the bs_identifier 
-in the KIND section of that element within the SUBSYS section. The bs_identifier should correspond
+in the KIND section of that element within the ``SUBSYS`` section. The bs_identifier should correspond
 to one of the basis sets for the given element within the basis set file.
 The q number proceeding the basis set in the identifer gives the number of 
 valence electrons. It depends on the element, for example H:1, C:4, O:6, N:5.
 
-Basis set files are provided within the /data directory of the CP2K source code
-(https://github.com/cp2k/cp2k/tree/master/data).
+Basis set files are provided within the /data directory of the 
+`CP2K source code <https://github.com/cp2k/cp2k/tree/master/data>`_ .
 If your installation of CP2K  has been built correctly then
 the files within this directory should be automatically included, so there is no
 need to copy these file to your working directory. 
@@ -231,8 +231,8 @@ is assumed to be smooth in space.  Such an approximation is rather crude and oft
 inaccurate results for some properties.
 
  An example of how to setup the PADE LDA method in the CP2K input file is shown below. 
- The functional needs to be specified in the XC_FUNCTIONAL section, 
- and the corresponding GTH-PADE pseudopotentials should be used.
+ The functional needs to be specified in the ``XC_FUNCTIONAL`` section, 
+ and the corresponding ``GTH-PADE`` pseudopotentials should be used.
 
 .. code-block:: none
 
@@ -250,7 +250,7 @@ The generalised gradient approximation (GGA) is an improvement on the LDA which 
 gradient of the density, as well as the density at one point.
 
 Using the GGA in CP2K is similar to using the LDA. It requires specifying the functional 
-and using the complementary pseudopotentials (which in this case would be GTH_PBE).
+and using the complementary pseudopotentials (which in this case would be ``GTH_PBE``).
 
 .. code-block:: none
 
@@ -297,8 +297,8 @@ been used (http://doi.org/10.1021/ct900489g) ).
    &END XC
 
 
-There are a variety of metaGGA method available through libxc, details of these 
-can be found here: https://www.tddft.org/programs/libxc/functionals/ (note that 
+There are a variety of metaGGA method available through 
+`libxc <https://www.tddft.org/programs/libxc/functionals/>`_ (note that 
 functional availablity is dependent on the version of libxc used).
 
 Hybrid methods
@@ -458,8 +458,7 @@ in the energy. A larger cutoff is usually more accurate as the planewave grid be
 however at a certain point increasing the 
 cutoff would no longer make any difference to the energy, but would increase the computational cost.
 
-Before doing a production run it is important to converge the cutoff. This process is
-described in detail here: https://www.cp2k.org/howto:converging_cutoff .
+Before doing a production run it is important to `converge the cutoff <https://www.cp2k.org/howto:converging_cutoff>`_.
 It essentially involves tracking the energy as the cutoff is varied
 and then selecting a cutoff large enough such that the energy reaches convergence. The correct value
 of the cutoff depends on the basis set, the pseudopotentals, the XC functional and the system itself.
@@ -470,7 +469,7 @@ REL_CUTOFF
 
 The REL_CUTOFF is similar to the CUTOFF and sets the planewave cutoff of a reference grid
 covered by a Gaussian function with unit standard deviation. This parameter is important to map Gaussian functions on a grid.
-Converging this parameter is also covered in this guide: https://www.cp2k.org/howto:converging_cutoff.
+Converging this parameter is also covered in this `guide <https://www.cp2k.org/howto:converging_cutoff>`_.
 
 COMMENSURATE
 ------------
@@ -492,14 +491,14 @@ EPS_SCF
 This sets the target accuracy for the SCF convergence. The SCF will be converged when the energy change between two SCF
 steps is less than this value. The default for this value is 1.0E-5. It is possible to set different values for the inner
 and outer SCF loops, however the EPS_SCF of the outer SCF must be smaller than or equal to EPS_SCF of the inner loop. In fact
-the EPS_SCF of the inner loop determines the value that can be reached in the outer loop.
+the ``EPS_SCF`` of the inner loop determines the value that can be reached in the outer loop.
 
 MAX_SCF
 -------
 
 In the main SCF section of the input this keyword sets the maximum number of SCF iterations to be performed in the inner SCF loop.
-In the OUTER_SCF section this keyword sets the maximum number of outer loops. The total number of SCF steps will be at maximum the product
-of the MAX_SCF for the inner SCF loop and MAX_SCF for the outer SCF loop.
+In the ``OUTER_SCF`` section this keyword sets the maximum number of outer loops. The total number of SCF steps will be at maximum the product
+of the ``MAX_SCF`` for the inner SCF loop and MAX_SCF for the outer SCF loop.
 
 .. _ref_troubleshooting:
 
@@ -513,12 +512,12 @@ Simulation fails or gives strange results
 Providing that you have used a sensible QM setup with a sufficiently large cutoff then
 the error is usually related to the setup of your system. When running a calculation with periodic boundary 
 conditions check that the CELL boundaries are large enough to keep the periodic
-images sufficiently separated. A convergence test for the CELL size can be crucial in this case.
+images sufficiently separated. A convergence test for the ``CELL`` size can be crucial in this case.
 Also check the initial atomic coordinates are sensible by visualising your system. 
 
 If the initial coordinates look reasonable then consider simplifying 
 your input, starting with the most simple settings, including basis sets and functionals. If the QM/MM simulation fails then
-may want to try running a simple MM calcaultion first (RUN_TYPE FIST) to check the geometries, and then slowly increase the complexity
+may want to try running a simple MM calcaultion first (``RUN_TYPE FIST``) to check the geometries, and then slowly increase the complexity
 adding in QM and QM/MM sections.
 
 SCF does not converge
@@ -526,18 +525,19 @@ SCF does not converge
 
 If during the SCF calculation the energies varies rapidly then it is likely that
 the SCF will not converge. This will be reported in the CP2K output with the message 
-"WARNING SCF has not converged. You can quickly verify if the SCF has failed to converge by 
+``"WARNING SCF has not converged"``. You can quickly verify if the SCF has failed to converge by 
 looking for this text in your output file:
 
 ``grep 'WARNING SCF' output-file.log``
 
-If this occurs then the easiest parameters to change to try to tune in order to reach SCF convergence are the MAX_SCF and EPS_SCF.
+If this occurs then the easiest parameters to change to try to tune in order 
+to reach SCF convergence are the ``MAX_SCF`` and ``EPS_SCF``.
 
 Some things to try are listed below:
 
-* Check OUTER_SCF&EPS_SCF <= EPS_SCF. If not decrease the outer EPS_SCF.
-* Increase the number of SCF loops with OUTER_SCF&MAX_SCF.
-* Increase the number of inner SCF steps with MAX_SCF.
+* Check ``OUTER_SCF&EPS_SCF`` <= ``EPS_SCF``. If not decrease the outer ``EPS_SCF``.
+* Increase the number of SCF loops with ``OUTER_SCF&MAX_SCF``.
+* Increase the number of inner SCF steps with ``MAX_SCF``.
 * Change the OT minimizer to CG.
 * Check again your geometry.
 * If running MD consider decreasing your timestep.

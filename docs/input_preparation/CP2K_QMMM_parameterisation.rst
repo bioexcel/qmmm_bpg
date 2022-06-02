@@ -13,7 +13,7 @@ CP2K QMMM input format
 
 The basic structure of the QMMM section in the CP2K input file is shown below. This contains all the parameters
 describing the selection of the QM atoms and how the QM region should be treated within the system.
-This paragraph is designed to act as a rough guide about how to build your QMMM section, and contains some example
+This paragraph is designed to act as a rough guide about how to build your ``QMMM`` section, and contains some example
 parameter settings with descriptions in the comments. The example assumes the employment of the GEEP approach
 for the QM/MM electrostatic coupling. However other methods exist and these will require
 slightly different parameters.  A list of these different approaches can be found in the description of the ECOUPL keyword below.
@@ -60,7 +60,7 @@ slightly different parameters.  A list of these different approaches can be foun
 Setting up QM atoms
 -------------------
 
-The QM atoms need to be listed in terms of their MM index in the .pdb file 
+The QM atoms need to be listed in terms of their MM index in the ``pdb`` file 
 (or coordinate file format of your choice). They should be grouped into their QM atomic
 kinds (i.e. their element type) and given as a list of indexes, as shown below for N atoms.
 
@@ -70,10 +70,10 @@ kinds (i.e. their element type) and given as a list of indexes, as shown below f
       MM_INDEX list_of_atom_indexes      ! list of N QM atoms
     &END QM_KIND
 
-The QM kind should match a KIND specified in the SUBSYS section, which supplies the element
+The QM kind should match a ``KIND`` specified in the ``SUBSYS`` section, which supplies the element
 type and corresponding basis set and pseudopotential. To get the correct input format
 for CP2K the get_qm_kinds.sh script is supplied which converts a pdb file containing the
-QM atoms to this format. This pdb file can be created by selecting the QM atoms from the pdb file of the whole system
+QM atoms to this format. This ``pdb`` file can be created by selecting the QM atoms from the ``pdb`` file of the whole system
 
 
 
@@ -118,10 +118,10 @@ PARALLEL_SCHEME
 
 This section allows one to specify the parallelisation scheme to be used in the calculation
 of the long-range terms of the potential. The choices are to parallelise
-on the GRID or ATOM. ATOM is the default option, however this can require a lot of memory
+on the ``GRID`` or ``ATOM``. ``ATOM`` is the default option, however this can require a lot of memory
 as the grids are replicated and you may get out of memory errors.
-Switching to the GRID scheme can reduce the memory requirements however when replicating
-many atoms the performance may suffer. Instead you want to consider sticking with the ATOM
+Switching to the ``GRID`` scheme can reduce the memory requirements however when replicating
+many atoms the performance may suffer. Instead you want to consider sticking with the ``ATOM``
 scheme, but using multiple threads per process or underpopulating the cores to increase the available 
 memory.
 
@@ -131,8 +131,8 @@ CENTER
 ------
 
 This keyword allows setting when the QM system is automatically centered within the QM box. 
-The options for this setting are EVERY_STEP, SETUP_ONLY
-and NEVER. The default is EVERY_STEP, which is suggested to prevent QM atoms from leaving the box.
+The options for this setting are ``EVERY_STEP``, ``SETUP_ONLY``
+and NEVER. The default is ``EVERY_STEP``, which is suggested to prevent QM atoms from leaving the box.
 
 .. _ref_qmmmcell:
 
@@ -144,9 +144,9 @@ Selecting the size of the cell
 ------------------------------
 
 
-The CELL section within the QMMM section contains settings for the QM box which should contain the QM
+The ``CELL`` section within the QMMM section contains settings for the QM box which should contain the QM
 atoms. QM atoms are by default centered within the cell so you do not have to worry about
-its position within the cell for the whole system (this is controlled by the CENTER option).
+its position within the cell for the whole system (this is controlled by the ``CENTER`` option).
 However the dimensions of the CELL should be large enough to contain all the QM atoms.
 A cell size that extends roughly 1.5-2 A around the outermost QM atoms is usually sufficient. 
 If the CELL is too small the QM energy will not be calculated properly and as a
@@ -164,14 +164,14 @@ Preventing QM atoms moving outside of the cell
 ------------------------------------------------
 
 The QM atoms should stay within the QM box during a simulation. If they move too much into the boundaries
-of the QM box the following warning message will be printed - "WARNING One or few QM atoms are within the SKIN 
-of the quantum box". The calculation will usually continue in this case but the energies
+of the QM box the following warning message will be printed - ``"WARNING One or few QM atoms are within the SKIN 
+of the quantum box"``. The calculation will usually continue in this case but the energies
 and forces could be wrong.  This message will usually occur in the first few MD steps
 of a simulation, and if you see this message it is a good idea to terminate the
 calculation and check what might be wrong.
 
 Some simple fixes for this might be to increase the size of the QM box and double 
-check that the QM atoms are properly centered in the box using &QMMM&CELL&CENTERING.
+check that the QM atoms are properly centered in the box using ``&QMMM&CELL&CENTERING``.
 However these options may not solve the issue if atoms are moving rapidly from within the box.
 Fast movement of atoms in an MD simulation may be due to incorrect geometry. It can also happen if you 
 have QM water atoms as these move around more readily
@@ -211,7 +211,7 @@ Cutting a C-C bond for example is usually a safe choice.
 
 The bonds can be identified via visual inspection, e.g. by vmd or other pdb viewer, or by careful analysis
 of the pdb file. To correctly treat a QM-MM bond in CP2K you need to know the atomic indexes
-of the QM and MM atoms involved in the cut bond. The LINK section is then used to pass this information.
+of the QM and MM atoms involved in the cut bond. The ``LINK`` section is then used to pass this information.
 
 
 .. _ref_link:
@@ -222,13 +222,13 @@ QM-MM Link parameterisation
 The CP2K  treatment of the dangling bonds involves adding an atom (usually a hydrogen) to
 saturate the valence of the unpaired QM atom.
 
-This must be done for all dangling QM bonds or you will get an error message beginning with the following: "ERROR in the QM/MM connectivity..."
+This must be done for all dangling QM bonds or you will get an error message beginning with the following: ``"ERROR in the QM/MM connectivity..."``
 
 There are three different link treatments in CP2K which can be set using the LINK_TYPE option. These are as follows:
 
-* GHO - Integrated Molecular Orbital Molecular Mechanics method
-* IMOMM -  Generalized Hybrid Orbital method
-* PSEUDO - Use a monovalent pseudo-potential
+* ``GHO`` - Integrated Molecular Orbital Molecular Mechanics method
+* ``IMOMM`` -  Generalized Hybrid Orbital method
+* ``PSEUDO`` - Use a monovalent pseudo-potential
 
 The element used to cap the bond can be changed by setting QM_KIND; the default option is hydrogen H.
 
