@@ -188,9 +188,8 @@ All results are reported for ARCHER2. MPI+OpenMP is used with 4 threads per proc
 
     Performance\@128 cores: 3.8 ps/day, Parallel efficiency\@128 cores: 58%
 
-.. class:: center
 
-   **ClC-253-BLYP**
+**ClC-253-BLYP**
 
 .. figure:: /_static/ARCHER2/CPU/ClC-253-BLYP_total_diff6-1_4threads.out-time.png
     :align: center
@@ -211,69 +210,69 @@ All results are reported for Cirrus. The Cirrus GPU nodes contain 4 GPUs per nod
 
 **MQAE-BLYP**
 
-.. figure:: /_static/Cirrus/GPU/MQAE-BLYP_total_diff6-1_4threads.out-time.png
+.. figure:: /_static/Cirrus/GPU/MQAE-BLYP_total_diff6-1_10threads.out-time.png
     :align: center
     :alt: alternate text
     :scale: 25
 
-    Performance\@256 cores: 24 ps/day, Parallel efficiency\@256 cores: 45%
+    Performance\@160 cores: 13.4 ps/day, Parallel efficiency\@160 cores: 60%
 
     
 **MQAE-B3LYP**
 
-.. figure:: /_static/Cirrus/GPU/MQAE-B3LYP_total_diff6-1_4threads.out-time.png
+.. figure:: /_static/Cirrus/GPU/MQAE-B3LYP_total_diff6-1_10threads.out-time.png
     :align: center
     :alt: alternate text
     :scale: 25
 
-    Performance\@256 cores: 17 ps/day, Parallel efficiency\@256 cores: 51%
+    Performance\@160 cores: 9.7 ps/day, Parallel efficiency\@160 cores: 71%
 
 **MQAE-B3LYP-large**
 
-.. figure:: /_static/Cirrus/GPU/MQAE-B3LYP-large_total_diff6-1_4threads.out-time.png
+.. figure:: /_static/Cirrus/GPU/MQAE-B3LYP-large_total_diff6-1_10threads.out-time.png
     :align: center
     :alt: alternate text
     :scale: 25
 
-    Performance\@256 cores: 3.4 ps/day, Parallel efficiency\@256 cores: 43%
+    Performance\@160 cores: 9.7 ps/day, Parallel efficiency\@160 cores: 71%
 
 
 **CBD_PHY-PBE**
 
-.. figure:: /_static/Cirrus/GPU/CBD_PHY-PBE_total_diff6-1_4threads.out-time.png
+.. figure:: /_static/Cirrus/GPU/CBD_PHY-PBE_total_diff6-1_10threads.out-time.png
     :align: center
     :alt: alternate text
     :scale: 25
 
-    Performance\@256 cores: 3.5 ps/day, Parallel efficiency\@256 cores: 56%
+    Performance\@320 cores: 3.5 ps/day, Parallel efficiency\@320 cores: 69%
 
 **CBD_PHY-PBE0**
 
-.. figure:: /_static/Cirrus/GPU/CBD_PHY-PBE0_total_diff6-1_4threads.out-time.png
+.. figure:: /_static/Cirrus/GPU/CBD_PHY-PBE0_total_diff6-1_10threads.out-time.png
     :align: center
     :alt: alternate text
     :scale: 25
 
-    Performance\@256 cores: 2.1 ps/day, Parallel efficiency\@256 cores: 83%
+    Performance\@320 cores: 2.1 ps/day
 
 
 **ClC-19-BLYP**
 
-.. figure:: /_static/Cirrus/GPU/ClC-19-BLYP_total_diff6-1_4threads.out-time.png
+.. figure:: /_static/Cirrus/GPU/ClC-19-BLYP_total_diff6-1_10threads.out-time.png
     :align: center
     :alt: alternate text
     :scale: 25
 
-    Performance\@128 cores: 3.8 ps/day, Parallel efficiency\@128 cores: 58%
+    Performance\@1160 cores: 4.3 ps/day, Parallel efficiency\@160 cores: 69%
 
 
    **ClC-253-BLYP**
 
-.. figure:: /_static/Cirrus/GPU/ClC-253-BLYP_total_diff6-1_4threads.out-time.png
+.. figure:: /_static/Cirrus/GPU/ClC-253-BLYP_total_diff6-1_10threads.out-time.png
     :align: center
     :alt: alternate text
     :scale: 25
 
-    Performance\@256 cores: 0.7 ps/day, Parallel efficiency\@256 cores: 21%
+    Performance\@160 cores: 1.4 ps/day, Performance\@320 cores: 1.9%
 
 
