@@ -139,7 +139,7 @@ CPU benchmark results
     :alt: alternate text
     :scale: 25
 
-    MQAE-BLYP - 4 threads per rank, Performance@256 cores: 24 ps/day, Parallel efficiency@256 cores: 45%
+    MQAE-BLYP - 4 threads per rank, Performance\@256 cores: 24 ps/day, Parallel efficiency\@256 cores: 45%
 
 **MQAE-B3LYP**
 
