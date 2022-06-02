@@ -134,6 +134,8 @@ CPU benchmark results
 
 All results are reported for ARCHER2. MPI+OpenMP is used with 4 threads per process.
 
+.. class:: center
+
 **MQAE-BLYP**
 
 .. figure:: /_static/ARCHER2/CPU/MQAE-BLYP_total_diff6-1_4threads.out-time.png
@@ -143,6 +145,8 @@ All results are reported for ARCHER2. MPI+OpenMP is used with 4 threads per proc
 
     Performance\@256 cores: 24 ps/day, Parallel efficiency\@256 cores: 45%
 
+.. class:: center
+    
 **MQAE-B3LYP**
 
 .. figure:: /_static/ARCHER2/CPU/MQAE-B3LYP_total_diff6-1_4threads.out-time.png
@@ -152,14 +156,18 @@ All results are reported for ARCHER2. MPI+OpenMP is used with 4 threads per proc
 
     Performance\@256 cores: 17 ps/day, Parallel efficiency\@256 cores: 51%
 
+.. class:: center
+
 **MQAE-B3LYP-large**
 
-.. figure:: /_static/ARCHER2/CPU/MQAE-B3LYP_large_total_diff6-1_4threads.out-time.png
+.. figure:: /_static/ARCHER2/CPU/MQAE-B3LYP-large_total_diff6-1_4threads.out-time.png
     :align: center
     :alt: alternate text
     :scale: 25
 
     Performance\@256 cores: 3.4 ps/day, Parallel efficiency\@256 cores: 43%
+
+.. class:: center
 
 **CBD_PHY-PBE**
 
@@ -170,6 +178,8 @@ All results are reported for ARCHER2. MPI+OpenMP is used with 4 threads per proc
 
     Performance\@256 cores: 3.5 ps/day, Parallel efficiency\@256 cores: 56%
 
+.. class:: center
+
 **CBD_PHY-PBE0**
 
 .. figure:: /_static/ARCHER2/CPU/CBD_PHY-PBE0_total_diff6-1_4threads.out-time.png
@@ -179,6 +189,8 @@ All results are reported for ARCHER2. MPI+OpenMP is used with 4 threads per proc
 
     Performance\@256 cores: 2.1 ps/day, Parallel efficiency\@256 cores: 83%
 
+.. class:: center
+
 **ClC-19-BLYP**
 
 .. figure:: /_static/ARCHER2/CPU/ClC-19-BLYP_total_diff6-1_4threads.out-time.png
@@ -187,6 +199,8 @@ All results are reported for ARCHER2. MPI+OpenMP is used with 4 threads per proc
     :scale: 25
 
     Performance\@128 cores: 3.8 ps/day, Parallel efficiency\@128 cores: 58%
+
+.. class:: center
 
 **ClC-253-BLYP**
 
