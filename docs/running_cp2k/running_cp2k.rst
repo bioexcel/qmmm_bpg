@@ -137,11 +137,9 @@ CPU benchmark results
 .. figure:: /_static/ARCHER2/CPU/MQAE-BLYP_total_diff6-1_4threads.out-time.png
     :align: center
     :alt: alternate text
-    :scale: 50
+    :scale: 25
 
-    MQAE-BLYP - 4 threads per rank
-    Performance@256 cores: 24 ps/day
-    Parallel efficiency@256 cores: 45%
+    MQAE-BLYP - 4 threads per rank, Performance@256 cores: 24 ps/day, Parallel efficiency@256 cores: 45%
 
 **MQAE-B3LYP**
 
