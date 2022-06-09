@@ -100,10 +100,10 @@ The table below gives an overview of them.
 Running on CPUs
 ---------------
 
-The time per MD step (s) on ARCHER2 is reported in the Table below for the benchmark systems. ARCHER2 has 
-128 cores per node, comprised of two 64-core AMD EYPC processors. More details are given on the 
-`ARCHER2 website <https://www.archer2.ac.uk>`_ The results below use MPI+OpenMP with 4 threads per MPI process which was found
-to, in general, give the best performance.
+The time per MD step (s) and performance (ps/day) on ARCHER2 is reported in the Tables below for 
+the benchmark systems. ARCHER2 has 128 cores per node, comprised of two 64-core AMD EYPC processors.
+More details are given on the `ARCHER2 website <https://www.archer2.ac.uk>`_ The results below use
+MPI+OpenMP with 4 threads per MPI process which was found to, in general, give the best performance.
 
 +--------+--------------+--------------+-------------+--------------+----------------+-----------------+
 |        | MQAE  (BLYP) | MQAE (B3LYP) | ClC (QM 19) | ClC (QM 253) | CBD_PHY (PBE)  | CBD_PHY (PBE0)  |
@@ -121,10 +121,30 @@ to, in general, give the best performance.
 | 512    |              |              |             |              |                | 24.93           |
 +--------+--------------+--------------+-------------+--------------+----------------+-----------------+
 
+
+
++--------+--------------+--------------+-------------+--------------+----------------+-----------------+
+|        | MQAE  (BLYP) | MQAE (B3LYP) | ClC (QM 19) | ClC (QM 253) | CBD_PHY (PBE)  | CBD_PHY (PBE0)  |
++--------+--------------+--------------+-------------+--------------+----------------+-----------------+
+| Cores  | Performance (ps/day)                                                                        |
++========+==============+==============+=============+==============+================+=================+
+| 32     | 6.71         | 4.13         | 1.84        | 0.51         | 0.76           | 0.32            |
++--------+--------------+--------------+-------------+--------------+----------------+-----------------+
+| 64     | 11.71        | 6.98         | 3.35        | 0.77         | 1.29           | 0.68            |
++--------+--------------+--------------+-------------+--------------+----------------+-----------------+
+| 128    | 17.60        | 11.01        | 5.73        | 1.15         | 2.27           | 1.24            |
++--------+--------------+--------------+-------------+--------------+----------------+-----------------+
+| 256    | 24.34        | 16.84        |             | 1.50         | 3.47           | 2.15            |
++--------+--------------+--------------+-------------+--------------+----------------+-----------------+
+| 512    |              |              |             |              |                | 3.47            |
++--------+--------------+--------------+-------------+--------------+----------------+-----------------+
+
+
 Running on GPUs
 ---------------
 
-The time per MD step (s) on Cirrus GPU nodes is reported in the Table below for the benchmark systems.
+The time per MD step (s) and performance (ps/day) on Cirrus GPU nodes is reported in the Tables below 
+for the benchmark systems.
 The Cirrus GPU nodes contain 4 GPUs per node and 20 CPU cores. The GPUs are Nvidia Volta V100's
 Here we assign one MPI process per GPU and 10 OpenMP threads per process to make use of the CPU cores. 
 More details are given in the `Cirrus documentation <https://cirrus.readthedocs.io/en/main/user-guide/gpu.html>`_
@@ -144,6 +164,21 @@ improve the performance.
 | 160   | 16           | 6.44         | 8.91         | 20.31        | 63.08          | 38.66           | 70.43           |
 +-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+
 | 320   | 32           |              | 6.36         |              | 46.62          | 24.79           | 41.19           |
++-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+
+
+
++-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+
+|                      | MQAE  (BLYP) | MQAE (B3LYP) | ClC (QM 19)  | ClC (QM 253)   | CBD_PHY (PBE)   | CBD_PHY (PBE0)  |
++-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+
+| Cores | GPUs         | Performance (ps/day)                                                                            |
++=======+==============+==============+==============+==============+================+=================+=================+
+| 40    | 4            | 5.60         | 3.38         | 1.55         |                | 0.63            |                 |
++-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+
+| 80    | 8            | 9.12         | 6.03         | 2.63         |                | 0.96            | 0.55            |
++-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+
+| 160   | 16           | 13.42        | 9.70         | 4.25         | 1.37           | 2.23            | 1.23            |
++-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+
+| 320   | 32           |              | 13.58        |              | 1.85           | 3.49            | 2.10            |
 +-------+--------------+--------------+--------------+--------------+----------------+-----------------+-----------------+
 
 
@@ -204,7 +239,7 @@ All results are reported for ARCHER2. MPI+OpenMP is used with 4 threads per proc
     :alt: alternate text
     :scale: 25
 
-    Performance\@128 cores: 3.8 ps/day, Parallel efficiency\@128 cores: 58%
+    Performance\@128 cores: 5.7 ps/day, Parallel efficiency\@128 cores: 58%
 
 
 **ClC-253-BLYP**
@@ -214,7 +249,7 @@ All results are reported for ARCHER2. MPI+OpenMP is used with 4 threads per proc
     :alt: alternate text
     :scale: 25
 
-    Performance\@256 cores: 0.7 ps/day, Parallel efficiency\@256 cores: 21%
+    Performance\@256 cores: 1.5 ps/day, Parallel efficiency\@256 cores: 21%
 
 
 
@@ -281,7 +316,7 @@ All results are reported for Cirrus. The Cirrus GPU nodes contain 4 GPUs per nod
     :alt: alternate text
     :scale: 25
 
-    Performance\@1160 cores: 4.3 ps/day, Parallel efficiency\@160 cores: 69%
+    Performance\@160 cores: 4.3 ps/day, Parallel efficiency\@160 cores: 69%
 
 
 **ClC-253-BLYP**
