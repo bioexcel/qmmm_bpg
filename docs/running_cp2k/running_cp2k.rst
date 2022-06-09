@@ -105,7 +105,7 @@ The time per MD step (s) on ARCHER2 is reported in the Table below for the bench
 `ARCHER2 website <https://www.archer2.ac.uk>`_ The results below use MPI+OpenMP with 4 threads per MPI process which was found
 to, in general, give the best performance.
 
-+------- +--------------+--------------+-------------+--------------+----------------+-----------------+
++--------+--------------+--------------+-------------+--------------+----------------+-----------------+
 | System | MQAE  (BLYP) | MQAE (B3LYP) | ClC (QM 19) | ClC (QM 253) | CBD_PHY (PBE)  | CBD_PHY (PBE0)  |
 +--------+--------------+--------------+-------------+--------------+----------------+-----------------+
 | Cores  | Time per MD step (s)                                                                        |
