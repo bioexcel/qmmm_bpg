@@ -8,6 +8,13 @@ file (``.top``) and a MD parameter file (``.mdp``) with settings to do a classic
 simulation. From this this guide will show you how to select your QM atoms, 
 and set the parameters in order to run a QM/MM simulation. 
 
+
+Examples of input files for running QM/MM simulations with the GROMACS/CP2K interface can be
+found in the 
+`Bioexcel QM/MM benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_.
+
+
+
 ----------------------
 Selecting QM atoms
 ----------------------

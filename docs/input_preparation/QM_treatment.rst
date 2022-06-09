@@ -9,6 +9,11 @@ It will guide on how to use various options within CP2K, and give some general a
 it will not give any information about what specific choices (e.g. basis sets and XC functionals)
 are best for your system.
 
+Examples of QM/MM input files for CP2K can be found in the 
+`Bioexcel QM/MM benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_.
+
+
+
 --------------------------------------
 Mechanics of a DFT calculation in CP2K
 --------------------------------------
