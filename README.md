@@ -1,10 +1,10 @@
-# CP2K QM/MM best practice guide
+# (GROMACS+)CP2K QM/MM Best Practice Guide
 
 To build html version locally:
 ==============================
-pip install sphinx
+pip3 install sphinx
 
-pip install sphinx_rtd_theme
+pip3 install sphinx_rtd_theme
 
 make html
 
