@@ -313,6 +313,13 @@ Hybrid methods
 Hybrid methods calculate a portion of the the exchange functional using exact Hartree Fock theory.
 The rest of the exchange and correlation functions is calcaulated with other methods, typically GGA or LDA.
 Within the XC section of the CP2K input the HF section is used for the Hartree Fock exchange setup.
+
+Using the DZVP-MOLOPT basis sets with hybrid functionals becomes too computationally expensive. However
+it is possible to use these with the auxiliary density matrix methods (ADMM) as it can mitigate the
+cost of using large basis sets such as these. Examples of inputs for these can be found in the QMMM
+benchmark suite for the `ClC-19 system <https://github.com/bioexcel/qmmm_benchmark_suite/tree/master/ClC/QM-19/CP2K/B3LYP/MOLOPT-ADMM>`_
+and the `MQAE system <https://github.com/bioexcel/qmmm_benchmark_suite/tree/master/MQAE/CP2K/B3LYP/MOLOPT-ADMM>`_.
+
 Two commonly used hybrid methods dicussed here are B3LYP and PBE0.
 
 **PBE0**
