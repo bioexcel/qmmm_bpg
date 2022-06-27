@@ -65,7 +65,8 @@ simulation will be dominated by the QM and QM/MM contributions within CP2K. The 
 of a CP2K standlone QM/MM calculation is equivalent to that of the GROMACS/CP2K interface.
 Here performance results are resported for CP2K QM/MM benchmarks.
 
-The selection of CP2K QM/MM benchmarks are available from the `Bioexel QM/MM benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_
+The selection of CP2K QM/MM benchmarks are available from the `Bioexel QM/MM benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_.
+
 
 The table below gives an overview of them.
 
@@ -95,6 +96,9 @@ The table below gives an overview of them.
 |                  |                     |             +----------+            |              |                 |           |         |          |
 |                  |                     |             | 77       |            |              |                 |           |         |          |
 +------------------+---------------------+-------------+----------+------------+--------------+-----------------+-----------+---------+----------+
+
+The raw data for the performance of these benchmarks is available in the `QM/MM Benchmarking Data <https://github.com/bioexcel/qmmm_benchmark_results>`_ repository. 
+However the performance is summarised below.
 
 
 Running on CPUs
