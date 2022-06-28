@@ -2,7 +2,7 @@
 CP2K QM/MM parameterisation
 ============================
 
-The chapter describes important topics related to the QM/MM settings in CP2K once you have decided which are the QM atoms.
+This section describes important topics related to the QM/MM settings in CP2K once you have decided which are the QM atoms.
 This includes how to get the QM atoms into the right format for CP2K, and how to parameterise
 the QM/MM cell. It will also deal with how to properly handle atomic bonds that cross the QM-MM
 boundary.
@@ -12,7 +12,7 @@ CP2K QMMM input format
 -----------------------
 
 The basic structure of the QMMM section in the CP2K input file is shown below. This contains all the parameters
-describing the selection of the QM atoms and how the QM region should be treated within the system.
+describing the selection of the QM atoms and how the QM region should be treated. 
 This paragraph is designed to act as a rough guide about how to build your ``QMMM`` section, and contains some example
 parameter settings with descriptions in the comments. The example assumes the employment of the GEEP approach
 for the QM/MM electrostatic coupling. However other methods exist and these will require

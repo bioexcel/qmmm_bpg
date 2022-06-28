@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'CP2K QM/MM Best Practice Guide'
+project = '(GROMACS+)CP2K QM/MM Best Practice Guide'
 author = 'Holly Judge, Salome Llabres Prat'
 
 # The short X.Y version

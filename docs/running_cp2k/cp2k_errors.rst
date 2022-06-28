@@ -6,9 +6,9 @@ CP2K Troubleshooting
 Abort messages
 -----------------------
 
-Abort messages appear when something has occured that causes CP2K to exit. They 
-will look like this and contain a message about what has caused the abort, and 
-what can be done to fix it.
+Abort messages appear when something has occured that causes CP2K to
+exit. They will look like the output shown below and contain a message
+about what has caused the abort, and what can be done to fix it.
 
 
 .. code-block :: none
@@ -17,7 +17,7 @@ what can be done to fix it.
  *   ___                                                                       *
  *  /   \                                                                      *
  * [ABORT]                                                                     *
- *  \___/                         Error messsge here                           *
+ *  \___/                         Error messsage here                          *
  *    |                                                                        *
  *  O/|                                                                        *
  * /| |                                                                        *

@@ -4,7 +4,7 @@ Building CP2K
 
 
 This chapter will guide on how to install CP2K so that it can be used
-with the GROMACS/CP2K interface. It will show you how to use the CP2K
+with the GROMACS-CP2K interface. It will show you how to use the CP2K
 toolchain to do this.
 
 
@@ -19,11 +19,11 @@ CP2K can be downloaded from the `CP2K github repositry <https://github.com/cp2k/
 Set up environment
 ------------------
 
-Usually on a HPC machine commonaly used software is available through
+Usually on a HPC machine commonly used software is available through
 centrally installed modules. We suggest using these on your machine
 if they are available rather than building your own version. Typically
 CP2K recommends the use of the GCC compilers. You should also make 
-sure that an MPI implemetation which is compatible with these is also 
+sure that an MPI implementation which is compatible with these is also 
 loaded. If in doubt consult the documentation of the machine.
 
 Apart from this you will also need
@@ -33,7 +33,7 @@ Apart from this you will also need
 * FFTW
 * CMAKE
 
-BLAS, SCALAPACK and LAPACK are usually available through Intel MKL library,
+BLAS, SCALAPACK and LAPACK are usually available through the Intel MKL library,
 Cray-libsci, or OpenBlas/OpenSCALAPACK.
 
 If building on a GPU you should also make sure that either the CUDA or
@@ -74,7 +74,7 @@ or directed to use the system version of the package by adding
 .. code-block:: none
   --with-package=system
 
-A lot of the default installed packages can be unnecssary. Therefore 
+A lot of the packages installed by default can be unnecessary. Therefore 
 we suggest these be excluded from the build as these can make the
 build process more complex.
 
@@ -182,7 +182,7 @@ of your choice using:
 
   make -j 12 ARCH=local VERSION=psmp
 
-And then after this build libcp2k which is required for the GROMACS/CP2K
+And then after this build libcp2k which is required for the GROMACS-CP2K
 interface.
 
 .. code-block:: none
@@ -195,5 +195,5 @@ Building the interface
 -----------------------
 
 
-For information on building the GROMACS/CP2K interface please see the 
+For information on building the GROMACS-CP2K interface please see the 
 dedecated `GROMACS page <https://manual.gromacs.org/documentation/2022-beta1/install-guide/index.html#installing-with-cp2k>`_

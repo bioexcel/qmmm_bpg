@@ -2,7 +2,7 @@
 GROMACS/CP2K interface QM/MM parameterisation
 =============================
 
-This chapter describes how to set up a QM/MM system within the GROMACS/CP2K interface.
+This section describes how to set up a QM/MM system when using the GROMACS-CP2K interface.
 It assumes that you have a equilibriated GROMACS coordinates file (``.gro``), a GROMACS topolopy
 file (``.top``) and a MD parameter file (``.mdp``) with settings to do a classical MM
 simulation. From this this guide will show you how to select your QM atoms, 

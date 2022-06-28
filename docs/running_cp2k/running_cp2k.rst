@@ -48,7 +48,7 @@ you can create the GROMACS ``tpr`` file and then launch the MD simulation.
   joblauncher (n proces) gmx_mpi -s sys.tpr
 
 
-When genreating the ``tpr`` file you may get a warning about your system having non-zero
+When generating the ``tpr`` file you may get a warning about your system having non-zero
 charge. This can safely be ignored for QM/MM calculations by using the ``-maxwarn`` option.
 
 The ``joblauncher`` will depend on the job launcher on your system, common examples are
@@ -60,16 +60,15 @@ The ``joblauncher`` will depend on the job launcher on your system, common examp
 Performance considerations
 --------------------------
 
-When running with either CP2K standalone or the  GROMACS/CP2K interface the run times of the
-simulation will be dominated by the QM and QM/MM contributions within CP2K. The performance 
-of a CP2K standlone QM/MM calculation is equivalent to that of the GROMACS/CP2K interface.
-Here performance results are resported for CP2K QM/MM benchmarks.
+When running CP2K standalone or together with GROMACS using the
+GROMACS-CP2K interface, the run times of simulations will be dominated
+by the QM and QM/MM calculations within CP2K. The performance of QM/MM
+simulation using GROMACS together with CP2K is roughly equivalent to
+that of performing the equivalent simulation using CP2K standalone.
 
-The selection of CP2K QM/MM benchmarks are available from the `Bioexel QM/MM benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_.
-
-
-The table below gives an overview of them.
-
+For the sake of reference we include here performance results for a
+number of CP2K QM/MM benchmarks that are part of the `Bioexel QM/MM
+benchmark suite <https://github.com/bioexcel/qmmm_benchmark_suite>`_. 
 
 +------------------+---------------------+-------------+----------+------------+--------------+-----------------+-----------+---------+----------+
 | Name             | Type                | Total atoms | QM atoms | Functional | QM Cell Size | Basis set       | Time step | MD Type | Periodic |
@@ -98,7 +97,7 @@ The table below gives an overview of them.
 +------------------+---------------------+-------------+----------+------------+--------------+-----------------+-----------+---------+----------+
 
 The raw data for the performance of these benchmarks is available in the `QM/MM Benchmarking Data <https://github.com/bioexcel/qmmm_benchmark_results>`_ repository. 
-However the performance is summarised below.
+Their performance is summarised below.
 
 
 Running on CPUs

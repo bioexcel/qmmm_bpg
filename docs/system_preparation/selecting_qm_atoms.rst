@@ -2,6 +2,7 @@
 Selecting QM atoms
 ==========================
 
+You may also like to consult our guide on Best Practices in QM/MM Simulation of Biomolecular Systems, which gives advice on QM/MM methodology including how to select QM atoms that is independent of the software used: https://docs.bioexcel.eu/qmmm_simulation_bpg
 
 -----------------
 Initial selection
