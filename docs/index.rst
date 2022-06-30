@@ -5,8 +5,9 @@
 This guide provides practical advice on how to use CP2K and the GROMACS-CP2K interface
 to perform QM/MM simulation of biomolecular systems.
 
-For advice on QM/MM methodology that is independent of the software used, see our guide on Best Practices in QM/MM Simulation of Biomolecular Systems:
-https://docs.bioexcel.eu/qmmm_simulation_bpg
+For *general methodological* advice on QM/MM modelling & simulation of biomolecular
+systems, see our guide on `Best Practices in QM/MM Simulation of Biomolecular Systems <https://docs.bioexcel.eu/qmmm_simulation_bpg>`_
+
 
 
 .. toctree::
