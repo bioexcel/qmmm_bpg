@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building CP2K &mdash; (GROMACS+)CP2K QM/MM Best Practice Guide  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Running QM/MM simulations" href="running_cp2k.html" />
+    <link rel="prev" title="GROMACS/CP2K interface QM/MM parameterisation" href="../input_preparation/interface_QMMM_parameterisation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> (GROMACS+)CP2K QM/MM Best Practice Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">QM/MM overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">System preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/system_preparation.html">System preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/selecting_qm_atoms.html">Selecting QM atoms</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/CP2K_MM_setup.html">CP2K MM setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/QM_treatment.html">QM treatment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/CP2K_QMMM_parameterisation.html">CP2K QM/MM parameterisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/interface_QMMM_parameterisation.html">GROMACS/CP2K interface QM/MM parameterisation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Running:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building CP2K</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-cp2k">Downloading CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-environment">Set up environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cp2k-toolchain">CP2K toolchain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cpu-options">CPU options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpu-options">GPU options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-plumed">Enabling Plumed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-cp2k">Compiling CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-interface">Building the interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k.html">Running QM/MM simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cp2k_output.html">Understanding the CP2K output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cp2k_errors.html">CP2K Troubleshooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">(GROMACS+)CP2K QM/MM Best Practice Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Building CP2K</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/running_cp2k/building_cp2k.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-cp2k">
+<h1>Building CP2K<a class="headerlink" href="#building-cp2k" title="Permalink to this heading"></a></h1>
+<p>This chapter will guide on how to install CP2K so that it can be used
+with the GROMACS-CP2K interface. It will show you how to use the CP2K
+toolchain to do this.</p>
+<section id="downloading-cp2k">
+<h2>Downloading CP2K<a class="headerlink" href="#downloading-cp2k" title="Permalink to this heading"></a></h2>
+<p>CP2K can be downloaded from the <a class="reference external" href="https://github.com/cp2k/cp2k/releases/">CP2K github repositry</a></p>
+</section>
+<section id="set-up-environment">
+<h2>Set up environment<a class="headerlink" href="#set-up-environment" title="Permalink to this heading"></a></h2>
+<p>Usually on a HPC machine commonly used software is available through
+centrally installed modules. We suggest using these on your machine
+if they are available rather than building your own version. Typically
+CP2K recommends the use of the GCC compilers. You should also make
+sure that an MPI implementation which is compatible with these is also
+loaded. If in doubt consult the documentation of the machine.</p>
+<p>Apart from this you will also need</p>
+<ul class="simple">
+<li><p>BLAS, SCALAPACK, LAPACK</p></li>
+<li><p>Python3</p></li>
+<li><p>FFTW</p></li>
+<li><p>CMAKE</p></li>
+</ul>
+<p>BLAS, SCALAPACK and LAPACK are usually available through the Intel MKL library,
+Cray-libsci, or OpenBlas/OpenSCALAPACK.</p>
+<p>If building on a GPU you should also make sure that either the CUDA or
+ROCM libraries are loaded.</p>
+</section>
+<section id="cp2k-toolchain">
+<h2>CP2K toolchain<a class="headerlink" href="#cp2k-toolchain" title="Permalink to this heading"></a></h2>
+<p>The simplest way to build CP2K if you are not familer with it is
+with the CP2K toolchain.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd cp2k/tools/toolchain
+</pre></div>
+</div>
+<p>The general way to invoke this is to use</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install_cp2k_toolchain.sh -j
+</pre></div>
+</div>
+<p>packages then be included by adding</p>
+<p>excluded by adding</p>
+<p>or directed to use the system version of the package by adding</p>
+<p>A lot of the packages installed by default can be unnecessary. Therefore
+we suggest these be excluded from the build as these can make the
+build process more complex.</p>
+<p>For CPU and GPU builds the important options to set are the <code class="docutils literal notranslate"><span class="pre">--math-mode</span></code> and the <code class="docutils literal notranslate"><span class="pre">--mpi-mode</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">--math-mode</span></code>, which sets the maths library, has the following choices:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mkl</span></code> - use Intel MKL</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acml</span></code> - use the AMD core maths library</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cray</span></code> - use cray-libsci on cray machines</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openblas</span></code> - use openblas</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">--mpi-mode</span></code>, which sets the mpi library, has the following choices:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mpich</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openmpi</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intelmpi</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">no</span></code> - disable mpi</p></li>
+</ul>
+<p>Additionally for GPU builds you need to either use <code class="docutils literal notranslate"><span class="pre">--enable-cuda</span></code> for
+Nvidia GPUs or <code class="docutils literal notranslate"><span class="pre">--enable-hip</span></code> for AMD GPUs, and also set the <code class="docutils literal notranslate"><span class="pre">--gpu-ver</span></code>
+to your GPU version (see below).</p>
+<section id="cpu-options">
+<h3>CPU options<a class="headerlink" href="#cpu-options" title="Permalink to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install_cp2k_toolchain.sh --math-mode=&lt;acml,cray,mkl,openblas&gt; \
+--mpi-mode=&lt;mpich,openmpi,intelmpi&gt; --with-hdf5=no
+--with-sirius=no --with-libvori=no --with-gsl=no --with-spfft=no --with-spglib=no
+</pre></div>
+</div>
+</section>
+<section id="gpu-options">
+<h3>GPU options<a class="headerlink" href="#gpu-options" title="Permalink to this heading"></a></h3>
+<p><strong>CUDA</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install_cp2k_toolchain.sh --math-mode=&lt;acml,cray,mkl,openblas&gt; \
+--mpi-mode=&lt;mpich,openmpi,intelmpi&gt; --enable-cuda=yes --gpu-ver=&lt;K20X, K40, K80, P100, V100&gt; \
+--with-hdf5=no --with-sirius=no --with-libvori=no --with-gsl=no --with-spfft=no \
+--with-spglib=no
+</pre></div>
+</div>
+<p><strong>HIP</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./install_cp2k_toolchain.sh --math-mode=&lt;acml,cray,mkl,openblas&gt; \
+--mpi-mode=&lt;mpich,openmpi,intelmpi&gt; --enable-hip=yes --gpu-ver=&lt;Mi50, Mi10&gt; \
+--with-hdf5=no --with-sirius=no --with-libvori=no --with-gsl=no --with-spfft=no \
+--with-spglib=no
+</pre></div>
+</div>
+</section>
+<section id="enabling-plumed">
+<h3>Enabling Plumed<a class="headerlink" href="#enabling-plumed" title="Permalink to this heading"></a></h3>
+<p>If you would like to use Plumed for Metadynamics simulations in CP2K you can
+add:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--enable-plumed=install
+</pre></div>
+</div>
+</section>
+</section>
+<section id="compiling-cp2k">
+<h2>Compiling CP2K<a class="headerlink" href="#compiling-cp2k" title="Permalink to this heading"></a></h2>
+<p>After the toolchain has completed it will produce an environment setup file
+in:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cp2k/tools/toolchain/install/setup
+</pre></div>
+</div>
+<p>and a selection of arch files e.g. <code class="docutils literal notranslate"><span class="pre">local.ssmp</span></code>, <code class="docutils literal notranslate"><span class="pre">local.psmp</span></code>, <code class="docutils literal notranslate"><span class="pre">local.popt</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.psmp</span></code> file which has MPI and threading enabled is the most useful of these.
+You should first source the setup:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source install/setup
+</pre></div>
+</div>
+<p>and then copy the arch files to cp2k/arch</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cp install/arch/* ../../../../arch
+</pre></div>
+</div>
+<p>For a CUDA or HIP build there will be a <code class="docutils literal notranslate"><span class="pre">local_cuda.psmp</span></code> or a <code class="docutils literal notranslate"><span class="pre">local_hip.psmp</span></code>
+arch file created in addition. You should use this if you
+wish to use the GPU offloading.</p>
+<p>For the top level cp2k directory you can then compile with the arch file
+of your choice using:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make -j 12 ARCH=local VERSION=psmp
+</pre></div>
+</div>
+<p>And then after this build libcp2k which is required for the GROMACS-CP2K
+interface.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make -j 12 ARCH=local VERSION=psmp libcp2k
+</pre></div>
+</div>
+</section>
+<section id="building-the-interface">
+<h2>Building the interface<a class="headerlink" href="#building-the-interface" title="Permalink to this heading"></a></h2>
+<p>For information on building the GROMACS-CP2K interface please see the
+dedecated <a class="reference external" href="https://manual.gromacs.org/documentation/2022-beta1/install-guide/index.html#installing-with-cp2k">GROMACS page</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../input_preparation/interface_QMMM_parameterisation.html" class="btn btn-neutral float-left" title="GROMACS/CP2K interface QM/MM parameterisation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="running_cp2k.html" class="btn btn-neutral float-right" title="Running QM/MM simulations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

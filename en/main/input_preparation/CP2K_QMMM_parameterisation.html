@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CP2K QM/MM parameterisation &mdash; (GROMACS+)CP2K QM/MM Best Practice Guide  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GROMACS/CP2K interface QM/MM parameterisation" href="interface_QMMM_parameterisation.html" />
+    <link rel="prev" title="QM treatment" href="QM_treatment.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> (GROMACS+)CP2K QM/MM Best Practice Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">QM/MM overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">System preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/system_preparation.html">System preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/selecting_qm_atoms.html">Selecting QM atoms</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input preparation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="CP2K_MM_setup.html">CP2K MM setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QM_treatment.html">QM treatment</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CP2K QM/MM parameterisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cp2k-qmmm-input-format">CP2K QMMM input format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-qm-atoms">Setting up QM atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#important-qmmm-input-parameters">Important QMMM input parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ecoupl">ECOUPL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-geep-lib">USE_GEEP_LIB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#periodic">PERIODIC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parallel-scheme">PARALLEL_SCHEME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#center">CENTER</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#qmmm-cell">QMMM Cell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#selecting-the-size-of-the-cell">Selecting the size of the cell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preventing-qm-atoms-moving-outside-of-the-cell">Preventing QM atoms moving outside of the cell</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dealing-with-the-qm-mm-boundary">Dealing with the QM-MM boundary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#finding-which-bonds-are-cut">Finding which bonds are cut</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qm-mm-link-parameterisation">QM-MM Link parameterisation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interface_QMMM_parameterisation.html">GROMACS/CP2K interface QM/MM parameterisation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Running:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/building_cp2k.html">Building CP2K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/running_cp2k.html">Running QM/MM simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_output.html">Understanding the CP2K output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_errors.html">CP2K Troubleshooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">(GROMACS+)CP2K QM/MM Best Practice Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>CP2K QM/MM parameterisation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/input_preparation/CP2K_QMMM_parameterisation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cp2k-qm-mm-parameterisation">
+<h1>CP2K QM/MM parameterisation<a class="headerlink" href="#cp2k-qm-mm-parameterisation" title="Permalink to this heading"></a></h1>
+<p>This section describes important topics related to the QM/MM settings in CP2K once you have decided which are the QM atoms.
+This includes how to get the QM atoms into the right format for CP2K, and how to parameterise
+the QM/MM cell. It will also deal with how to properly handle atomic bonds that cross the QM-MM
+boundary.</p>
+<section id="cp2k-qmmm-input-format">
+<h2>CP2K QMMM input format<a class="headerlink" href="#cp2k-qmmm-input-format" title="Permalink to this heading"></a></h2>
+<p>The basic structure of the QMMM section in the CP2K input file is shown below. This contains all the parameters
+describing the selection of the QM atoms and how the QM region should be treated.
+This paragraph is designed to act as a rough guide about how to build your <code class="docutils literal notranslate"><span class="pre">QMMM</span></code> section, and contains some example
+parameter settings with descriptions in the comments. The example assumes the employment of the GEEP approach
+for the QM/MM electrostatic coupling. However other methods exist and these will require
+slightly different parameters.  A list of these different approaches can be found in the description of the ECOUPL keyword below.</p>
+<pre class="literal-block"> &amp;QMMM
+   &amp;CELL                                ! see <a class="reference internal" href="#ref-qmmmcell"><span class="std std-ref">QMMM Cell</span></a>
+     ABC qm_x qm_y qm_z                 ! size of QM cell in x,y,z
+     <a class="reference internal" href="#ref-periodic"><span class="std std-ref">PERIODIC</span></a> XYZ
+   &amp;END CELL
+   <a class="reference internal" href="#ref-ecoupl"><span class="std std-ref">ECOUPL</span></a> GAUSS                         ! type of QM/MM elect. coupling
+   <a class="reference internal" href="#ref-geep-lib"><span class="std std-ref">USE_GEEP_LIB</span></a> 9                       ! number of Gaussians in Gaussian expansion
+   &amp;PERIODIC                            ! apply periodic potential
+     &amp;MULTIPOLE ON                      ! turn on coupling of the QM multipole
+     &amp;END
+   &amp;END PERIODIC
+   <a class="reference internal" href="#ref-par-scheme"><span class="std std-ref">PARALLEL_SCHEME</span></a> ATOM                ! parallel scheme (atom is default)
+   &amp;QM_KIND N
+     MM_INDEX list_of_atom_indexes      ! list of N QM atoms
+   &amp;END QM_KIND
+   &amp;QM_KIND H
+     MM_INDEX list_of_atom_indexes      ! list of H QM atoms
+   &amp;END QM_KIND
+   &amp;QM_KIND C
+     MM_INDEX list_of_atom_indexes      ! list of C QM atoms
+   &amp;END QM_KIND
+   &amp;QM_KIND O
+     MM_INDEX list_of_atom_indexes      ! list of O QM atoms
+   &amp;END QM_KIND
+
+   &amp;LINK                                ! see <a class="reference internal" href="#ref-link"><span class="std std-ref">QM-MM Link parameterisation</span></a>
+      QM_KIND H
+      MM_INDEX  mm_atom_index           ! index of MM atom in broken bond
+      QM_INDEX  qm_atom_index           ! index of QM atom in broken bond
+      LINK_TYPE IMOMM                   ! IMOMM method
+   &amp;END LINK
+&amp;END QMMM</pre>
+</section>
+<section id="setting-up-qm-atoms">
+<span id="ref-qmatoms"></span><h2>Setting up QM atoms<a class="headerlink" href="#setting-up-qm-atoms" title="Permalink to this heading"></a></h2>
+<p>The QM atoms need to be listed in terms of their MM index in the <code class="docutils literal notranslate"><span class="pre">pdb</span></code> file
+(or coordinate file format of your choice). They should be grouped into their QM atomic
+kinds (i.e. their element type) and given as a list of indexes, as shown below for N atoms.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;QM_KIND N
+  MM_INDEX list_of_atom_indexes      ! list of N QM atoms
+&amp;END QM_KIND
+</pre></div>
+</div>
+<p>The QM kind should match a <code class="docutils literal notranslate"><span class="pre">KIND</span></code> specified in the <code class="docutils literal notranslate"><span class="pre">SUBSYS</span></code> section, which supplies the element
+type and corresponding basis set and pseudopotential. To get the correct input format
+for CP2K the get_qm_kinds.sh script is supplied which converts a pdb file containing the
+QM atoms to this format. This <code class="docutils literal notranslate"><span class="pre">pdb</span></code> file can be created by selecting the QM atoms from the <code class="docutils literal notranslate"><span class="pre">pdb</span></code> file of the whole system</p>
+</section>
+<section id="important-qmmm-input-parameters">
+<h2>Important QMMM input parameters<a class="headerlink" href="#important-qmmm-input-parameters" title="Permalink to this heading"></a></h2>
+<section id="ecoupl">
+<span id="ref-ecoupl"></span><h3>ECOUPL<a class="headerlink" href="#ecoupl" title="Permalink to this heading"></a></h3>
+<p>Specifies the type of the QM-MM electrostatic coupling. The following options are available:</p>
+<ul class="simple">
+<li><p><strong>COULOMB</strong> - use a coulomb potential (not for GPW, GAPW).</p></li>
+<li><p><strong>GAUSS</strong> - use a Gaussian expansion of the electrostatic potential (not for DFTB)</p></li>
+<li><p><strong>NONE</strong> - use a classical point charge based coupling</p></li>
+<li><p><strong>POINT_CHARGE</strong> - use a QM derived point charges</p></li>
+<li><p><strong>S-WAVE</strong> - use a Gaussian expansion of the s-wave electrostatic potential</p></li>
+</ul>
+</section>
+<section id="use-geep-lib">
+<span id="ref-geep-lib"></span><h3>USE_GEEP_LIB<a class="headerlink" href="#use-geep-lib" title="Permalink to this heading"></a></h3>
+<p>This keyword enables the use of the internal GEEP library to generate the Gaussian expansion of the MM potential.
+You can specify a number from 2 to 15, to set the number of Gaussian funtions to be used in the expansion.</p>
+</section>
+<section id="periodic">
+<span id="ref-periodic"></span><h3>PERIODIC<a class="headerlink" href="#periodic" title="Permalink to this heading"></a></h3>
+<p>The periodic section can be  used to specify the parameters for QM/MM periodic boundary conditions calculations</p>
+</section>
+<section id="parallel-scheme">
+<span id="ref-par-scheme"></span><h3>PARALLEL_SCHEME<a class="headerlink" href="#parallel-scheme" title="Permalink to this heading"></a></h3>
+<p>This section allows one to specify the parallelisation scheme to be used in the calculation
+of the long-range terms of the potential. The choices are to parallelise
+on the <code class="docutils literal notranslate"><span class="pre">GRID</span></code> or <code class="docutils literal notranslate"><span class="pre">ATOM</span></code>. <code class="docutils literal notranslate"><span class="pre">ATOM</span></code> is the default option, however this can require a lot of memory
+as the grids are replicated and you may get out of memory errors.
+Switching to the <code class="docutils literal notranslate"><span class="pre">GRID</span></code> scheme can reduce the memory requirements however when replicating
+many atoms the performance may suffer. Instead you want to consider sticking with the <code class="docutils literal notranslate"><span class="pre">ATOM</span></code>
+scheme, but using multiple threads per process or underpopulating the cores to increase the available
+memory.</p>
+</section>
+<section id="center">
+<span id="ref-center"></span><h3>CENTER<a class="headerlink" href="#center" title="Permalink to this heading"></a></h3>
+<p>This keyword allows setting when the QM system is automatically centered within the QM box.
+The options for this setting are <code class="docutils literal notranslate"><span class="pre">EVERY_STEP</span></code>, <code class="docutils literal notranslate"><span class="pre">SETUP_ONLY</span></code>
+and NEVER. The default is <code class="docutils literal notranslate"><span class="pre">EVERY_STEP</span></code>, which is suggested to prevent QM atoms from leaving the box.</p>
+</section>
+</section>
+<section id="qmmm-cell">
+<span id="ref-qmmmcell"></span><h2>QMMM Cell<a class="headerlink" href="#qmmm-cell" title="Permalink to this heading"></a></h2>
+<section id="selecting-the-size-of-the-cell">
+<h3>Selecting the size of the cell<a class="headerlink" href="#selecting-the-size-of-the-cell" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">CELL</span></code> section within the QMMM section contains settings for the QM box which should contain the QM
+atoms. QM atoms are by default centered within the cell so you do not have to worry about
+its position within the cell for the whole system (this is controlled by the <code class="docutils literal notranslate"><span class="pre">CENTER</span></code> option).
+However the dimensions of the CELL should be large enough to contain all the QM atoms.
+A cell size that extends roughly 1.5-2 A around the outermost QM atoms is usually sufficient.
+If the CELL is too small the QM energy will not be calculated properly and as a
+consequence the SCF will not converge and/or the energies will be incorrect.</p>
+<p>To check the size of your CELL you may want to consider running a series of energy calculations
+at different cell sizes and check the convergence of the energy with the CELL size.  Increasing
+the cell size would in principle always improve the accuracy, however at a certain point
+increasing the size would no longer make any difference to the energy, while a larger cell
+size implies larger computational cost.</p>
+</section>
+<section id="preventing-qm-atoms-moving-outside-of-the-cell">
+<h3>Preventing QM atoms moving outside of the cell<a class="headerlink" href="#preventing-qm-atoms-moving-outside-of-the-cell" title="Permalink to this heading"></a></h3>
+<p>The QM atoms should stay within the QM box during a simulation. If they move too much into the boundaries
+of the QM box the following warning message will be printed - <code class="docutils literal notranslate"><span class="pre">&quot;WARNING</span> <span class="pre">One</span> <span class="pre">or</span> <span class="pre">few</span> <span class="pre">QM</span> <span class="pre">atoms</span> <span class="pre">are</span> <span class="pre">within</span> <span class="pre">the</span> <span class="pre">SKIN</span>
+<span class="pre">of</span> <span class="pre">the</span> <span class="pre">quantum</span> <span class="pre">box&quot;</span></code>. The calculation will usually continue in this case but the energies
+and forces could be wrong.  This message will usually occur in the first few MD steps
+of a simulation, and if you see this message it is a good idea to terminate the
+calculation and check what might be wrong.</p>
+<p>Some simple fixes for this might be to increase the size of the QM box and double
+check that the QM atoms are properly centered in the box using <code class="docutils literal notranslate"><span class="pre">&amp;QMMM&amp;CELL&amp;CENTERING</span></code>.
+However these options may not solve the issue if atoms are moving rapidly from within the box.
+Fast movement of atoms in an MD simulation may be due to incorrect geometry. It can also happen if you
+have QM water atoms as these move around more readily
+than protein atoms. In this case you can prevent the
+water molecules leaving the QM box.</p>
+<p><strong>Add walls around QM box</strong></p>
+<p>Walls are additional potentials that can be added around the QM box to prevent QM atoms leaving the QM box.</p>
+<p>This of course produces artefact and unphysical dynamics close too the walls. Therefore, care
+should be taken to set this up in a way that preserves the properties and the dynamics of the system of interest.</p>
+</section>
+</section>
+<section id="dealing-with-the-qm-mm-boundary">
+<h2>Dealing with the QM-MM boundary<a class="headerlink" href="#dealing-with-the-qm-mm-boundary" title="Permalink to this heading"></a></h2>
+<p>Once you have chosen the QM atoms you must deal with any bonds at the boundaries of the QM region,
+between MM and QM atoms. This is to ensure that there are no dangling QM bonds.</p>
+<section id="finding-which-bonds-are-cut">
+<h3>Finding which bonds are cut<a class="headerlink" href="#finding-which-bonds-are-cut" title="Permalink to this heading"></a></h3>
+<p>It is important that there is no large electronegative difference between the two atoms
+forming the bond across the boundary, as correctly treating such cases is very difficult on the QM side.
+Cutting a C-C bond for example is usually a safe choice.</p>
+<p>The bonds can be identified via visual inspection, e.g. by vmd or other pdb viewer, or by careful analysis
+of the pdb file. To correctly treat a QM-MM bond in CP2K you need to know the atomic indexes
+of the QM and MM atoms involved in the cut bond. The <code class="docutils literal notranslate"><span class="pre">LINK</span></code> section is then used to pass this information.</p>
+</section>
+<section id="qm-mm-link-parameterisation">
+<span id="ref-link"></span><h3>QM-MM Link parameterisation<a class="headerlink" href="#qm-mm-link-parameterisation" title="Permalink to this heading"></a></h3>
+<p>The CP2K  treatment of the dangling bonds involves adding an atom (usually a hydrogen) to
+saturate the valence of the unpaired QM atom.</p>
+<p>This must be done for all dangling QM bonds or you will get an error message beginning with the following: <code class="docutils literal notranslate"><span class="pre">&quot;ERROR</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">QM/MM</span> <span class="pre">connectivity...&quot;</span></code></p>
+<p>There are three different link treatments in CP2K which can be set using the LINK_TYPE option. These are as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GHO</span></code> - Integrated Molecular Orbital Molecular Mechanics method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IMOMM</span></code> -  Generalized Hybrid Orbital method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PSEUDO</span></code> - Use a monovalent pseudo-potential</p></li>
+</ul>
+<p>The element used to cap the bond can be changed by setting QM_KIND; the default option is hydrogen H.</p>
+<p>An example LINK section is shown below:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;LINK
+   QM_KIND H                         ! element capping
+   QMMM_SCALE_FACTOR 1.0             ! scale factor of the MM charge
+   MM_INDEX  mm_atom_index           ! index of MM atom in broken bond
+   QM_INDEX  qm_atom_index           ! index of QM atom in broken bond
+   LINK_TYPE IMOMM                   ! IMOMM method
+&amp;END LINK
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="QM_treatment.html" class="btn btn-neutral float-left" title="QM treatment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="interface_QMMM_parameterisation.html" class="btn btn-neutral float-right" title="GROMACS/CP2K interface QM/MM parameterisation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CP2K MM setup &mdash; (GROMACS+)CP2K QM/MM Best Practice Guide  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="QM treatment" href="QM_treatment.html" />
+    <link rel="prev" title="Selecting QM atoms" href="../system_preparation/selecting_qm_atoms.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> (GROMACS+)CP2K QM/MM Best Practice Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">QM/MM overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">System preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/system_preparation.html">System preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/selecting_qm_atoms.html">Selecting QM atoms</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input preparation:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CP2K MM setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mm-forcefields-types-in-cp2k">MM forcefields types in CP2K</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#amber">Amber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#charmm">CHARMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gromos">GROMOS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connectivity-formats">Connectivity formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coordinate-formats">Coordinate formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#important-mm-input-parameters">Important MM input parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#emax-spline">EMAX_SPLINE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rcut-nb">RCUT_NB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ewald-type">EWALD_TYPE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gmax">GMAX</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#geometry-wrong-or-emax-spline-too-small">GEOMETRY wrong or EMAX_SPLINE too small!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kind-not-found">KIND not found</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="QM_treatment.html">QM treatment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CP2K_QMMM_parameterisation.html">CP2K QM/MM parameterisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface_QMMM_parameterisation.html">GROMACS/CP2K interface QM/MM parameterisation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Running:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/building_cp2k.html">Building CP2K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/running_cp2k.html">Running QM/MM simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_output.html">Understanding the CP2K output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_errors.html">CP2K Troubleshooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">(GROMACS+)CP2K QM/MM Best Practice Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>CP2K MM setup</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/input_preparation/CP2K_MM_setup.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cp2k-mm-setup">
+<h1>CP2K MM setup<a class="headerlink" href="#cp2k-mm-setup" title="Permalink to this heading"></a></h1>
+<p>An example CP2K input for a simple single energy MM calculation is shown below.
+Note that the <code class="docutils literal notranslate"><span class="pre">RUN_TYPE</span></code> is set to <code class="docutils literal notranslate"><span class="pre">ENERGY</span></code> and the <code class="docutils literal notranslate"><span class="pre">METHOD</span></code> in the <code class="docutils literal notranslate"><span class="pre">FORCE_EVAL</span></code> section
+is set to <code class="docutils literal notranslate"><span class="pre">FIST</span></code> for an MM run. This stands for Frontiers in Simulation Technology which is the
+method used in CP2K MM calculations.</p>
+<pre class="literal-block">&amp;GLOBAL
+   PROJECT project_name
+   RUN_TYPE ENERGY
+   PRINT_LEVEL LOW
+&amp;END GLOBAL
+&amp;FORCE_EVAL
+   METHOD FIST                       ! Do MM
+   &amp;MM
+     &amp;FORCEFIELD
+     PARMTYPE AMBER                  ! use the Amber forcefield type (see also <a class="reference internal" href="#ref-ffield"><span class="std std-ref">MM forcefields types in CP2K</span></a>)
+     DO_NONBONDED .TRUE.             ! short range non bonded interactions
+     PARM_FILE_NAME ff_name          ! forcefield filename
+     &amp;SPLINE
+        <a class="reference internal" href="#ref-emax-spline"><span class="std std-ref">EMAX_SPLINE</span></a> 1.0E04           ! max spline
+        <a class="reference internal" href="#ref-rcut-nb"><span class="std std-ref">RCUT_NB</span></a> [angstrom] 12        ! Cutoff radius for nonbonded interactions
+     &amp;END SPLINE
+     &amp;END FORCEFIELD
+     &amp;POISSON
+        &amp;EWALD
+           <a class="reference internal" href="#ref-ewald-type"><span class="std std-ref">EWALD_TYPE</span></a> SPME           ! recommended ewald type
+           <a class="reference internal" href="#ref-gmax"><span class="std std-ref">GMAX</span></a> 70                   ! number of grid points 1 per angstrom in each direction
+        &amp;END EWALD
+     &amp;END POISSON
+   &amp;END MM
+   &amp;SUBSYS
+      &amp;CELL
+        ABC x y z                    ! size in x,y,z in Angstrom
+        PERIODIC XYZ
+        ALPHA_BETA_GAMMA 90 90 90    ! cubic cell (90 degrees between alpha, beta, gamma)
+      &amp;END CELL
+      &amp;TOPOLOGY
+         CONN_FILE_FORMAT AMBER      ! use the Amber format (see also <a class="reference internal" href="#ref-ffield"><span class="std std-ref">MM forcefields types in CP2K</span></a>)
+         CONN_FILE_NAME ff_name      ! amber forcefield filename
+         COORD_FILE_FORMAT PDB       ! coords in pdb formant (see also <a class="reference internal" href="#ref-coords"><span class="std std-ref">Coordinate formats</span></a>)
+         COORD_FILE_NAME coord_name  ! coordinate filename
+      &amp;END TOPOLOGY
+   &amp;SUBSYS
+&amp;END FORCE_EVAL</pre>
+<p>The <code class="docutils literal notranslate"><span class="pre">MM</span></code> and <code class="docutils literal notranslate"><span class="pre">SUBSYS</span></code> sections of <code class="docutils literal notranslate"><span class="pre">FORCE_EVAL</span></code> are required for this calculation. The <code class="docutils literal notranslate"><span class="pre">MM</span></code> section contains
+all the parameters related to the atomic interations such as the forcefield, and Poisson solver and splines
+used in the non-bonded interations.
+The <code class="docutils literal notranslate"><span class="pre">SUBSYS</span></code> section contains the systems topology information
+such as the atomic coordinates, the cell size and the connectivity.</p>
+<section id="mm-forcefields-types-in-cp2k">
+<span id="ref-ffield"></span><h2>MM forcefields types in CP2K<a class="headerlink" href="#mm-forcefields-types-in-cp2k" title="Permalink to this heading"></a></h2>
+<section id="amber">
+<h3>Amber<a class="headerlink" href="#amber" title="Permalink to this heading"></a></h3>
+<p>If using an Amber forcefield the .prmtop file should be used as the forcefield file
+<code class="docutils literal notranslate"><span class="pre">PARM_FILE_NAME</span></code> in the FORCEFIELD section and as the connectivity file <code class="docutils literal notranslate"><span class="pre">CONN_FILE_NAME</span></code>
+in the TOPOLOGY section. Both the <code class="docutils literal notranslate"><span class="pre">PARMTYPE</span></code> and <code class="docutils literal notranslate"><span class="pre">CONN_FILE_FORMAT</span></code> should be set to <code class="docutils literal notranslate"><span class="pre">AMBER</span></code>.</p>
+</section>
+<section id="charmm">
+<h3>CHARMM<a class="headerlink" href="#charmm" title="Permalink to this heading"></a></h3>
+<p>The CHARMM force field  (i.e. a <code class="docutils literal notranslate"><span class="pre">.prm</span></code> file) can be used by setting <code class="docutils literal notranslate"><span class="pre">PARMTYPE</span></code> to CHM. The
+psf CHARMM connectivity file is used with <code class="docutils literal notranslate"><span class="pre">CONN_FILE_FORMAT</span></code> set to PSF.
+Example usage can be found in this <a class="reference external" href="https://www.cp2k.org/exercises:2015_cecam_tutorial:forcefields">tutorial</a>.</p>
+</section>
+<section id="gromos">
+<h3>GROMOS<a class="headerlink" href="#gromos" title="Permalink to this heading"></a></h3>
+<p>The GROMOS 96 format can be used by specifying <code class="docutils literal notranslate"><span class="pre">PARMTYPE</span></code> G96.</p>
+</section>
+</section>
+<section id="connectivity-formats">
+<h2>Connectivity formats<a class="headerlink" href="#connectivity-formats" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>AMBER</strong> - Use AMBER topology file .prmtop or .top</p></li>
+<li><p><strong>G87</strong> - Use GROMOS G87 topology file.</p></li>
+<li><p><strong>G96</strong> - Use GROMOS G96 topology file.</p></li>
+<li><p><strong>PSF</strong> - Use a CHARMM PSF file.</p></li>
+<li><p><strong>UPSF</strong> - Use an unformatted PSF file.</p></li>
+</ul>
+</section>
+<section id="coordinate-formats">
+<span id="ref-coords"></span><h2>Coordinate formats<a class="headerlink" href="#coordinate-formats" title="Permalink to this heading"></a></h2>
+<p>The atomic coordinates are supplied in the topology section. The following different file
+types are allowed.</p>
+<ul class="simple">
+<li><p><strong>CIF</strong> - Coordinates provided through a CIF (Crystallographic Information File) file format</p></li>
+<li><p><strong>CRD</strong> - Coordinates provided through an AMBER file format e.g. .inpcrd .crd</p></li>
+<li><p><strong>G96</strong> - Coordinates provided through a GROMOS96 file format</p></li>
+<li><p><strong>PDB</strong> - Coordinates provided through a PDB file format</p></li>
+<li><p><strong>XTL</strong> - Coordinates provided through a XTL (MSI native) file format</p></li>
+<li><p><strong>XYZ</strong> - Coordinates provided through an XYZ file format</p></li>
+</ul>
+<p>Note that even if your coordinates file contains information about the
+box dimensions these should be listed in the cp2k input in the CELL section.</p>
+</section>
+<section id="important-mm-input-parameters">
+<h2>Important MM input parameters<a class="headerlink" href="#important-mm-input-parameters" title="Permalink to this heading"></a></h2>
+<section id="emax-spline">
+<span id="ref-emax-spline"></span><h3>EMAX_SPLINE<a class="headerlink" href="#emax-spline" title="Permalink to this heading"></a></h3>
+<p>Specifies the maximum value of the potential up to which splines will be constructed</p>
+</section>
+<section id="rcut-nb">
+<span id="ref-rcut-nb"></span><h3>RCUT_NB<a class="headerlink" href="#rcut-nb" title="Permalink to this heading"></a></h3>
+<p>Cutoff radius for nonbonded interactions. This value overrides the value specified
+in the potential definition and is global for all potentials.</p>
+</section>
+<section id="ewald-type">
+<span id="ref-ewald-type"></span><h3>EWALD_TYPE<a class="headerlink" href="#ewald-type" title="Permalink to this heading"></a></h3>
+<p>This parameter specifies the type of non-bonded long-range interaction method should be used in the calculation.
+The following options are available.</p>
+<ul class="simple">
+<li><p><strong>NONE</strong> - standard real-space coulomb potential is computed together with the non-bonded contributions</p></li>
+<li><p><strong>EWALD</strong> - standard non-fft based ewald</p></li>
+<li><p><strong>PME</strong> - particle mesh using fft interpolation</p></li>
+<li><p><strong>SPME</strong> - smooth particle mesh using beta-Euler splines (recommended)</p></li>
+</ul>
+</section>
+<section id="gmax">
+<span id="ref-gmax"></span><h3>GMAX<a class="headerlink" href="#gmax" title="Permalink to this heading"></a></h3>
+<p>Number of grid points (SPME and EWALD). Supply a single value N for all three dimensions or Nx, Ny, Nz
+for individiual dimensions. One grid point per Angstrom is a typical chocie, however such a value may
+cause the calculation to become too slow for large cells.</p>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<section id="geometry-wrong-or-emax-spline-too-small">
+<h3>GEOMETRY wrong or EMAX_SPLINE too small!<a class="headerlink" href="#geometry-wrong-or-emax-spline-too-small" title="Permalink to this heading"></a></h3>
+<p>This is usually means there is a problem with the MM forcefield or the geometry of your system.</p>
+</section>
+<section id="kind-not-found">
+<h3>KIND not found<a class="headerlink" href="#kind-not-found" title="Permalink to this heading"></a></h3>
+<p>You may get an error message from CP2K saying <code class="docutils literal notranslate"><span class="pre">&quot;Unknown</span> <span class="pre">element</span> <span class="pre">for</span> <span class="pre">KIND&quot;</span></code>. This happens when a symbol
+that does not match a proper element is found in the coordinate and force field files. The workaround
+for this is to let CP2K know what element the offended symbol should correspond to. This is done by
+adding in the <code class="docutils literal notranslate"><span class="pre">SUBSYS</span></code> section a new <code class="docutils literal notranslate"><span class="pre">KIND</span></code> section for the novel symbol where to specify the element
+via the keyword <code class="docutils literal notranslate"><span class="pre">ELEMENT</span></code>. Alternatively, one can specify the element symbol in the <code class="docutils literal notranslate"><span class="pre">PDB</span></code> coordinate file.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../system_preparation/selecting_qm_atoms.html" class="btn btn-neutral float-left" title="Selecting QM atoms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="QM_treatment.html" class="btn btn-neutral float-right" title="QM treatment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

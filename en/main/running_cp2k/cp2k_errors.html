@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CP2K Troubleshooting &mdash; (GROMACS+)CP2K QM/MM Best Practice Guide  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Understanding the CP2K output" href="cp2k_output.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> (GROMACS+)CP2K QM/MM Best Practice Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">QM/MM overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">System preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/system_preparation.html">System preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/selecting_qm_atoms.html">Selecting QM atoms</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/CP2K_MM_setup.html">CP2K MM setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/QM_treatment.html">QM treatment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/CP2K_QMMM_parameterisation.html">CP2K QM/MM parameterisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/interface_QMMM_parameterisation.html">GROMACS/CP2K interface QM/MM parameterisation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Running:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="building_cp2k.html">Building CP2K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k.html">Running QM/MM simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cp2k_output.html">Understanding the CP2K output</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CP2K Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#abort-messages">Abort messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#geometry-wrong-or-emax-spline-too-small">GEOMETRY wrong or EMAX_SPLINE too small!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kind-not-found">KIND not found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-the-lsd-option-for-an-odd-number-of-electrons">Use the LSD option for an odd number of electrons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cholesky-decomposition-failed-matrix-ill-conditioned">Cholesky decomposition failed. Matrix ill conditioned ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-requested-basis-set-for-element-was-not-found-in-the-basis-set-files">The requested basis set for element was not found in the basis set files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-in-qm-mm-connectivity">Error in QM/MM Connectivity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cpassert-failed-messages">CPASSERT failed messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#commensurate-not-used">COMMENSURATE not used</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#runtime-issues">Runtime issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-fails-or-gives-strange-results">Simulation fails or gives strange results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf-does-not-converge">SCF does not converge</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">(GROMACS+)CP2K QM/MM Best Practice Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>CP2K Troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/running_cp2k/cp2k_errors.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cp2k-troubleshooting">
+<h1>CP2K Troubleshooting<a class="headerlink" href="#cp2k-troubleshooting" title="Permalink to this heading"></a></h1>
+<section id="abort-messages">
+<h2>Abort messages<a class="headerlink" href="#abort-messages" title="Permalink to this heading"></a></h2>
+<p>Abort messages appear when something has occured that causes CP2K to
+exit. They will look like the output shown below and contain a message
+about what has caused the abort, and what can be done to fix it.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*******************************************************************************
+*   ___                                                                       *
+*  /   \                                                                      *
+* [ABORT]                                                                     *
+*  \___/                         Error messsage here                          *
+*    |                                                                        *
+*  O/|                                                                        *
+* /| |                                                                        *
+* / \                                                                         *
+*******************************************************************************
+</pre></div>
+</div>
+<section id="geometry-wrong-or-emax-spline-too-small">
+<h3>GEOMETRY wrong or EMAX_SPLINE too small!<a class="headerlink" href="#geometry-wrong-or-emax-spline-too-small" title="Permalink to this heading"></a></h3>
+<p>This is usually means there is a problem with the MM forcefield or the geometry of your system.
+You can first try to increase <code class="docutils literal notranslate"><span class="pre">EMAX_SPLINE</span></code> to verify if this was the issue.
+If this does not fix the error then you should double check the correctness of the MM forcefield and
+geometries.</p>
+</section>
+<section id="kind-not-found">
+<h3>KIND not found<a class="headerlink" href="#kind-not-found" title="Permalink to this heading"></a></h3>
+<p>You may get an error message from CP2K saying <code class="docutils literal notranslate"><span class="pre">&quot;Unknown</span> <span class="pre">element</span> <span class="pre">for</span> <span class="pre">KIND&quot;</span></code>. This is becasue CP2K only expects
+proper element symbols in the coordinate and forcefield files. The work around for this is
+to let CP2K know what element the symbol should correspond to. This is done by adding a new <code class="docutils literal notranslate"><span class="pre">KIND</span></code> section
+in the <code class="docutils literal notranslate"><span class="pre">SUBSYS</span></code> section for the unknown symbol, or by specifying the corresponding element symbol directly
+in the <code class="docutils literal notranslate"><span class="pre">pdb</span></code> coordinates file.</p>
+</section>
+<section id="use-the-lsd-option-for-an-odd-number-of-electrons">
+<h3>Use the LSD option for an odd number of electrons<a class="headerlink" href="#use-the-lsd-option-for-an-odd-number-of-electrons" title="Permalink to this heading"></a></h3>
+<p>You will also get this message if the total number of QM electrons is odd. First you
+should check that the charge of you QM region is correct and adjust <code class="docutils literal notranslate"><span class="pre">DFT&amp;CHARGE</span></code> and
+<code class="docutils literal notranslate"><span class="pre">DFT&amp;MULTIPLICITY</span></code> if necessary (see section QM_treatmenent).</p>
+<p>If indeed the charge is odd then you will need to do a spin polarised calculation
+by specifying <code class="docutils literal notranslate"><span class="pre">LSD</span></code> under <code class="docutils literal notranslate"><span class="pre">DFT</span></code>. This will take up to twice the time for a non-spin polarised
+calculation so it should be avoided unless really necessary.</p>
+</section>
+<section id="cholesky-decomposition-failed-matrix-ill-conditioned">
+<h3>Cholesky decomposition failed. Matrix ill conditioned ?<a class="headerlink" href="#cholesky-decomposition-failed-matrix-ill-conditioned" title="Permalink to this heading"></a></h3>
+<p>Check that the multiplicity is correct. The default is 1 (singlet) for an even
+number and 2 (doublet) for an odd number of electrons.</p>
+<p>Check that employed pseudopotentials are correct e.g. you are specifying the right
+pseudopotentials set for the elements in the QM system.</p>
+</section>
+<section id="the-requested-basis-set-for-element-was-not-found-in-the-basis-set-files">
+<h3>The requested basis set for element was not found in the basis set files<a class="headerlink" href="#the-requested-basis-set-for-element-was-not-found-in-the-basis-set-files" title="Permalink to this heading"></a></h3>
+<p>This message will also report the name of the element.
+Check that the basis set file name in the <code class="docutils literal notranslate"><span class="pre">SUBSYS</span></code> section is the correct one.</p>
+</section>
+<section id="error-in-qm-mm-connectivity">
+<h3>Error in QM/MM Connectivity<a class="headerlink" href="#error-in-qm-mm-connectivity" title="Permalink to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ERROR in the QM/MM connectivity. A QM/MM LINK was detected but
+no LINK section was provided in the Input file!
+This very probably can be identified as an error in the specified QM
+indexes or in a missing LINK section. Check your structure!
+</pre></div>
+</div>
+<p>This error is fairly self explanatory. It means that the QM region has not been
+properly defined based on the connectivity between atoms. You are either missing QM
+atoms from the QM region in <code class="docutils literal notranslate"><span class="pre">QMMM&amp;QM_KIND</span></code> or a QM to MM LINK section is missing.</p>
+</section>
+</section>
+<section id="cpassert-failed-messages">
+<h2>CPASSERT failed messages<a class="headerlink" href="#cpassert-failed-messages" title="Permalink to this heading"></a></h2>
+<p>This error is produced when a check within the CP2K code fails. It can be difficult to diagnose
+as the error is not always very specific and ways to solve it are not given.
+Sometimes a filename and line number from where the error was reported in the code is printed.
+This can help give some idea about what the error might be.</p>
+<p>Some common causes of CPASSERT failure and how to identify them are listed below.</p>
+<section id="commensurate-not-used">
+<h3>COMMENSURATE not used<a class="headerlink" href="#commensurate-not-used" title="Permalink to this heading"></a></h3>
+<p>Not turning on <code class="docutils literal notranslate"><span class="pre">COMMENSURATE</span></code> in the <code class="docutils literal notranslate"><span class="pre">MGRID</span></code> section will cause a CPASSERT error. This
+error will reference <code class="docutils literal notranslate"><span class="pre">pw_spline_utils.F</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pw/pw_spline_utils.F:1086</span></code></p>
+</section>
+</section>
+<section id="runtime-issues">
+<h2>Runtime issues<a class="headerlink" href="#runtime-issues" title="Permalink to this heading"></a></h2>
+<p>Runtime issue are those that do not produce an error or cause the calculation to
+crash. Sometimes a warning message may be printed in the output file to highlight that
+something is not behaving as expected, or the calculation might produce
+unexpected results.</p>
+<section id="simulation-fails-or-gives-strange-results">
+<h3>Simulation fails or gives strange results<a class="headerlink" href="#simulation-fails-or-gives-strange-results" title="Permalink to this heading"></a></h3>
+<p>Providing you have used a sensible QM setup with sufficiently large enough cutoffs then the error has usually to do with the setup of your
+system. If running a periodic calculation check that the CELL boundaries are large enough to separate the periodic images.
+Also check the initial atomic coordinates are sensible by visualising your system.</p>
+<p>If this looks correct then consider simpifying
+you input, starting with the most simple settings, and choices for basis sets and functionals. If the QM/MM simulation fails then
+may want to try running a simple MM calcaultion first (<code class="docutils literal notranslate"><span class="pre">RUN_TYPE</span> <span class="pre">FIST)</span></code> to check the geometries, and then slowly increase the complexity
+adding in <code class="docutils literal notranslate"><span class="pre">QM</span></code> and <code class="docutils literal notranslate"><span class="pre">QMMM</span></code> sections.</p>
+</section>
+<section id="scf-does-not-converge">
+<h3>SCF does not converge<a class="headerlink" href="#scf-does-not-converge" title="Permalink to this heading"></a></h3>
+<p>If the energies are rapidly varying then it is likely that the SCF is failing to converge. This will be reported in the cp2k output
+with the message <code class="docutils literal notranslate"><span class="pre">&quot;WARNING</span> <span class="pre">SCF</span> <span class="pre">has</span> <span class="pre">not</span> <span class="pre">converged&quot;</span></code>. You can quickly double whether the SCF has failed to converge by using grep to
+search your output for this message:</p>
+<p><code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">'WARNING</span> <span class="pre">SCF'</span> <span class="pre">output-file.log</span></code></p>
+<p>If this occurs then the easiest variables to change to try and fix this are the <code class="docutils literal notranslate"><span class="pre">MAX_SCF</span></code> and <code class="docutils literal notranslate"><span class="pre">EPS_SCF</span></code>.</p>
+<p>Some things to try are listed below:</p>
+<ul class="simple">
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">OUTER_SCF&amp;EPS_SCF</span> <span class="pre">&lt;=</span> <span class="pre">EPS_SCF</span></code>. If not decrease the outer <code class="docutils literal notranslate"><span class="pre">EPS_SCF</span></code>.</p></li>
+<li><p>Increase the number of SCF loops with <code class="docutils literal notranslate"><span class="pre">OUTER_SCF&amp;MAX_SCF</span></code>.</p></li>
+<li><p>Increase the number of inner SCF steps with <code class="docutils literal notranslate"><span class="pre">MAX_SCF</span></code>.</p></li>
+<li><p>Change the OT minimiser to CG.</p></li>
+<li><p>Check your geometry again.</p></li>
+<li><p>If running MD consider decreasing your timestep.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cp2k_output.html" class="btn btn-neutral float-left" title="Understanding the CP2K output" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

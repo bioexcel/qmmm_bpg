@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QM/MM overview &mdash; (GROMACS+)CP2K QM/MM Best Practice Guide  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="System preparation" href="../system_preparation/system_preparation.html" />
+    <link rel="prev" title="Biomolecular QM/MM with CP2K and GROMACS" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> (GROMACS+)CP2K QM/MM Best Practice Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QM/MM overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prepare-system">Prepare system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#minimisation-equilibration-and-thermalisation">Minimisation, Equilibration and Thermalisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#select-qm-atoms">Select QM atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-mm-only-in-cp2k">Run MM only in CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-a-simple-qm-mm-calculation-in-cp2k">Run a simple QM/MM calculation in CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-md-with-cp2k">Run MD with CP2K</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ensembles">Ensembles</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">System preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/system_preparation.html">System preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/selecting_qm_atoms.html">Selecting QM atoms</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/CP2K_MM_setup.html">CP2K MM setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/QM_treatment.html">QM treatment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/CP2K_QMMM_parameterisation.html">CP2K QM/MM parameterisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/interface_QMMM_parameterisation.html">GROMACS/CP2K interface QM/MM parameterisation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Running:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/building_cp2k.html">Building CP2K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/running_cp2k.html">Running QM/MM simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_output.html">Understanding the CP2K output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_errors.html">CP2K Troubleshooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">(GROMACS+)CP2K QM/MM Best Practice Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>QM/MM overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/overview/overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qm-mm-overview">
+<h1>QM/MM overview<a class="headerlink" href="#qm-mm-overview" title="Permalink to this heading"></a></h1>
+<p>The following overview will outline the main steps in setting up and running a QM/MM
+simulation in CP2K, starting from preparing your system from a raw pdb file, and leading
+towards running a production QM/MM run, for example a molecular dynamics simulation. Each
+section links to the relevant specfic parts of the guide.</p>
+<p>This overview is designed to be read from the point of view of a beginner, a more experienced
+user may benefit from using the contents page to directly navigate to areas of interest.</p>
+<section id="prepare-system">
+<h2>Prepare system<a class="headerlink" href="#prepare-system" title="Permalink to this heading"></a></h2>
+<p>The first step is to prepare your system - i.e. to generate the desired starting
+system and forcefield files. The starting point for this is usually a pdb file
+which may have been downloaded from the PDB data bank. Usually these structures are not
+ready to use and will require fixing to obtain the desired protonation state of the protein.
+Details of how to do this are described in the system preparation guide:
+<a class="reference internal" href="../system_preparation/system_preparation.html"><span class="doc">System preparation</span></a></p>
+<p>You will also have to generate a forcefield for your system. There are different tools
+available to do this depending on the type of forcefield. For CP2K the Amber, Charmm and Gromos
+forcefields can be used. The relevant tools and their tutorials can be found below:</p>
+<ul class="simple">
+<li><p>Ambertools - <a class="reference external" href="https://ambermd.org/tutorials/ForceField.php">https://ambermd.org/tutorials/ForceField.php</a></p></li>
+<li><p>Charmm - <a class="reference external" href="https://www.charmm.org/charmm/documentation/tutorials/">https://www.charmm.org/charmm/documentation/tutorials/</a></p></li>
+<li><p>Gromos - <a class="reference external" href="http://www.gromos.net">http://www.gromos.net</a></p></li>
+</ul>
+</section>
+<section id="minimisation-equilibration-and-thermalisation">
+<h2>Minimisation, Equilibration and Thermalisation<a class="headerlink" href="#minimisation-equilibration-and-thermalisation" title="Permalink to this heading"></a></h2>
+<p>After you have built your topology and coordinate files you must first minimise your system at the MM level before running
+any QM/MM simulations.
+This will find the energy minima for your system and fix any possible bad contacts in your initial structure.
+Once the system is minimised, it has to be subsequently heated (from 0 K to your target conditions, e.g. 300 K) and equilibrated.
+This gradual and slow heating process prevents instabilities arising due to the
+sudden increase in the kinetic energy.</p>
+</section>
+<section id="select-qm-atoms">
+<h2>Select QM atoms<a class="headerlink" href="#select-qm-atoms" title="Permalink to this heading"></a></h2>
+<p>After the system has been prepared you can consider which atoms will be included
+in the QM region. This will usually be the atoms in your ligand, however it is
+important to consider whether enough atoms are included to accurately represent
+the chemistry of the system, while at the same time not having too many QM atoms
+(which will require more compute resources).</p>
+<p>Details on how to select QM atoms from a pdb file and get them in the correct format
+for using in a CP2K input are given here: <a class="reference internal" href="../system_preparation/selecting_qm_atoms.html"><span class="doc">Selecting QM atoms</span></a></p>
+</section>
+<section id="run-mm-only-in-cp2k">
+<h2>Run MM only in CP2K<a class="headerlink" href="#run-mm-only-in-cp2k" title="Permalink to this heading"></a></h2>
+<p>Before running a QM/MM simulation in CP2K it is recommended to try and run a simple single energy
+MM calculation. This will verify that the input forcefield and coordinates
+are set up correctly and compatible with CP2K before attempting to add more complicated
+QM/MM parameters. The MM calculation should be fast to run and if the calculation finishes without
+error and the energy is sensible then it is a good indicator that the system has been
+prepared correctly for CP2K.</p>
+<p>Details of how to do this are given here: <a class="reference internal" href="../input_preparation/CP2K_MM_setup.html"><span class="doc">CP2K MM setup</span></a></p>
+<p>If this is your first time using CP2K then it is recommended to read the Running CP2K section of guide (<a class="reference internal" href="../running_cp2k/running_cp2k.html"><span class="doc">Running QM/MM simulations</span></a>),
+as well as the CP2K Output Guide (<a class="reference internal" href="../running_cp2k/cp2k_output.html"><span class="doc">Understanding the CP2K output</span></a>). If you encouter any errors while runnning
+you can debug these following advice in the Troubleshooting guide (<a class="reference internal" href="../running_cp2k/cp2k_errors.html"><span class="doc">CP2K Troubleshooting</span></a>).</p>
+</section>
+<section id="run-a-simple-qm-mm-calculation-in-cp2k">
+<h2>Run a simple QM/MM calculation in CP2K<a class="headerlink" href="#run-a-simple-qm-mm-calculation-in-cp2k" title="Permalink to this heading"></a></h2>
+<p>Once an MM calculation has been run successfully the input can be used as a basis for a QM/MM calculation.</p>
+<p>The METHOD should be set to QMMM.
+You will need to add the QMMM section for the parameterisation of the QM region, and the DFT section
+which will define all the necessary settings for the QM treatment. Additionally, information
+about the atomic kind parameterisation will need to be added for each atomic kind in the SUBSYS section.</p>
+<p>The structure of your input will look something like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;GLOBAL                                   ! global section (required)
+   PROJECT project_name                      ! name of project for output files
+   RUN_TYPE ENERGY                           ! run type (important)
+   PRINT_LEVEL LOW                           ! controls amount of output produced
+&amp;END GLOBAL
+
+&amp;FORCE_EVAL                               ! parameters for force evaluation
+   METHOD QMMM                               ! method employed e.g. QMMM, QS, FIST
+
+   &amp;DFT                                   ! DFT section - all QM
+     .... contents of DFT section
+   &amp;END DFT
+
+   &amp;QMMM                                  ! QMMM section - set up for QM region
+     .... contents of QMMM section
+   &amp;END QMMM
+
+   &amp;MM                                    ! MM section - MM forcefields,  etc.
+     .... contents of MM section
+   &amp;END MM
+
+   &amp;SUBSYS                                ! subsystem - coordinates, atom kinds etc.
+     .... contents of SUBSYS section
+   &amp;SUBSYS
+
+&amp;END FORCE_EVAL
+
+&amp;MOTION                                   ! control of atom movement e.g. geometry optimisations, MD
+  .... contents of MOTION section
+&amp;END MOTION
+</pre></div>
+</div>
+<p>Information on setting up the parameters for the QMMM section can be found here: <a class="reference internal" href="../input_preparation/CP2K_QMMM_parameterisation.html"><span class="doc">CP2K QM/MM parameterisation</span></a></p>
+<p>Settings for this will depend highly on your choice of the QM region.</p>
+<p>Information on setting the QM treatment can be found here: <a class="reference internal" href="../input_preparation/QM_treatment.html"><span class="doc">QM treatment</span></a></p>
+<p>It is good practice to start with a simple method for the XC functional and then check that the QM set up
+has been done correctly before increasing the complexity and deciding on a more accurate or appropirate
+method for your system.</p>
+<p>You should first calculate just the ENERGY of the system and check that the SCF
+converges and that the energy is sensible. This will ensure that there are no errors in your DFT setup or QM atom selection.</p>
+<p>Before running a production QM/MM calculation the value of the CUTOFF should be converged
+for the final choice of BASIS_SET, XC_FUNCTIONAL and any other parameters. How to do this
+is documented here: <a class="reference external" href="https://www.cp2k.org/howto:converging_cutoff">https://www.cp2k.org/howto:converging_cutoff</a></p>
+</section>
+<section id="run-md-with-cp2k">
+<h2>Run MD with CP2K<a class="headerlink" href="#run-md-with-cp2k" title="Permalink to this heading"></a></h2>
+<p>Once you  have setup a simple single energy QM/MM CP2K calculation it is fairly
+straightfoward to adjust the input file to run a production molecular dynamics simulation.</p>
+<p>The first change is to set the <code class="docutils literal notranslate"><span class="pre">RUN_TYPE</span></code> to MD. You will also need to add an MD section
+in the MOTION section, which will list the parameters to do with the dynamics of the
+simulation. For a simple NVE ensemble MD this would look as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;MOTION
+   &amp;MD
+      ENSEMBLE NVE                            ! Ensemble type
+      STEPS 5                                 ! Number of MD steps
+      TEMPERATURE 300                         ! Target temperature in Kelvin
+      TIMESTEP 1                              ! Timestep in femtoseconds
+   &amp;END MD
+&amp;END MOTION
+</pre></div>
+</div>
+<p>Usually a timestep of 1 femtoseconds or less is recommended in order to ensure
+energy conservation in the system.</p>
+<p>More information about MD simulations in CP2K is
+given here: <a class="reference external" href="https://www.cp2k.org/howto:md">https://www.cp2k.org/howto:md</a></p>
+<section id="ensembles">
+<h3>Ensembles<a class="headerlink" href="#ensembles" title="Permalink to this heading"></a></h3>
+<p>CP2K offers a range of MD integrators for sampling different
+ensembles which are listed here: <a class="reference external" href="https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/MD.html#ENSEMBLE">https://manual.cp2k.org/trunk/CP2K_INPUT/MOTION/MD.html#ENSEMBLE</a></p>
+<p>Common ones are the NVT and NPT_I (isobaric) ensemble. For an NVT ensemble
+you will need to add information about the thermostat in the &amp;THERMOSTAT section
+within the MD section, while the NPT_I ensemble will need both and THERMOSTAT and
+BAROSTAT section as shown below.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;MOTION
+..
+ &amp;MD
+    ENSEMBLE NPT_I
+    TIMESTEP  0.5
+    STEPS  1000
+    TEMPERATURE 298
+    &amp;BAROSTAT
+      TIMECON [fs] 100        ! time constant for barostat
+      PRESSURE [bar] 1.0      ! target pressure
+    &amp;END BAROSTAT
+    &amp;THERMOSTAT
+      TYPE CSVR               ! type of thermostat -  options include NOSE, CSVR (rescaling), GLE, AD_LANGEVIN
+      &amp;CSVR
+        TIMECON [fs] 10.      ! time constant for thermostat
+      &amp;END CSVR
+    &amp;END THERMOSTAT
+ &amp;END MD
+ ..
+&amp;END MOTION
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Biomolecular QM/MM with CP2K and GROMACS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../system_preparation/system_preparation.html" class="btn btn-neutral float-right" title="System preparation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selecting QM atoms &mdash; (GROMACS+)CP2K QM/MM Best Practice Guide  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CP2K MM setup" href="../input_preparation/CP2K_MM_setup.html" />
+    <link rel="prev" title="System preparation" href="system_preparation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> (GROMACS+)CP2K QM/MM Best Practice Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">QM/MM overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">System preparation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="system_preparation.html">System preparation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Selecting QM atoms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#initial-selection">Initial selection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-the-qm-atoms-list-for-cp2k">Creating the QM atoms list for CP2K</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#including-water-molecules">Including water molecules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dealing-with-breaking-bonds">Dealing with breaking bonds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expanding-or-shrinking-the-qm-region">Expanding or shrinking the QM region</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/CP2K_MM_setup.html">CP2K MM setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/QM_treatment.html">QM treatment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/CP2K_QMMM_parameterisation.html">CP2K QM/MM parameterisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input_preparation/interface_QMMM_parameterisation.html">GROMACS/CP2K interface QM/MM parameterisation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Running:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/building_cp2k.html">Building CP2K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/running_cp2k.html">Running QM/MM simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_output.html">Understanding the CP2K output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_errors.html">CP2K Troubleshooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">(GROMACS+)CP2K QM/MM Best Practice Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Selecting QM atoms</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/system_preparation/selecting_qm_atoms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="selecting-qm-atoms">
+<h1>Selecting QM atoms<a class="headerlink" href="#selecting-qm-atoms" title="Permalink to this heading"></a></h1>
+<p>You may also like to consult our guide on Best Practices in QM/MM Simulation of Biomolecular Systems, which gives advice on QM/MM methodology including how to select QM atoms that is independent of the software used: <a class="reference external" href="https://docs.bioexcel.eu/qmmm_simulation_bpg">https://docs.bioexcel.eu/qmmm_simulation_bpg</a></p>
+<section id="initial-selection">
+<h2>Initial selection<a class="headerlink" href="#initial-selection" title="Permalink to this heading"></a></h2>
+<p>The starting point for deciding which atoms should be treated at a quantum level is the ligand or the
+region of interest in your system (such as a metal ion). The size of the ligand will usually
+dictate whether you can treat the whole ligend, a subsection of the ligand,
+or the ligand plus some neighbouring residues with QM. As previously mentioned, ideally the
+number of QM atoms should not be too large (over 200 QM atoms) as this will become too
+computationally demanding. However we want to be able to include all the regions
+involved in the chemical reaction as much as possible.</p>
+<p>A good approach for selecting the QM region is therefore to select the entire ligand plus
+some residues nearby, say within x Å of the ligand. The size you consider for this region
+around the ligand will depend on the number of atoms in your ligand. If you have a ligand of
+50 or more atoms then you might only include residues within 2-3 Å in order to limit
+the overall size of the QM region. For a smaller ligand you may be able to include more atoms around it
+(up to approximately 6 Å).</p>
+<section id="creating-the-qm-atoms-list-for-cp2k">
+<h3>Creating the QM atoms list for CP2K<a class="headerlink" href="#creating-the-qm-atoms-list-for-cp2k" title="Permalink to this heading"></a></h3>
+<p>Creating a list of  QM atoms that can be read by CP2K can be done using <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/">VMD</a></p>
+<ol class="arabic simple">
+<li><p>Open the entire system pdb file with <code class="docutils literal notranslate"><span class="pre">vmd</span></code>.</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>vmd system.pdb
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Go to File &gt;&gt; Save coordinates</p></li>
+<li><p>Use Selected Atoms to save a pdb containing the desired QM atoms.
+To select all the atom indexes of the residues with some atoms within x Å from the ligand with residue
+index i (excluding the water molecules) the following command is used:</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>((same resid as (protein within x of resid i)) or resid i) and not water
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Use Save to save a list of atoms (and their residues) in a pdb file. Note that
+vmd does not preserve the atomic index from the original pdb file (which is the required
+ID needed for setting up the QM atoms). The correct atom indexes can be pulled directly
+from the pdb file using the residue ID.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">awk</span></code> to get the atoms in the selected residues. e.g.</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>for res in 12 34 76 77
+do
+   awk &#39;$5 == $res&#39; system.pdb &gt;&gt; QMatoms.pdb
+   awk &#39;$5~/$res/{print}&#39; system.pdb &gt;&gt; QMatoms.pdb
+done
+</pre></div>
+</div>
+<p>6) Use the <a class="reference external" href="https://github.com/bioexcel/CP2K_qmmm_input_preparation_scripts/blob/main/get_qm_kind.py">get_qm_kind.py script</a>
+to convert the pdb containing the QM atoms to the format required in the CP2K input (requires python3).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python3 get_qm_kind.py QMatoms.pdb
+</pre></div>
+</div>
+</section>
+<section id="including-water-molecules">
+<h3>Including water molecules<a class="headerlink" href="#including-water-molecules" title="Permalink to this heading"></a></h3>
+<p>Generally, including water molecules in the QM region and treat them at quantum level
+may be complicated. In fact, the water molecules usually move around more
+readily than larger protein molecules and they may not remain far enough from the
+boundaries of the QM box during the simulation, thus producing artefacts.
+However in some circumstances water molecules may be important for the reaction chemistry
+and/or can remain localised during the entire simulation (e.g. when coordinating a metal ion).
+In this case negihbouring water molecules can be included in the selection using:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(same resid as (protein within x of resid i)) or resid i
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dealing-with-breaking-bonds">
+<h2>Dealing with breaking bonds<a class="headerlink" href="#dealing-with-breaking-bonds" title="Permalink to this heading"></a></h2>
+<p>When the boundary between the QM and MM region breaks a covalent bond,
+this bond has to be treated with care. CP2K offers some alternatives.
+One of the most simple is adding a link atom to saturate the valence of the QM dangling atom.
+More about this can be found in the QMMM input part of the guide.
+To avoid spurious polarisations at the boundary between the QM and MM part,
+the bonds to be cut should not be chosen arbitrarily. When possible, one should
+break only C-C bonds, due to their symmetry and the total absence of electronegativity.</p>
+<p>The bonds can be identified via visual inspection, e.g. with vmd or another pdb viewer, or by observation
+of the pdb file. You should first find the residues within the QM region which are bonded
+to residues treated without QM. Within these residues you can then find
+the C-C bond to break, and record the atomic indexes of the QM and MM C atoms.
+These will be needed to correctly treat a QM-MM bond in CP2K (see section).</p>
+</section>
+<section id="expanding-or-shrinking-the-qm-region">
+<h2>Expanding or shrinking the QM region<a class="headerlink" href="#expanding-or-shrinking-the-qm-region" title="Permalink to this heading"></a></h2>
+<p>You may want to examine the effect of growing or shrinking the QM region on your
+property of interest in order to decide on a suitable region size. If the calculation
+is taking too long you could consider reducing the number of QM atoms in the region (i.e.
+shrinking the region), or if the chemistry is not sufficiently included the region can be expanded.
+This can be done by increasing or decreasing the  distance around the ligand (or region
+of interest) using the above approach. The property of interest can be measured for different
+QM region sizes and used to determine the optimum size.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="system_preparation.html" class="btn btn-neutral float-left" title="System preparation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../input_preparation/CP2K_MM_setup.html" class="btn btn-neutral float-right" title="CP2K MM setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

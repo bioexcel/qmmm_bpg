@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QM treatment &mdash; (GROMACS+)CP2K QM/MM Best Practice Guide  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CP2K QM/MM parameterisation" href="CP2K_QMMM_parameterisation.html" />
+    <link rel="prev" title="CP2K MM setup" href="CP2K_MM_setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> (GROMACS+)CP2K QM/MM Best Practice Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/overview.html">QM/MM overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">System preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/system_preparation.html">System preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system_preparation/selecting_qm_atoms.html">Selecting QM atoms</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input preparation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="CP2K_MM_setup.html">CP2K MM setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QM treatment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mechanics-of-a-dft-calculation-in-cp2k">Mechanics of a DFT calculation in CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-basic-qm-input">A basic QM input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basis-sets">Basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xc-functionals">XC functionals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lda">LDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gga">GGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metagga">metaGGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hybrid-methods">Hybrid methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pseudopotentials">Pseudopotentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#important-qm-input-parameters">Important QM input parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#charge">CHARGE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiplicity">MULTIPLICITY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cutoff">CUTOFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rel-cutoff">REL_CUTOFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commensurate">COMMENSURATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eps-default">EPS_DEFAULT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eps-scf">EPS_SCF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#max-scf">MAX_SCF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-fails-or-gives-strange-results">Simulation fails or gives strange results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scf-does-not-converge">SCF does not converge</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CP2K_QMMM_parameterisation.html">CP2K QM/MM parameterisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface_QMMM_parameterisation.html">GROMACS/CP2K interface QM/MM parameterisation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Running:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/building_cp2k.html">Building CP2K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/running_cp2k.html">Running QM/MM simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_output.html">Understanding the CP2K output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_cp2k/cp2k_errors.html">CP2K Troubleshooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">(GROMACS+)CP2K QM/MM Best Practice Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>QM treatment</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/input_preparation/QM_treatment.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qm-treatment">
+<h1>QM treatment<a class="headerlink" href="#qm-treatment" title="Permalink to this heading"></a></h1>
+<p>This section of the guide focuses on setting up the QM parameters in a QM/MM simulation.</p>
+<p>It will guide on how to use various options within CP2K, and give some general advice but
+it will not give any information about what specific choices (e.g. basis sets and XC functionals)
+are best for your system.</p>
+<p>Examples of QM/MM input files for CP2K can be found in the
+<a class="reference external" href="https://github.com/bioexcel/qmmm_benchmark_suite">Bioexcel QM/MM benchmark suite</a>.</p>
+<p>You may also like to consult our guide on Best Practices in QM/MM Simulation of Biomolecular Systems, which gives advice on QM/MM methodology that is independent of the software used: <a class="reference external" href="https://docs.bioexcel.eu/qmmm_simulation_bpg">https://docs.bioexcel.eu/qmmm_simulation_bpg</a></p>
+<section id="mechanics-of-a-dft-calculation-in-cp2k">
+<h2>Mechanics of a DFT calculation in CP2K<a class="headerlink" href="#mechanics-of-a-dft-calculation-in-cp2k" title="Permalink to this heading"></a></h2>
+<p>CP2K uses the Quickstep (QS) method when performing a QM calculation.
+Quickstep is the part of the code in CP2K devoted to solving the electronic
+structure problem in order to get energies in the QM region and forces
+on the QM atoms. The default electronic structure method is the
+self-consistent Kohn-Sham Density Functional Theory (DFT). Alternatively, within Quickstep
+there is also the option to use Semi-empirical (SE), Tight-Binding DFT (DFTB),
+and Gaussian Plane Waves (GPW) methods, among many others. The <a class="reference external" href="https://www.cp2k.org/quickstep">GPW method</a> is a
+key part of CP2K, which involves using a mixed basis of atom centred Gaussian
+orbitals and plane waves (regular grids) to improve on the performance compared
+to other QM methods.</p>
+<p>Basis functions described in the Gaussian type orbitals for each element are supplied
+through the basis set file. For the basis set, multiple choices are available. The <a class="reference internal" href="#ref-basis-sets"><span class="std std-ref">Basis sets</span></a>
+section of the guide gives an overview of these choices. Likewise the pseudopotentials for using with
+plane waves must also be supplied.</p>
+<p>The exchange-correlation (XC) functional within DFT contains approximations that make
+it a source of inaccuracy in a DFT calculation. This stems from the fact that
+the exact functionals for exchange and correlation are not known.
+There are many choices of XC functional,
+with different levels of accuracy (see <a class="reference external" href="https://doi.org/10.1063/1.1390175">“Jacob’s ladder”</a>). However greater accuracy
+usually comes with more computational cost.  The <a class="reference internal" href="#ref-xc"><span class="std std-ref">XC functionals</span></a> section outlines the available options
+for XC functionals in CP2K and how to use them.</p>
+<p>In Quickstep, a self-consistent (SCF) calculation is performed in
+order to find the ground state energy of the system (with the atom
+positions fixed).  This involves performing a number of SCF steps
+where in each step the potential is calculated from the electronic
+density and used to construct a new electron density by solving the KS
+equations (this density is then used in the next SCF step). The SCF
+converges when the required tolarence for self-consistency is met. The
+electronic state found at the end of a converged SCF calculation
+represents the best prediction of the employed method for the
+electronic ground state energy minimum.  As this calculation is
+self-consistent, its convergence properties will highly depend on the
+starting electronic density. Therefore, a good starting electronic
+density will allow the calculation to converge faster.  If the SCF has
+not converged after it has exceeded the maximum number of steps (set
+by <code class="docutils literal notranslate"><span class="pre">MAX_SCF)</span></code> the SCF calculation will terminate and print the
+warning message: “SCF has not converged”. Information on how to
+overcome the issue of a non-converging SCF calculation can be found
+under <a class="reference internal" href="#ref-troubleshooting"><span class="std std-ref">Troubleshooting</span></a>.</p>
+<p>The SCF calculation involves inner and outer loops. If the inner SCF
+loop does not converge in the desired number of steps (set in
+<code class="docutils literal notranslate"><span class="pre">MAX_SCF</span></code>) then the inner loop will exit in order to prevent wasting
+time heading in the wrong direction. The preconditioner is
+recalculated and then a new inner loop SCF begins, with the number of
+outer steps incremented by one. This will hopefully stand a better
+chance of converging than the previous inner cycle. This process will
+be repeated for a number of outer steps (set in the <code class="docutils literal notranslate"><span class="pre">&amp;OUTER_SCF</span></code>
+section). After this the SCF calculation is terminated. Hence, the
+maximum number of SCF steps attempted is given as the product of the
+inner SCF steps and the outer SCF steps.</p>
+</section>
+<section id="a-basic-qm-input">
+<h2>A basic QM input<a class="headerlink" href="#a-basic-qm-input" title="Permalink to this heading"></a></h2>
+<p>A basic DFT input section for a calculation using the Gaussian Plane
+Wave (GPW) method is shown below.  This is designed to act as a rough
+guide for how to build your DFT section, and contains some example
+parameter settings with descriptions in the comments. However it
+should not be taken as an example set up for your system, and should
+certainly not be used without first considering the choices for the
+important parameters outlined below.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;DFT                                 ! CP2K input block for DFT
+  CHARGE 0                               ! charge of the QM region
+  MULTIPLICITY 1                         ! multiplicity of the QM region
+  BASIS_SET_FILE_NAME  bs_filename       ! name of the basis set filename
+  POTENTIAL_FILE_NAME  pot_filename      ! name of the potential filename
+
+  &amp;MGRID
+    CUTOFF 300                           ! planewave cutoff
+    REL_CUTOFF 50                        ! relative cutoff for gaussian grid
+    COMMENSURATE                         ! If grids are commensurate (always true for QM/MM)
+  &amp;END MGRID
+
+  &amp;QS
+    METHOD GPW                           ! QS method (GPW: DFT, DFTB, or SE method)
+    EPS_DEFAULT 1.0E-12                  ! Energy tolarance for QS
+  &amp;END QS
+
+  &amp;SCF                               ! Parameters controlling the convergence of the scf.
+    SCF_GUESS RESTART                    ! starting point for scf - restart reads restart wfn.
+    EPS_SCF 1.0E-6                       ! tolarance for SCF convergence
+    MAX_SCF 50                           ! number of inner SCF steps to attempt
+    &amp;OT  T                           ! Use the orbital transform method (T: true)
+      MINIMIZER  DIIS                    ! DIIS minimisation (less reliable but faster than CG)
+      PRECONDITIONER  FULL_ALL           ! good choice for preconditioner
+    &amp;END OT
+    &amp;OUTER_SCF
+      EPS_SCF 1.0E-6                     ! tolarence for outer SCF convergence (should be &gt; inner SCF)
+      MAX_SCF 10                         ! number of outer SCF steps to attempt
+    &amp;END
+  &amp;END SCF
+  &amp;XC                                ! Parameters needed to compute the electronic exchange potential
+    &amp;XC_FUNCTIONAL xc_choice             ! choice of XC functional (can simply change this for BLYP, PBE)
+    &amp;END XC_FUNCTIONAL
+  &amp;END XC
+
+&amp;END DFT
+</pre></div>
+</div>
+<p>Additionally for each element identifier in your topology you need to tell CP2K which basis
+sets and potentials to use. This is done in the <code class="docutils literal notranslate"><span class="pre">SUBSYS</span></code> section, under <code class="docutils literal notranslate"><span class="pre">KIND</span></code>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;SUBSYS
+  &amp;KIND H
+    ELEMENT H
+    BASIS_SET bs_identifier
+    POTENTIAL pot_identifier
+  &amp;END KIND
+&amp;END SUBSYS
+</pre></div>
+</div>
+</section>
+<section id="basis-sets">
+<span id="ref-basis-sets"></span><h2>Basis sets<a class="headerlink" href="#basis-sets" title="Permalink to this heading"></a></h2>
+<p>The basis set for each element can be changed by editing the bs_filename within the DFT section, and the bs_identifier
+in the KIND section of that element within the <code class="docutils literal notranslate"><span class="pre">SUBSYS</span></code> section. The bs_identifier should correspond
+to one of the basis sets for the given element within the basis set file.
+The q number preceding the basis set in the identifer gives the number of
+valence electrons. It depends on the element, for example H:1, C:4, O:6, N:5.</p>
+<p>Basis set files are provided within the /data directory of the
+<a class="reference external" href="https://github.com/cp2k/cp2k/tree/master/data">CP2K source code</a> .
+If your installation of CP2K  has been built correctly then
+the files within this directory should be automatically included, so there is no
+need to copy these file to your working directory.</p>
+<p>The GTH basis sets are usually recommended in CP2K, and there exists a
+molecular optimised (MOLOPT) GTH basis set that is likely to be a good
+choice for biomolecular systems. Some common options for basis sets
+and their location within the basis set files are shown in the table
+below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 19%" />
+<col style="width: 22%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Description</p></th>
+<th class="head"><p>GTH (cp2k_root/data/BASIS_SET)</p></th>
+<th class="head"><p>MOLOPT (cp2k_root/data/BASIS_MOLOPT)</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Single-zeta valence</p></td>
+<td><p>SZV-GTH</p></td>
+<td><p>SZV-MOLOPT-GTH</p></td>
+<td><p>Use only for testing</p></td>
+</tr>
+<tr class="row-odd"><td><p>Double-zeta valence polarised</p></td>
+<td><p>DZVP-GTH</p></td>
+<td><p>DZVP-MOLOPT-GTH</p></td>
+<td><p>A good choice, available for most elements</p></td>
+</tr>
+<tr class="row-even"><td><p>Triple-zeta valence polarised</p></td>
+<td><p>TZVP-GTH</p></td>
+<td><p>TZVP-MOLOPT-GTH</p></td>
+<td><p>More accurate than DZVP</p></td>
+</tr>
+<tr class="row-odd"><td><p>Triple-zeta valence 2x polarisation functions</p></td>
+<td><p>TZV2P-GTH</p></td>
+<td><p>TZV2P-MOLOPT-GTH</p></td>
+<td><p>More accurate still, may not have some elements</p></td>
+</tr>
+<tr class="row-even"><td><p>Quadrupal-zeta valence 2x polarisation functions</p></td>
+<td><p>QZV2P-GTH</p></td>
+<td><p>QZV2P-MOLOPT-GTH</p></td>
+<td><p>Most accurate but least availablity</p></td>
+</tr>
+</tbody>
+</table>
+<p>The choice of basis depends on the accuracy required, and whether it is available for the elements in your system.
+More accurate basis sets will increase the run time of the simulation, but may not be available for some elements e.g. metal ions.</p>
+<p>The error due to the basis set in general is smaller than the error associated to the XC functional. Therefore, chosing a large basis set may not be sensible
+unless you require a very accurate calculation and you are employing an accurate XC functional.</p>
+<p>Using the DZVP basis set is usually a good compromise. If you would like to explore more accurate options
+then you may consider checking the convergence of your basis set by plotting the number of independent orbital functions vs. the energy.</p>
+</section>
+<section id="xc-functionals">
+<span id="ref-xc"></span><h2>XC functionals<a class="headerlink" href="#xc-functionals" title="Permalink to this heading"></a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h3>
+<p>The exchange-correlation (XC) functional within DFT contains approximations which make
+it a source of inaccuracy in a DFT calculation. Choosing an XC functional is therefore
+an important consideration, it has the potential to be the largest source of error in
+a DFT calculation.</p>
+<p>There are many choices of XC functional,
+with different levels of accuracy, however increased accuracy usually requires longer run time,
+so this is a tradeoff that you will have to consider when picking your functional.</p>
+<p>The XC functional setup is described in the XC section of the CP2K
+input. The choice of functional also depends on the availability of
+the corresponding pseudopotentials.  In fact, each pseudopotential is
+built using a specific XC functional and it should be used only in
+combination with that XC functional. Usually, the name of the
+pseudopotential file reports explicitly the XC functional used to
+build it.</p>
+<p>The table below lists the XC functional types available in CP2K from least to
+most accurate, and gives a overview of each option.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 22%" />
+<col style="width: 10%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>CP2K examples</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LDA</p></td>
+<td><p>local density approximation</p></td>
+<td><p>PADE, PW92</p></td>
+<td><p>fast but not accurate</p></td>
+</tr>
+<tr class="row-odd"><td><p>GGA</p></td>
+<td><p>generalised gradient approximation</p></td>
+<td><p>BLYP, PBE, PW91</p></td>
+<td><p>usually a good choice if you are not worried about being very accurate or have a large QM region</p></td>
+</tr>
+<tr class="row-even"><td><p>metaGGA</p></td>
+<td><p>metaGGA (higher order terms)</p></td>
+<td><p>TPSS</p></td>
+<td><p>Available through Libxc library</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hybrid</p></td>
+<td><p>Hartree Fock exchange + GGA method</p></td>
+<td><p>B3LYP, PBE0</p></td>
+<td><p>More accurate,</p></td>
+</tr>
+<tr class="row-even"><td><p>Double hybrid</p></td>
+<td><p>HFX + PT2 correlation + GGA methods</p></td>
+<td><p>B2PYLP</p></td>
+<td><p>Most accurate, can requires many times more time than GGA etc.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Examples of their usage can be found in the
+<a class="reference external" href="https://github.com/bioexcel/qmmm_benchmark_suite">Bioexcel QM/MM benchmark suite</a>.</p>
+</section>
+<section id="lda">
+<h3>LDA<a class="headerlink" href="#lda" title="Permalink to this heading"></a></h3>
+<p>The local density approximation is one of the simplest approximations for the XC functional.
+It assumes that the functional depends only on the density at one point, i.e the density
+is assumed to be smooth in space.  Such an approximation is rather crude and often provide
+inaccurate results for some properties.</p>
+<blockquote>
+<div><p>An example of how to setup the PADE LDA method in the CP2K input file is shown below.
+The functional needs to be specified in the <code class="docutils literal notranslate"><span class="pre">XC_FUNCTIONAL</span></code> section,
+and the corresponding <code class="docutils literal notranslate"><span class="pre">GTH-PADE</span></code> pseudopotentials should be used.</p>
+</div></blockquote>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;XC
+  &amp;XC_FUNCTIONAL PADE
+  &amp;END XC_FUNCTIONAL
+&amp;END XC
+</pre></div>
+</div>
+</section>
+<section id="gga">
+<h3>GGA<a class="headerlink" href="#gga" title="Permalink to this heading"></a></h3>
+<p>The generalised gradient approximation (GGA) is an improvement on the LDA which takes into account the
+gradient of the density, as well as the density at one point.</p>
+<p>Using the GGA in CP2K is similar to using the LDA. It requires specifying the functional
+and using the complementary pseudopotentials (which in this case would be <code class="docutils literal notranslate"><span class="pre">GTH_PBE</span></code>).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;XC
+  &amp;XC_FUNCTIONAL PBE
+  &amp;END XC_FUNCTIONAL
+&amp;END XC
+</pre></div>
+</div>
+<p>Using a GGA functional is usually a good starting point for running a QM calculation. It is not
+computationally expensive and it is simple to set up in CP2K.</p>
+<p><strong>BLYP or PBE?</strong></p>
+<p>BLYP and PBE are the most commonly used GGA functionals. The main
+difference between them is that PBE is non-empirical i.e. the
+parameters are based on theoretical consideration and calculations,
+while BLYP is partially-empirical because some parameters were
+obtained via empirical fittings.  As a result PBE gives results of a
+certain accuracy for a wide range of systems, whereas BLYP can be more
+accurate than PBE for some particular systems.  This consideration
+also holds for the hybrid methods PBE0 and B3LYP which are derived
+from their GGA counterparts PBE and BLYP, respectively (see below).
+If BLYP/B3LYP are not widely used in your research area then it may be
+prudent to use PBE or PBE0 instead.</p>
+</section>
+<section id="metagga">
+<h3>metaGGA<a class="headerlink" href="#metagga" title="Permalink to this heading"></a></h3>
+<p>The metaGGA builds upon the GGA methods by assuming the functional also depends on
+then non-interacting kinetic energy density, in addition to the electron density and its
+gradient. To use metaGGA methods in CP2K the libxc library is used, and therefore your
+version of CP2K needs to be built with this library enabled. An example of the XC
+section for using the metaGGA is shown below (here the
+<a class="reference external" href="http://doi.org/10.1021/ct900489g">oTPSS-D functional</a> has been used.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;XC
+   &amp;XC_FUNCTIONAL
+      &amp;LIBXC T                        ! use libxc library
+       FUNCTIONAL MGGA_XC_OTPSS_D     ! oTPSS-D functional
+      &amp;END LIBXC
+   &amp;END XC_FUNCTIONAL
+&amp;END XC
+</pre></div>
+</div>
+<p>There are a variety of metaGGA method available through
+<a class="reference external" href="https://www.tddft.org/programs/libxc/functionals/">libxc</a> (note that
+functional availablity is dependent on the version of libxc used).</p>
+</section>
+<section id="hybrid-methods">
+<h3>Hybrid methods<a class="headerlink" href="#hybrid-methods" title="Permalink to this heading"></a></h3>
+<p>Hybrid methods calculate a portion of the the exchange functional using exact Hartree Fock theory.
+The rest of the exchange and correlation functions is calculated with other methods, typically GGA or LDA.
+Within the XC section of the CP2K input the HF section is used for the Hartree Fock exchange setup.</p>
+<p>Using the DZVP-MOLOPT basis sets with hybrid functionals becomes too computationally expensive. However
+it is possible to use these with the auxiliary density matrix methods (ADMM) as it can mitigate the
+cost of using large basis sets such as these. Examples of inputs for these can be found in the QMMM
+benchmark suite for the <a class="reference external" href="https://github.com/bioexcel/qmmm_benchmark_suite/tree/master/ClC/QM-19/CP2K/B3LYP/MOLOPT-ADMM">ClC-19 system</a>
+and the <a class="reference external" href="https://github.com/bioexcel/qmmm_benchmark_suite/tree/master/MQAE/CP2K/B3LYP/MOLOPT-ADMM">MQAE system</a>.</p>
+<p>Two commonly used hybrid methods dicussed here are B3LYP and PBE0.</p>
+<p><strong>PBE0</strong></p>
+<p>In the PBE0 functional the exchange is comprised of 75% of the PBE exchange and 25% of the HF exchange.
+The correlation energy is entirely PBE.</p>
+<div class="math notranslate nohighlight">
+\[E^{PBE0}_{XC} = \frac{1}{4} E_X^{HF} + \frac{3}{4} E_X^{PBE} + E_C^{PBE}\]</div>
+<p>In CP2K to use the PBE0 functional the XC section of the input file should be
+configured as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;XC
+   &amp;XC_FUNCTIONAL
+     &amp;PBE
+        SCALE_X 0.75         ! 75% GGA exchange
+        SCALE_C 1.0          ! 100% GGA correlation
+     &amp;END PBE
+  &amp;END XC_FUNCTIONAL
+  &amp;HF
+     FRACTION 0.25         ! 25 % HF exchange
+     &amp;SCREENING
+        EPS_SCHWARZ 1.0E-6  ! Important to improve scaling
+     &amp;END
+     &amp;MEMORY
+        MAX_MEMORY 1500     ! In MB per MPI rank
+     &amp;END
+  &amp;END HF
+&amp;END XC
+</pre></div>
+</div>
+<p><strong>B3LYP</strong></p>
+<p>The B3LYP functional stands for - Becke, 3-parameter, Lee–Yang–Parr.
+It makes use of the HF exchange and GGA functionals for the exchange and correlation
+(in particular the Becke 88 exchange functional and the LYP correlation functional).
+Three parameters are used in its description:</p>
+<div class="math notranslate nohighlight">
+\[E^{B3LYP}_{XC} = E_X^{LDA} + a_0(E_X^{HF} - E_X^{LDA}) + a_x(E_X^{GGA} - E_X^{LDA}) + E_C^{LDA} + a_c(E_C^{GGA} - E_C^{LDA})\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_0\)</span> = 0.2, <span class="math notranslate nohighlight">\(a_x\)</span> = 0.72 and <span class="math notranslate nohighlight">\(a_c\)</span> = 0.81.
+To use B3LYP in CP2K the XC section of the input file should be
+configured as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;XC
+   &amp;XC_FUNCTIONAL
+      &amp;LYP
+         SCALE_C 0.81          ! 81% LYP correlation
+      &amp;END
+      &amp;BECKE88
+         SCALE_X 0.72          ! 72% Becke88 exchange
+      &amp;END
+      &amp;VWN
+         FUNCTIONAL_TYPE VWN3
+         SCALE_C 0.19          ! 19% LDA correlation
+      &amp;END
+      &amp;XALPHA
+         SCALE_X 0.08          ! 8%  LDA exchange
+      &amp;END
+   &amp;END XC_FUNCTIONAL
+   &amp;HF
+      FRACTION 0.20            ! 20% HF exchange
+      &amp;SCREENING
+         EPS_SCHWARZ 1.0E-10   ! Improves scaling
+      &amp;END
+      &amp;MEMORY
+         MAX_MEMORY  1500     ! In MB per MPI rank
+      &amp;END
+   &amp;END HF
+&amp;END XC
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pseudopotentials">
+<h2>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Permalink to this heading"></a></h2>
+<p>As mentioned before, each pseudopotential is built using a specific XC functional
+and it should be used only in combination with that XC functional. For example the GTH-PBE
+pseudopotential should be used with the PBE XC functional.</p>
+</section>
+<section id="dispersion-corrections">
+<h2>Dispersion corrections<a class="headerlink" href="#dispersion-corrections" title="Permalink to this heading"></a></h2>
+<p>DFT is known to underestimate van der Waals forces between atoms. Empirical dispersion
+corrections can be used in combination with XC functionals to improve the description of
+van der Waals forces, which can play an important role in protein
+systems.</p>
+<p>In CP2K three different dispersion options are available, DFT-D2, DFT-D3 and DFT-D3(BJ).
+All three of these methods involve adding
+an extra dispersion term to the energy density functional, e.g.</p>
+<div class="math notranslate nohighlight">
+\[E_{tot} = E_{DFT} + E_{disp}\]</div>
+<p>The DFT-D3 method offers improvements on the DFT-D2 method,
+and the DFT-D3(BJ) method adds Becke-Jonson damping to the dispersion energy.</p>
+<p>To use a dispersion correction the
+vdW_POTENTIAL section is added inside the XC_FUNCTIONAL section. An example of
+the vdW_POTENTIAL section is shown below:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&amp;vdW_POTENTIAL
+   DISPERSION_FUNCTIONAL PAIR_POTENTIAL     ! usually set to pair_potential
+   &amp;PAIR_POTENTIAL
+      TYPE vdw-type                         ! VDW type (DFT-D2, DFT-D3 or DFT-D3(BJ)
+      PARAMETER_FILE_NAME dftd3.dat         ! required for DFT-D3 and DFT-D3(BJ)
+      REFERENCE_FUNCTIONAL xc_type          ! the reference xc functional e.g. PBE, B3LYP
+    &amp;END PAIR_POTENTIAL
+&amp;END vdW_POTENTIAL
+</pre></div>
+</div>
+</section>
+<section id="important-qm-input-parameters">
+<h2>Important QM input parameters<a class="headerlink" href="#important-qm-input-parameters" title="Permalink to this heading"></a></h2>
+<section id="charge">
+<h3>CHARGE<a class="headerlink" href="#charge" title="Permalink to this heading"></a></h3>
+<p>This is used to set the charge of the QM part of the system.</p>
+</section>
+<section id="multiplicity">
+<h3>MULTIPLICITY<a class="headerlink" href="#multiplicity" title="Permalink to this heading"></a></h3>
+<p>The multiplicity should be set to twice the total spin plus one.
+If set to 0 (the default) this will be 1 for an even number of electrons and 2 for an odd
+number of electrons.</p>
+</section>
+<section id="cutoff">
+<h3>CUTOFF<a class="headerlink" href="#cutoff" title="Permalink to this heading"></a></h3>
+<p>The CUTOFF parameter sets the planewave cutoff (given in units of
+Ry). It is an important parameter in a QM calculation, and choosing
+too small a cutoff can result in large inaccuracies in the energy. A
+larger cutoff is usually more accurate as the planewave grid becomes
+finer, however at a certain point increasing the cutoff would no
+longer make any difference to the energy whilst continuing to increase
+the computational cost.</p>
+<p>Before doing a production run it is important to <a class="reference external" href="https://www.cp2k.org/howto:converging_cutoff">converge the cutoff</a>.  This essentially
+involves tracking the energy as the cutoff is varied and then
+selecting a cutoff large enough such that the energy is reasonably
+converged. The correct value of the cutoff depends on the basis set,
+the pseudopotentals, the XC functional and the system itself.
+Therefore, the above convergence test must be performed whenever one
+of these elements is changed.</p>
+</section>
+<section id="rel-cutoff">
+<h3>REL_CUTOFF<a class="headerlink" href="#rel-cutoff" title="Permalink to this heading"></a></h3>
+<p>The REL_CUTOFF is similar to the CUTOFF and sets the planewave cutoff of a reference grid
+covered by a Gaussian function with unit standard deviation. This parameter is important to map Gaussian functions on a grid.
+Converging this parameter is also covered in this <a class="reference external" href="https://www.cp2k.org/howto:converging_cutoff">guide</a>.</p>
+</section>
+<section id="commensurate">
+<h3>COMMENSURATE<a class="headerlink" href="#commensurate" title="Permalink to this heading"></a></h3>
+<p>COMMENSURATE is a logical option which specifies if the grids should be commensurate or not. In a QM/MM
+calculation this must be set to true.</p>
+</section>
+<section id="eps-default">
+<h3>EPS_DEFAULT<a class="headerlink" href="#eps-default" title="Permalink to this heading"></a></h3>
+<p>This parameter provides an easy way to set all the EPS_xxx parameters to
+values such that the energy will be correct up to this value.
+The default value for this is 1.0E-10. Decreasing this value will slightly increase the
+accuracy of the energy, but will also increase significantly the run time.</p>
+</section>
+<section id="eps-scf">
+<h3>EPS_SCF<a class="headerlink" href="#eps-scf" title="Permalink to this heading"></a></h3>
+<p>This sets the target accuracy for the SCF convergence. The SCF will be converged when the energy change between two SCF
+steps is less than this value. The default for this value is 1.0E-5. It is possible to set different values for the inner
+and outer SCF loops, however the EPS_SCF of the outer SCF must be smaller than or equal to EPS_SCF of the inner loop. In fact
+the <code class="docutils literal notranslate"><span class="pre">EPS_SCF</span></code> of the inner loop determines the value that can be reached in the outer loop.</p>
+</section>
+<section id="max-scf">
+<h3>MAX_SCF<a class="headerlink" href="#max-scf" title="Permalink to this heading"></a></h3>
+<p>In the main SCF section of the input this keyword sets the maximum number of SCF iterations to be performed in the inner SCF loop.
+In the <code class="docutils literal notranslate"><span class="pre">OUTER_SCF</span></code> section this keyword sets the maximum number of outer loops. The total number of SCF steps will be at maximum the product
+of the <code class="docutils literal notranslate"><span class="pre">MAX_SCF</span></code> for the inner SCF loop and MAX_SCF for the outer SCF loop.</p>
+</section>
+</section>
+<section id="troubleshooting">
+<span id="ref-troubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<section id="simulation-fails-or-gives-strange-results">
+<h3>Simulation fails or gives strange results<a class="headerlink" href="#simulation-fails-or-gives-strange-results" title="Permalink to this heading"></a></h3>
+<p>Providing that you have used a sensible QM setup with a sufficiently large cutoff then
+the error is usually related to the setup of your system. When running a calculation with periodic boundary
+conditions check that the CELL boundaries are large enough to keep the periodic
+images sufficiently separated. A convergence test for the <code class="docutils literal notranslate"><span class="pre">CELL</span></code> size can be crucial in this case.
+Also check the initial atomic coordinates are sensible by visualising your system.</p>
+<p>If the initial coordinates look reasonable then consider simplifying
+your input, starting with the most simple settings, including basis sets and functionals. If the QM/MM simulation fails then
+may want to try running a simple MM calculation first (<code class="docutils literal notranslate"><span class="pre">RUN_TYPE</span> <span class="pre">FIST</span></code>) to check the geometries, and then slowly increase the complexity
+adding in QM and QM/MM sections.</p>
+</section>
+<section id="scf-does-not-converge">
+<h3>SCF does not converge<a class="headerlink" href="#scf-does-not-converge" title="Permalink to this heading"></a></h3>
+<p>If during the SCF calculation the energies vary rapidly then it is likely that
+the SCF will not converge. This will be reported in the CP2K output with the message
+<code class="docutils literal notranslate"><span class="pre">&quot;WARNING</span> <span class="pre">SCF</span> <span class="pre">has</span> <span class="pre">not</span> <span class="pre">converged&quot;</span></code>. You can quickly verify if the SCF has failed to converge by
+looking for this text in your output file:</p>
+<p><code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">'WARNING</span> <span class="pre">SCF'</span> <span class="pre">output-file.log</span></code></p>
+<p>If this occurs then the easiest parameters to change to try to tune in order
+to reach SCF convergence are the <code class="docutils literal notranslate"><span class="pre">MAX_SCF</span></code> and <code class="docutils literal notranslate"><span class="pre">EPS_SCF</span></code>.</p>
+<p>Some things to try are listed below:</p>
+<ul class="simple">
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">OUTER_SCF&amp;EPS_SCF</span></code> &lt;= <code class="docutils literal notranslate"><span class="pre">EPS_SCF</span></code>. If not decrease the outer <code class="docutils literal notranslate"><span class="pre">EPS_SCF</span></code>.</p></li>
+<li><p>Increase the number of SCF loops with <code class="docutils literal notranslate"><span class="pre">OUTER_SCF&amp;MAX_SCF</span></code>.</p></li>
+<li><p>Increase the number of inner SCF steps with <code class="docutils literal notranslate"><span class="pre">MAX_SCF</span></code>.</p></li>
+<li><p>Change the OT minimizer to CG.</p></li>
+<li><p>Check again your geometry.</p></li>
+<li><p>If running MD consider decreasing your timestep.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CP2K_MM_setup.html" class="btn btn-neutral float-left" title="CP2K MM setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CP2K_QMMM_parameterisation.html" class="btn btn-neutral float-right" title="CP2K QM/MM parameterisation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

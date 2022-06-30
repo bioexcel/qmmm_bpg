@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biomolecular QM/MM with CP2K and GROMACS &mdash; (GROMACS+)CP2K QM/MM Best Practice Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QM/MM overview" href="overview/overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> (GROMACS+)CP2K QM/MM Best Practice Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview/overview.html">QM/MM overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">System preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="system_preparation/system_preparation.html">System preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_preparation/selecting_qm_atoms.html">Selecting QM atoms</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="input_preparation/CP2K_MM_setup.html">CP2K MM setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_preparation/QM_treatment.html">QM treatment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_preparation/CP2K_QMMM_parameterisation.html">CP2K QM/MM parameterisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_preparation/interface_QMMM_parameterisation.html">GROMACS/CP2K interface QM/MM parameterisation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Running:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k/building_cp2k.html">Building CP2K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k/running_cp2k.html">Running QM/MM simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k/cp2k_output.html">Understanding the CP2K output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k/cp2k_errors.html">CP2K Troubleshooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">(GROMACS+)CP2K QM/MM Best Practice Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>Biomolecular QM/MM with CP2K and GROMACS</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="biomolecular-qm-mm-with-cp2k-and-gromacs">
+<h1>Biomolecular QM/MM with CP2K and GROMACS<a class="headerlink" href="#biomolecular-qm-mm-with-cp2k-and-gromacs" title="Permalink to this heading"></a></h1>
+<p>This guide provides practical advice on how to use CP2K and the GROMACS-CP2K interface
+to perform QM/MM simulation of biomolecular systems.</p>
+<p>For <em>general methodological</em> advice on QM/MM modelling &amp; simulation of biomolecular
+systems, see our guide on <a class="reference external" href="https://docs.bioexcel.eu/qmmm_simulation_bpg">Best Practices in QM/MM Simulation of Biomolecular Systems</a></p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Overview:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview/overview.html">QM/MM overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview/overview.html#prepare-system">Prepare system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/overview.html#minimisation-equilibration-and-thermalisation">Minimisation, Equilibration and Thermalisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/overview.html#select-qm-atoms">Select QM atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/overview.html#run-mm-only-in-cp2k">Run MM only in CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/overview.html#run-a-simple-qm-mm-calculation-in-cp2k">Run a simple QM/MM calculation in CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/overview.html#run-md-with-cp2k">Run MD with CP2K</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">System preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="system_preparation/system_preparation.html">System preparation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="system_preparation/system_preparation.html#getting-to-know-your-biological-system">Getting to know your biological system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_preparation/system_preparation.html#preparing-your-pdb-file">Preparing your PDB file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_preparation/system_preparation.html#preparing-topology-and-coordinate-files-for-cp2k">Preparing topology and coordinate files for CP2K</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="system_preparation/selecting_qm_atoms.html">Selecting QM atoms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="system_preparation/selecting_qm_atoms.html#initial-selection">Initial selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_preparation/selecting_qm_atoms.html#dealing-with-breaking-bonds">Dealing with breaking bonds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_preparation/selecting_qm_atoms.html#expanding-or-shrinking-the-qm-region">Expanding or shrinking the QM region</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Input preparation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="input_preparation/CP2K_MM_setup.html">CP2K MM setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_MM_setup.html#mm-forcefields-types-in-cp2k">MM forcefields types in CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_MM_setup.html#connectivity-formats">Connectivity formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_MM_setup.html#coordinate-formats">Coordinate formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_MM_setup.html#important-mm-input-parameters">Important MM input parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_MM_setup.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="input_preparation/QM_treatment.html">QM treatment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/QM_treatment.html#mechanics-of-a-dft-calculation-in-cp2k">Mechanics of a DFT calculation in CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/QM_treatment.html#a-basic-qm-input">A basic QM input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/QM_treatment.html#basis-sets">Basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/QM_treatment.html#xc-functionals">XC functionals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/QM_treatment.html#pseudopotentials">Pseudopotentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/QM_treatment.html#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/QM_treatment.html#important-qm-input-parameters">Important QM input parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/QM_treatment.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="input_preparation/CP2K_QMMM_parameterisation.html">CP2K QM/MM parameterisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_QMMM_parameterisation.html#cp2k-qmmm-input-format">CP2K QMMM input format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_QMMM_parameterisation.html#setting-up-qm-atoms">Setting up QM atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_QMMM_parameterisation.html#important-qmmm-input-parameters">Important QMMM input parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_QMMM_parameterisation.html#qmmm-cell">QMMM Cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/CP2K_QMMM_parameterisation.html#dealing-with-the-qm-mm-boundary">Dealing with the QM-MM boundary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="input_preparation/interface_QMMM_parameterisation.html">GROMACS/CP2K interface QM/MM parameterisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/interface_QMMM_parameterisation.html#selecting-qm-atoms">Selecting QM atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/interface_QMMM_parameterisation.html#gromacs-qm-mm-input-parameters">Gromacs QM/MM input parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input_preparation/interface_QMMM_parameterisation.html#using-a-cp2k-input">Using a CP2K input</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Running:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k/building_cp2k.html">Building CP2K</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/building_cp2k.html#downloading-cp2k">Downloading CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/building_cp2k.html#set-up-environment">Set up environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/building_cp2k.html#cp2k-toolchain">CP2K toolchain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/building_cp2k.html#compiling-cp2k">Compiling CP2K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/building_cp2k.html#building-the-interface">Building the interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k/running_cp2k.html">Running QM/MM simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/running_cp2k.html#running-a-cp2k-standalone-job">Running a CP2K standalone job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/running_cp2k.html#running-qm-mm-simulations-with-the-gromacs-cp2k-interface">Running QM/MM simulations with the GROMACS/CP2K interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/running_cp2k.html#performance-considerations">Performance considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k/cp2k_output.html">Understanding the CP2K output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/cp2k_output.html#general-output">General Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/cp2k_output.html#output-from-an-md-run">Output from an MD run</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_cp2k/cp2k_errors.html">CP2K Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/cp2k_errors.html#abort-messages">Abort messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/cp2k_errors.html#cpassert-failed-messages">CPASSERT failed messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_cp2k/cp2k_errors.html#runtime-issues">Runtime issues</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview/overview.html" class="btn btn-neutral float-right" title="QM/MM overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
